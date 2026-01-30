@@ -1,0 +1,64 @@
+\pagestyle{fancy}
+\fancyhead{}
+
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{1pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{{\thesection}}
+\fancyhead[L]{\leftmark}
+
+% \fancyhead[LO,LE]{\nouppercase\firstleftmark}
+%\fancyhead[RO,RE]{\thesubsection\enspace\subsectiontitle}
+
+\section{Methods and Materials}
+
+
+\subsection{Dataset Description}
+
+The dataset for this project includes sEEG recordings, of the duration of
+approximately 2 to 4 hours, for 24 patients affected by focal epilepsy.
+Each patient provides one recording containing a seizure event and at least one
+wakefulness segment.
+For 18 patients two wakes were avaiaible, while the other 6 patients only
+included one wake.
+
+Each recording consists of several time series, one for each contact (typically
+150-200), sampled at 500 Hz.
+Each contact is labeled as a letter, representing the electrode, followed by an
+integer number referring to a segment of that electrode.
+For example, contact "A1" represents the first segment of electrode "A".
+
+A database was also included beside the recordings, including the
+thermocoagulated segments for each patient, which we will consider as the ground
+truth for this project. The onset time of the seizure, reported by doctors and
+corresponding to the first electrical symptoms, was also included in the
+database.
+
+(!! foto raw data??)
+
+\subsection{Pre-processing}
+
+!! i miei appunti dicono
+preprocessing:
+notch 50 100 150 200 powerline
+bandpass Butterworth 0.5-249.5 hz 6° ordine zero-phase (quindi in realtà 12° ordine)
+moltiplicazione 1e6 prima di convertire a f32 (dati in uV)
+chiedere a chatgpt
+
+\subsection{The Brain Network}
+\lipsum[2]
+
+\subsection{Feature Extraction}
+\lipsum[3]
+
+\subsection{The Variational Autoencoder}
+\lipsum[4]
+
+\subsection{Gaussian Mixture Models}
+\lipsum[5]
+
+\subsection{Anomaly Detection}
+\lipsum[6]
+
+\subsection{Hyperparameter Tuning and Validation}
+\lipsum[7]
