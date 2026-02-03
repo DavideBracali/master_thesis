@@ -16,10 +16,10 @@
 \subsection{Dataset Description}
 
 The dataset for this project includes sEEG recordings, of the duration of
-approximately 2 to 4 hours, for 24 patients affected by focal epilepsy.
+approximately 2 to 4 hours, for 23 patients affected by focal epilepsy.
 Each patient provides one recording containing a seizure event and at least one
 wakefulness segment.
-For 18 patients two wakes were avaiaible, while the other 6 patients only
+For 18 patients two wakes were available, while the other 5 patients only
 included one wake.
 
 Each recording consists of several time series, one for each contact (typically
@@ -28,13 +28,20 @@ Each contact is labeled as a letter, representing the electrode, followed by an
 integer number referring to a segment of that electrode.
 For example, contact "A1" represents the first segment of electrode "A".
 
-A database was also included beside the recordings, including the
-thermocoagulated segments for each patient, which we will consider as the ground
-truth for this project. The onset time of the seizure, reported by doctors and
-corresponding to the first electrical symptoms, was also included in the
-database.
+(!!! foto raw data??)
 
-(!! foto raw data??)
+
+Beside the recordings a database was also provided, including the list of the
+surgically removed brain regions.
+Each of the patients in this study underwent surgery, consisting in the 
+thermocoagulation of the tissue surrounding the contacts labeled as SOZ
+(!!! assicurarsi di aver chiarito la sigla).
+For all patients, the removal of these regions resulted in a drastic reduction
+of the symptoms of epilepsy. We will therefore consider this list as the ground
+truth for this project.
+The onset time of the seizure, reported by doctors and corresponding to the
+first electrical symptoms, was also included in the database.
+
 
 \subsection{Pre-processing}
 
@@ -46,6 +53,41 @@ moltiplicazione 1e6 prima di convertire a f32 (dati in uV)
 chiedere ai miei supervisor ;) come hanno fatto
 
 \subsection{The Brain Network}
+
+Network analysis was extensively used in this work: sEEG recordings are
+localized, and provide the opportunity to investigate the functional
+relationships between different regions of the brain.
+Each brain region can be mapped into a node, while an appropriate similarity
+measure between the recordings can be used to form weighted links.
+Because sEEG recordinggs are time series, such network will also be dynamic,
+enabling us to gain insights on the evolution of the network before, during and
+after the seizure.
+
+This approach is widely explored in literature
+\cite{10.1093/med/9780190228484.001.0001}, as epileptic seizures are
+characterized by anomalous and synchronized electrical activity (!!! ciiiitare).
+In particular, in focal epileptic seizures the abnormal activity is initially
+limited between the SOZ, and subsequently spreads to the entirity (or a vast
+area) of the brain.
+Functional brain networks are powerful tools to model such synchronization and
+diffusion mechanisms.
+
+Different choices are possible for the similarity measure, depending on the
+focus of the study \cite{10.1093/med/9780190228484.001.0001}.
+For this work mutual information was chosen to quantify the dependencies of
+signal pairs, capturing linear and non-linear relationships to model the
+dynamics of an epileptic seizure. Mutual information between two discrete
+random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
+
+\begin{equation}
+    MI(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
+\end{equation}
+
+where $D_{KL}$ is the Kullback–Leibler divergence, a statistical distance
+between the joint distribution $(P_{(X,Y)}$ and the outer product of the
+marginal distributions $P_X$ and $P_Y$.
+Notice 
+
 \lipsum[2]
 
 \subsection{Feature Extraction}
