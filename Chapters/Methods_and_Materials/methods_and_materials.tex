@@ -81,26 +81,47 @@ random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
 
 \begin{equation}
     MI(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
+    = \sum_{x\in\mathcal(X)}\sum_{y\in\mathcal(Y)}
+    {P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_{X}(x)\cdot P_{Y}(y)}}}
 \end{equation}
 
 where $D_{KL}$ is the Kullback–Leibler divergence, a statistical distance
 between the joint distribution $(P_{(X,Y)}$ and the outer product of the
-marginal distributions $P_X$ and $P_Y$.
-Notice 
+marginal distributions $P_X$ and $P_Y$. 
+It is a non-negative and symmetric quantity that measures how much the joint
+distribution of $(X,Y)$ differs from the product of the marginal distributions
+of $X$ and $Y$ \cite{cover1991elements}. Hence, when two random variables
+are independent, their mutual information is equal to zero.
 
-\lipsum[2]
+Being a metric that quantifies the amount of shared information between two
+variables, mutual information can be used to capture the linear and non-linear
+relationships that model the synchronization dynamics typical of epilepsy.
+For this reason, each sEEG channel was divided into $1\ s$ (or equivalently 500
+time steps) non-overlapping time windows.
+At a given instant, these segments represent the nodes of fully-connected,
+weighted, undirected graph network.
+The weight $w_{ij}$ of the link between two nodes $(i,j)$ is defined as
+$w_{ij} = \frac{MI_{ij}}{MI_{ii}}$, where $MI_{ij}$ is the mutual information
+between signal i and j.
+It is normalized over the mutual information between identical signals so that
+weights always are between 0 and 1, with $w_{ij} = 0$ indicating statistical
+independence and $w_{ij} = 1$ corresponding to identical signals.
+
+This process results in a dynamic set of networks with a temporal resolution of
+$1\ s$. Higher temporal resolution could be possible, for example using a
+sliding window instead of a non-overlapping one. One must however keep in mind
+that, for each time frame, a different network has to be built and the
+computation time to build and extract features will scale linearly with the
+number of time frames.
 
 \subsection{Feature Extraction}
-\lipsum[3]
+
+
 
 \subsection{The Variational Autoencoder}
-\lipsum[4]
 
 \subsection{Gaussian Mixture Models}
-\lipsum[5]
 
 \subsection{Anomaly Detection}
-\lipsum[6]
 
 \subsection{Hyperparameter Tuning and Validation}
-\lipsum[7]
