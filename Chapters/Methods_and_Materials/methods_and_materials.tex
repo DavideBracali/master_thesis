@@ -52,7 +52,7 @@ bandpass Butterworth 0.5-249.5 hz 6° ordine zero-phase (quindi in realtà 12° 
 moltiplicazione 1e6 prima di convertire a f32 (dati in uV)
 chiedere ai miei supervisor ;) come hanno fatto
 
-\subsection{The Brain Network}
+\subsection{The Brain Network} \label(meth:thebrainnetwork)
 
 Network analysis was extensively used in this work: sEEG recordings are
 localized, and provide the opportunity to investigate the functional
@@ -109,12 +109,38 @@ independence and $w_{ij} = 1$ corresponding to identical signals.
 
 This process results in a dynamic set of networks with a temporal resolution of
 $1\ s$. Higher temporal resolution could be possible, for example using a
-sliding window instead of a non-overlapping one. One must however keep in mind
-that, for each time frame, a different network has to be built and the
-computation time to build and extract features will scale linearly with the
-number of time frames.
+sliding window instead of a non-overlapping one.
+One must however keep in mind that, for each time frame, a different network has
+to be constructed. The computation time to build and extract features will
+therefore scale linearly with the number of time frames.
 
 \subsection{Feature Extraction}
+
+In order to distinguish between healthy and epileptogenic behavior in sEEG
+recordings, a set of features must be computed at each time frame in order to
+extract meaningful information from data.
+In this study we decided to extract a total of 22 features, which can be grouped
+into three categories depending on their nature: network features, signal
+features and spectral features.
+
+\subsubsection{Network features}
+
+Network features are metrics that are computed from the functional network
+described in section \ref(meth:thebrainnetwork).
+Those quantities can both describe the global state of the brain network
+(global features) and inspect the topological role of each individual node
+within the network (local features).
+Local metrics can provide insights on the individual role of each node in the
+network.
+Their main purpose in this study is to localize the portions of the brain who
+play an important role during the seizure onset.
+Global features and their evolution, on the other hand, can be important
+to understand and analyze network dynamics before, during and after a seizure.
+
+The following local measures were computed:
+
+
+
 
 
 
