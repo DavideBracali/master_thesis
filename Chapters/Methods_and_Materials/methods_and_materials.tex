@@ -34,8 +34,7 @@ For example, contact "A1" represents the first segment of electrode "A".
 Beside the recordings a database was also provided, including the list of the
 surgically removed brain regions.
 Each of the patients in this study underwent surgery, consisting in the 
-thermocoagulation of the tissue surrounding the contacts labeled as SOZ
-(!!! assicurarsi di aver chiarito la sigla).
+thermocoagulation of the tissue surrounding the contacts labeled as SOZ.
 For all patients, the removal of these regions resulted in a drastic reduction
 of the symptoms of epilepsy. We will therefore consider this list as the ground
 truth for this project.
@@ -45,14 +44,21 @@ first electrical symptoms, was also included in the database.
 
 \subsection{Pre-processing}
 
-!! i miei appunti dicono
-preprocessing:
-notch 50 100 150 200 powerline
-bandpass Butterworth 0.5-249.5 hz 6° ordine zero-phase (quindi in realtà 12° ordine)
-moltiplicazione 1e6 prima di convertire a f32 (dati in uV)
-chiedere ai miei supervisor ;) come hanno fatto
+Pre-processing for this data consists in the application of notch filters to 
+eliminate power line noise, and a bandpass Butterworth filter.
 
-\subsection{The Brain Network} \label(meth:thebrainnetwork)
+The notch filters were applied at $50\ Hz$, $100\ Hz$, $150\ Hz$ and $200\ Hz$
+to remove the fundamental frequency and its fundamental harmonics
+A bandpass Butterworth 6th order zero-phase filter was applied on raw data to
+isolate frequencies between $0.5\ Hz$, as very low frequencies
+provide no useful information for this study \cite{eeg-book} and $249.5\ Hz$,
+as frequencies higher than $250\ Hz$ would introduce aliasing in a $500\ Hz$ 
+time series.
+
+To lighten disk usage and computational time, signal was converted from $V$ to  
+$\mu V$ and stored to \textit{float32}.
+
+\subsection{The Brain Network} \label{meth:thebrainnetwork}
 
 Network analysis was extensively used in this work: sEEG recordings are
 localized, and provide the opportunity to investigate the functional
@@ -63,9 +69,9 @@ Because sEEG recordinggs are time series, such network will also be dynamic,
 enabling us to gain insights on the evolution of the network before, during and
 after the seizure.
 
-This approach is widely explored in literature
-\cite{10.1093/med/9780190228484.001.0001}, as epileptic seizures are
-characterized by anomalous and synchronized electrical activity (!!! ciiiitare).
+This approach is widely explored in literature \cite{eeg-book}, as epileptic
+seizures are characterized by anomalous and synchronized electrical activity
+\cite{WHO2016Epilepsy}.
 In particular, in focal epileptic seizures the abnormal activity is initially
 limited between the SOZ, and subsequently spreads to the entirity (or a vast
 area) of the brain.
@@ -73,7 +79,7 @@ Functional brain networks are powerful tools to model such synchronization and
 diffusion mechanisms.
 
 Different choices are possible for the similarity measure, depending on the
-focus of the study \cite{10.1093/med/9780190228484.001.0001}.
+focus of the study \cite{eeg-book}.
 For this work mutual information was chosen to quantify the dependencies of
 signal pairs, capturing linear and non-linear relationships to model the
 dynamics of an epileptic seizure. Mutual information between two discrete
@@ -84,7 +90,6 @@ random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
     = \sum_{x\in\mathcal(X)}\sum_{y\in\mathcal(Y)}
     {P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_{X}(x)\cdot P_{Y}(y)}}}
 \end{equation}
-
 where $D_{KL}$ is the Kullback–Leibler divergence, a statistical distance
 between the joint distribution $(P_{(X,Y)}$ and the outer product of the
 marginal distributions $P_X$ and $P_Y$. 
@@ -100,11 +105,14 @@ For this reason, each sEEG channel was divided into $1\ s$ (or equivalently 500
 time steps) non-overlapping time windows.
 At a given instant, these segments represent the nodes of fully-connected,
 weighted, undirected graph network.
-The weight $w_{ij}$ of the link between two nodes $(i,j)$ is defined as
-$w_{ij} = \frac{MI_{ij}}{MI_{ii}}$, where $MI_{ij}$ is the mutual information
-between signal i and j.
-It is normalized over the mutual information between identical signals so that
-weights always are between 0 and 1, with $w_{ij} = 0$ indicating statistical
+The weight $w_{ij}$ of the link between two nodes $(i,j)$ is defined as:
+\begin{equation}
+    w_{ij}(t) = \frac{MI_{ij}(t)}{MI_{ii}}
+\end{equation}
+where $MI_{ij}(t)$ is the mutual information between signal i and j at time $t$.
+It is normalized over the mutual information between identical signals $MI_{ii}$
+so that weights always are between 0 and 1,
+with $w_{ij} = 0$ indicating statistical
 independence and $w_{ij} = 1$ corresponding to identical signals.
 
 This process results in a dynamic set of networks with a temporal resolution of
@@ -119,17 +127,30 @@ therefore scale linearly with the number of time frames.
 In order to distinguish between healthy and epileptogenic behavior in sEEG
 recordings, a set of features must be computed at each time frame in order to
 extract meaningful information from data.
-In this study we decided to extract a total of 22 features, which can be grouped
+In this study we extract a total of 22 features, which can be grouped
 into three categories depending on their nature: network features, signal
-features and spectral features.
+features and spectral features:
+\begin{enumerate}
+    \item Network features: they are computed from a graph functional network to
+    explore pair-wise relationships between signals.
+    \item Signal features: metrics that can be extracted directly from the sEEG
+    pre-processed time series.
+    \item Spectral features: metrics that characterize the short-time Fourier
+    transform specrogram of data.
+\end{enumerate}
+All metrics were extracted with a $1\ s$ temporal resolution, using
+non-overlapping sliding windows for feature extractions.
+
+
 
 \subsubsection{Network features}
 
 Network features are metrics that are computed from the functional network
-described in section \ref(meth:thebrainnetwork).
+described in section \ref{meth:thebrainnetwork}.
 Those quantities can both describe the global state of the brain network
 (global features) and inspect the topological role of each individual node
 within the network (local features).
+
 Local metrics can provide insights on the individual role of each node in the
 network.
 Their main purpose in this study is to localize the portions of the brain who
@@ -138,10 +159,177 @@ Global features and their evolution, on the other hand, can be important
 to understand and analyze network dynamics before, during and after a seizure.
 
 The following local measures were computed:
+\begin{itemize}
+    \item Strength: it's defined as the sum of the weights of the links
+    associated with each node \cite{networks-weighted}.
+    Formally strength of node $i$ reads as:
+    \begin{equation}
+        s_i = \sum_{j\neq i}{w_{ij}}
+    \end{equation}
+    Its distribution, and its statistical moments, can provide insights
+    about the evolution of the network connectivity.
+    High weight indicates that contact $i$ is, on average, high
+    synchronization with all the other contacts.
+
+    \item Clustering coefficient: for unweighted graphs, the clustering of a
+    node is the fraction of possible triangles through that node that exist 
+    \cite{networks-clustering2}.
+    For weighted graphs, there are several ways to define clustering, and the
+    one used here is defined as the geometric average of the triangle edge
+    weights \cite{networks-clustering}.
+    Intuitively, it quantifies the tendency of nodes to form highly
+    interconnected communities in the network.
+
+    \item Betweenness centrality: it is defined as the sum of the fraction of
+    all shortest paths that pass through that node \cite{networks-betw}
+    Formally betweenness
+    centrality of node $i$ reads as:
+
+     
+    \begin{equation}
+        g_i = \sum_{i\neq j\neq k}{\frac{\sigma_{jk}(i)}{\sigma_{jk}}}
+    \end{equation}
+    where $\sigma_{jk}$ is the number of shortest paths from node $j$ to node $k$
+    and $\sigma_{jk}(i)$ is the number of shortest paths from node $j$ to node $k$
+    that pass through node $i$.
+    It is an important centrality measure that highlights nodes acting as
+    bridges between different parts of the network.
+
+    \item Eigenvector centrality: it measures the influence of a node in a
+    network by considering not only the number of its direct connections but
+    also the centrality of the nodes to which it is connected.
+    This measure is computed from the eigenvector corresponding to the largest
+    eigenvalue of the weighted adjacency matrix \cite{networks-eigen}:
+    \begin{equation}
+        W\mathbf{x} = \lambda_1\mathbf{x}
+    \end{equation}
+    where $W$ is the weighted adjacency matrix, $\lambda_1$ is its largest
+    eigenvalue and $\mathbf{x}$ contains the eigenvector centrality of each node.
+\end{itemize}
+
+The global metrics used for this work are:
+\begin{itemize}
+    \item Assortativity: it measures the similarity of connections in the graph
+    with respect to node strength.
+    A positive value (assortative network) indicates that nodes attach
+    preferentially to nodes with similar strength, while a negative value
+    (disassortative network) corresponds to the opposite tendency
+    \cite{networks-ass}.
+    
+    \item Average shortest path: the sum of shoretest path lengths between all
+    pairs of nodes:
+    \begin{equation}
+        a = \sum_{i\neq j}{\frac{d(i,j)}{n(n-1)}}
+    \end{equation}
+    where $d(i,j)$ is the shortest path distance between node $i$ and node $j$
+    and $n$ is the total number of nodes.
+    It can be generalized for weighted networks, using the inverse of the link
+    weight as a distance between two nodes (so that higher weights are
+    associated to shorter distances).
+
+    \item The average along nodes of all the previously described local metrics.
+
+\end{itemize}
+
 
 \subsubsection{Signal features}
 
+Signal features can be computed directly from the pre-processed sEEG time-seires.
+Such features were choosen to capture epileptogenic patterns that are directly
+visible just looking at data, such as increased amplitude, sharp oscillations, 
+or sudden transient spikes.
+
+The following metrics were computed for each contact:
+\begin{itemize}
+    \item Mean: the arithmetic mean of the distribution of signal amplitude.
+    
+    \item Standard deviation: standard deviation of the distribution of signal
+    amplitude, to capture increased signal variability during epileptogenic
+    behavior.
+
+    \item Skewness: measure of asymmetry the distribution of signal amplitude.
+    It highlights deviations from symmetric signal activity.
+    Has shown discriminative power in magnetoencephalography signals
+    \cite{skewkurt}.
+
+    \item Kurtosis coefficient: measures the tendency of the signal to produce
+    extreme values, using a normal distribution as refernce.
+    High Kurtosis indicates frequent large excursions from the mean, which
+    correspond to sharp transients and spikes commonly seen in epilepsy.
+    Has shown discriminative power in magnetoencephalography signals
+    \cite{skewkurt}.
+    
+    \item RMS (Root Mean Square): measures the overall signal power, equivalent 
+    of the standard deviation assuming zero as mean.
+
+    \item Peak-to-peak: maximum excursion between maximum and minimum.
+    This metric is particularly sensitive to sudden spikes or sharp waves,
+    indicators of epileptogenic activity.
+     
+    \item Maximum derivative: maximum absolute value of the difference between
+    adjacent signal samples, represents the maximum steepness of the signal.
+    
+    \item Highuci fractal dimension: approximate box-counting dimension of the
+    fractal that underlines the time-seires.
+    Captures signal complexity and self-similarity, and can be a powerful
+    discriminant in identifying seizure onset \cite{higuchi}.
+\end{itemize}
+
+
 \subsubsection{Spectral features}
+
+Spectral features are derived from the spectrogram of pre-processed signals.
+The spectrogram, a time-dependent representation of the frequency domain of
+signal, was computed using a short-time Fourier transform.
+It consists in the sequencing of data using $1\ s $ non-overlapping time windows
+and the application of a Fourier transform on those windows, providing a dynamic
+analysis of the signal frequencies.
+
+From now on, let $\mathbf{Z}=\mathcal{DFT}(\mathbf{x})$, where
+$\mathbf{x}\in\mathbb{R}^N$ is the $1\ s$ segment of $500\ Hz$ sEEG
+data ($N=500$ is the sample size), and $\mathbf{Z}\in\mathbb{C}^F$ is its
+Discrete Fourier Transform, sampling frequencies up to $250\ Hz$ with $1\ Hz$ 
+resolution ($F=521$ is the number of sampled frequencies).
+We will also define index $n=0,1,...,F$ so that $|Z_n|^2$ is the amplitude of
+frequency $f_n$ in the Fourier transform.
+
+The following metrics were computed:
+\begin{itemize}
+    \item Spectral centroid: the mean of frequencies weighted by their squared
+    amplitude. Formally:
+    \begin{equation}
+        S_\text{centroid} = \frac
+        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2f_n}}
+        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2}}
+    \end{equation}
+    
+    \item Spectral spread: the average dispersion of frequencies around the
+    centroid. Formally:
+    \begin{equation}
+        S_\text{spread} = \sqrt{\frac
+        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2(f_n-S_\text{centroid})^2}}
+        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2}}}
+    \end{equation}
+     
+    \item Spectral flatness: characterizes the tonality of the spectrum,
+    intended as the tendency to present peaks in the spectrum opposed to flat
+    noise. Formally:
+    \begin{equation}
+        S_\text{flatness}=
+        \frac{\exp\left(\frac{1}{N}\sum_{n=0}^{F}\ln |Z_n(\mathbf{x})|^2\right)}
+        {\frac{1}{N}\sum_{n=0}^{F}|Z_n(\mathbf{x})|^2}
+    \end{equation}
+     
+    \item Spectral entropy: captures the complexity of the spectrum.
+    Sharp peaks will have low entropy while flat noise will produce high values.
+    The definiton is based on Shannon entropy, formally:
+    \begin{equation}
+        S_\text{entropy}=
+        -\sum_{n=0}^F{|Z_n(\mathbf{x})|^2\log_2{|Z_n(\mathbf{x})|^2}}
+    \end{equation}    
+    
+    \item Relative powerbands:
+\end{itemize}
 
 
 \subsection{Variational Autoencoder (VAE)}

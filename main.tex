@@ -9,6 +9,8 @@
 \usepackage{etoolbox}
 \usepackage{hyperref}
 \usepackage{mathtools}
+\usepackage{amssymb}
+
 
 \usepackage[sfdefault,lf]{carlito}
 
@@ -21,6 +23,16 @@
 \renewcommand{\footrulewidth}{1pt}
 
 \usepackage{fancyhdr}
+\usepackage{extramarks}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{1pt}  % linea sopra (era 0pt)
+\renewcommand{\footrulewidth}{1pt}
+% Configurazione dello stile fancy
+\pagestyle{fancy}
+\fancyhf{} % pulisce tutto
+\fancyhead[L]{\nouppercase{\leftmark}} % nome sezione a sinistra
+\fancyfoot[C]{\thepage} % numero pagina centrato in basso
+
 \usepackage{extramarks}
 
 \setlength{\headheight}{14pt}
@@ -78,7 +90,11 @@
 % ###################################################################
 
 \pagenumbering{arabic} % Sets page numbering to arabic (1, 2, 3, ...)
-\setcounter{page}{1} % Specifies the starting page number
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
 
 \input{Chapters/Introduction/introduction}
 
