@@ -290,13 +290,13 @@ $\mathbf{x}\in\mathbb{R}^N$ is the $1\ s$ segment of $500\ Hz$ sEEG
 data ($N=500$ is the sample size), and $\mathbf{Z}\in\mathbb{C}^F$ is its
 Discrete Fourier Transform, sampling frequencies up to $250\ Hz$ with $1\ Hz$ 
 resolution ($F=521$ is the number of sampled frequencies).
-We will also define index $n=0,1,...,F$ so that $|Z_n|^2$ is the amplitude of
-frequency $f_n$ in the Fourier transform.
+We will also define index $n=0,1,...,F$ so that $|Z_n|^2$ is the power (squared
+amplitude) of frequency $f_n$ in the Fourier transform.
 
 The following metrics were computed:
 \begin{itemize}
-    \item Spectral centroid: the mean of frequencies weighted by their squared
-    amplitude. Formally:
+    \item Spectral centroid: the mean of frequencies weighted by their power.
+    Formally:
     \begin{equation}
         S_\text{centroid} = \frac
         {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2f_n}}
@@ -316,8 +316,8 @@ The following metrics were computed:
     noise. Formally:
     \begin{equation}
         S_\text{flatness}=
-        \frac{\exp\left(\frac{1}{N}\sum_{n=0}^{F}\ln |Z_n(\mathbf{x})|^2\right)}
-        {\frac{1}{N}\sum_{n=0}^{F}|Z_n(\mathbf{x})|^2}
+        \frac{\exp\left(\frac{1}{F+1}\sum_{n=0}^{F}\ln |Z_n(\mathbf{x})|^2\right)}
+        {\frac{1}{F+1}\sum_{n=0}^{F}|Z_n(\mathbf{x})|^2}
     \end{equation}
      
     \item Spectral entropy: captures the complexity of the spectrum.
@@ -327,8 +327,37 @@ The following metrics were computed:
         S_\text{entropy}=
         -\sum_{n=0}^F{|Z_n(\mathbf{x})|^2\log_2{|Z_n(\mathbf{x})|^2}}
     \end{equation}    
-    
-    \item Relative powerbands:
+    where 
+    \item Relative powerbands: integrated power between two frequencies, 
+    normalized so that the sum of all powerbands at a given instant is equal to
+    1. Formally, the relative powerband between frequencies $a$ and $b$ is
+    defined as:
+    \begin{equation}
+    S_{\text{band}} = \frac{1}{C}
+    \sum\limits_{f_n \in [a, b]} |Z_n(\mathbf{x})|^2
+    \end{equation}
+    where $\sum\limits_{n=0}^{F} |Z_n(\mathbf{x})|^2$ is a normalization factor
+    forcing the sum of all powerbands to be equal to 1.
+    In this study we compute the following relative powerbands:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Powerband} & \textbf{Frequency interval (Hz)} \\
+\hline
+Delta   & 0.5 -- 4 \\
+Theta   & 4 -- 8 \\
+Alpha   & 8 -- 12 \\
+Beta    & 12 -- 30 \\
+Gamma   & 30 -- 80 \\
+Ripple  & 80 -- 250 \\
+\hline
+\end{tabular}
+\caption{Relative powerbands considered in this study.}
+\label{tab:powerbands}
+\end{table}
+
+
 \end{itemize}
 
 
