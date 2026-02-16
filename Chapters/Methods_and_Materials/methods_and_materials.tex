@@ -15,10 +15,11 @@
 
 \subsection{Dataset Description}
 
-The dataset for this project includes sEEG recordings, of the duration of
-approximately 2 to 4 hours, for 23 patients affected by focal epilepsy.
-Each patient provides one recording containing a seizure event and at least one
-wakefulness segment.
+The dataset for this project includes sEEG recordings for 23 patients affected
+by focal epilepsy.
+Each patient provides one recording containing a seizure event (approximately 3
+minutes) and at least 2 hours of resting state recordings, which we will refer 
+as "wakes".
 For 18 patients two wakes were available, while the other 5 patients only
 included one wake.
 
@@ -33,11 +34,11 @@ For example, contact "A1" represents the first segment of electrode "A".
 
 Beside the recordings a database was also provided, including the list of the
 surgically removed brain regions.
-Each of the patients in this study underwent surgery, consisting in the 
+All of the patients in this study underwent surgery, consisting in the 
 thermocoagulation of the tissue surrounding the contacts labeled as SOZ.
-For all patients, the removal of these regions resulted in a drastic reduction
-of the symptoms of epilepsy. We will therefore consider this list as the ground
-truth for this project.
+For the majority of patients, the removal of these regions resulted in a drastic 
+reduction of the symptoms of epilepsy. We will therefore consider this list as
+the ground truth for this project.
 The onset time of the seizure, reported by doctors and corresponding to the
 first electrical symptoms, was also included in the database.
 
@@ -57,6 +58,7 @@ time series.
 
 To lighten disk usage and computational time, signal was converted from $V$ to  
 $\mu V$ and stored to \textit{float32}.
+
 
 \subsection{The Brain Network} \label{meth:thebrainnetwork}
 
@@ -86,7 +88,7 @@ dynamics of an epileptic seizure. Mutual information between two discrete
 random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
 
 \begin{equation}
-    MI(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
+    \text{MI}(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
     = \sum_{x\in\mathcal(X)}\sum_{y\in\mathcal(Y)}
     {P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_{X}(x)\cdot P_{Y}(y)}}}
 \end{equation}
@@ -107,10 +109,10 @@ At a given instant, these segments represent the nodes of fully-connected,
 weighted, undirected graph network.
 The weight $w_{ij}$ of the link between two nodes $(i,j)$ is defined as:
 \begin{equation}
-    w_{ij}(t) = \frac{MI_{ij}(t)}{MI_{ii}}
+    w_{ij}(t) = \frac{\text{MI}_{ij}(t)}{\text{MI}_{ii}}
 \end{equation}
-where $MI_{ij}(t)$ is the mutual information between signal i and j at time $t$.
-It is normalized over the mutual information between identical signals $MI_{ii}$
+where $\text{MI}_{ij}(t)$ is the mutual information between signal i and j at time $t$.
+It is normalized over the mutual information between identical signals $\text{MI}_{ii}$
 so that weights always are between 0 and 1,
 with $w_{ij} = 0$ indicating statistical
 independence and $w_{ij} = 1$ corresponding to identical signals.
@@ -122,7 +124,51 @@ One must however keep in mind that, for each time frame, a different network has
 to be constructed. The computation time to build and extract features will
 therefore scale linearly with the number of time frames.
 
-\subsection{Feature Extraction}
+
+\subsection{Proposed Pipeline}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Immagini/pipeline.png}
+    \caption{Proposed pipeline.}
+    \label{fig:pipeline}
+\end{figure}
+
+The aim of this work is to develop an patient-independent algorithm to classify
+which regions of the brain belong to the SOZ.
+The proposed pipeline for this task is shown in figure \ref{fig:pipeline}), and
+can be summarized in the following steps:
+\begin{itemize}
+    \item Feature extraction: a set of 22 metrics is computed from pre-processed
+    data, in order to extract meaningful features that characterize sEEG data.
+    Details are provided in Section~\ref{meth:features}.
+    \item Variational Autoencoder (VAE): features are used as input of a 
+    VAE, which encodes data in a lower-dimensional representation.
+    The model is trained on wakes to learn an encoded representation
+    for the resting state of the brain.
+    Details are provided in Section~\ref{meth:vae}
+    \item Gaussian Mixture Model (GMM): a weighted sum of normal distributions
+    is fitted on the latent space of the VAE, to learn the encoded
+    distribution of features during resting state activity.
+    Details are provided in Section~\ref{meth:gmm}
+    \item Negative log-likelihood score: seizure data are projected into the
+    trained latent space, where deviations from the learned resting-state
+    distribution result in low likelihood values.
+    The negative log-likelihood is computed at each time step and is considered
+    as a measure of anomalous behavior.
+    Details are provided in Section~\ref{meth:neg_ll}
+    \item SOZ classification: we assume that the SOZ is constituted by 
+    the contacts that begin to show anomalies a few seconds before the 
+    generalized seizure. We use a deterministic algorithm on the negative 
+    log-likelihood score to rank contacts based on an alarm score, proportional
+    to the estimated probability of belonging to the SOZ.
+    Finally, the computed alarm score is thresholded to obtain a binary 
+    classification.
+    Details are provided in Section~\ref{meth:classifier}
+\end{itemize}
+
+
+\subsection{Feature Extraction} \label{meth:features}
 
 In order to distinguish between healthy and epileptogenic behavior in sEEG
 recordings, a set of features must be computed at each time frame in order to
@@ -288,10 +334,10 @@ analysis of the signal frequencies.
 From now on, let $\mathbf{Z}=\mathcal{DFT}(\mathbf{x})$, where
 $\mathbf{x}\in\mathbb{R}^N$ is the $1\ s$ segment of $500\ Hz$ sEEG
 data ($N=500$ is the sample size), and $\mathbf{Z}\in\mathbb{C}^F$ is its
-Discrete Fourier Transform, sampling frequencies up to $250\ Hz$ with $1\ Hz$ 
-resolution ($F=521$ is the number of sampled frequencies).
-We will also define index $n=0,1,...,F$ so that $|Z_n|^2$ is the power (squared
-amplitude) of frequency $f_n$ in the Fourier transform.
+Discrete Fourier Transform, sampling frequencies from $0\ Hz$ to $250\ Hz$ with 
+$1\ Hz$ resolution ($F=251$ is the number of sampled frequencies).
+We will also define index $n=0,1,...,F-1$ so that $|Z_n|^2$ is the power 
+(squared amplitude) of frequency $f_n$ in the Fourier transform.
 
 The following metrics were computed:
 \begin{itemize}
@@ -299,16 +345,16 @@ The following metrics were computed:
     Formally:
     \begin{equation}
         S_\text{centroid} = \frac
-        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2f_n}}
-        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2}}
+        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2f_n}}
+        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2}}
     \end{equation}
     
     \item Spectral spread: the average dispersion of frequencies around the
     centroid. Formally:
     \begin{equation}
         S_\text{spread} = \sqrt{\frac
-        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2(f_n-S_\text{centroid})^2}}
-        {\sum_{n=0}^F{|Z_n(\mathbf{x})|^2}}}
+        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2(f_n-S_\text{centroid})^2}}
+        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2}}}
     \end{equation}
      
     \item Spectral flatness: characterizes the tonality of the spectrum,
@@ -316,30 +362,44 @@ The following metrics were computed:
     noise. Formally:
     \begin{equation}
         S_\text{flatness}=
-        \frac{\exp\left(\frac{1}{F+1}\sum_{n=0}^{F}\ln |Z_n(\mathbf{x})|^2\right)}
-        {\frac{1}{F+1}\sum_{n=0}^{F}|Z_n(\mathbf{x})|^2}
+        \frac{\exp\left(\frac{1}{F+1}\sum_{n=0}^{F-1}\ln
+        \left(|Z_n(\mathbf{x})|^2\right)+\epsilon\right)}
+        {\frac{1}{F+1}\sum_{n=0}^{F-1}|Z_n(\mathbf{x})|^2}
     \end{equation}
-     
+    where $\epsilon=10^{-12}$ is a small constant to ensure that the logarithm
+    is always defined. 
+    
     \item Spectral entropy: captures the complexity of the spectrum.
     Sharp peaks will have low entropy while flat noise will produce high values.
-    The definiton is based on Shannon entropy, formally:
+    The definition is based on Shannon entropy, formally:
     \begin{equation}
         S_\text{entropy}=
-        -\sum_{n=0}^F{|Z_n(\mathbf{x})|^2\log_2{|Z_n(\mathbf{x})|^2}}
+        -\sum_{n=0}^{F-1}{p_n(\mathbf{x})\log_2{p_n(\mathbf{x})}}
     \end{equation}    
-    where 
+    where $p_n(\mathbf{x})=\frac{|Z_n(\mathbf{x})|^2} 
+    {\sum_{n=0}^{F-1}|Z_n(\mathbf{x})|^2}$ and $\epsilon=10^{-12}$ is a small
+    constant to ensure that the logarithm is always defined.
+    Spectral entropy can be an indicator of anomalous behavior in both ictal
+    and inter-ictal activity \cite{spectral-entropy}.
+    
     \item Relative powerbands: integrated power between two frequencies, 
     normalized so that the sum of all powerbands at a given instant is equal to
-    1. Formally, the relative powerband between frequencies $a$ and $b$ is
+    1.
+    The ratio between powerbands has been proven to show anomalies during 
+    epileptic events \cite{powerbands} and can be used in user-assisted methods
+    to localize the SOZ \cite{bartolomei}.
+    Formally, the relative powerband between frequencies $a$ and $b$ is
     defined as:
     \begin{equation}
     S_{\text{band}} = \frac{1}{C}
     \sum\limits_{f_n \in [a, b]} |Z_n(\mathbf{x})|^2
     \end{equation}
-    where $\sum\limits_{n=0}^{F} |Z_n(\mathbf{x})|^2$ is a normalization factor
+    where $C=\sum\limits_{n=0}^{F} |Z_n(\mathbf{x})|^2$ is a normalization factor
     forcing the sum of all powerbands to be equal to 1.
-    In this study we compute the following relative powerbands:
-\begin{table}[h]
+    The frequency intervals used in this study are reported in table
+    \ref{tab:bands}.
+
+\begin{table}[h]\label{tab:bands}
 \centering
 \begin{tabular}{lcc}
 \hline
@@ -361,16 +421,79 @@ Ripple  & 80 -- 250 \\
 \end{itemize}
 
 
-\subsection{Variational Autoencoder (VAE)}
+\subsection{Variational Autoencoder (VAE)} \label{meth:vae}
+
+A Variational AutoEncoder (VAE) is an artificial neural network architecture
+\cite{vae-original}.
+Like an autoencoder, it is trained to reconstruct its own input and is composed 
+of an encoder and a decoder. 
+Unlike an autoencoder, encoder and decoder are connected through a probabilistic
+latent space.
+The encoder maps each input point into a probabilistic distribution into a
+lower-dimensional manifold known as latent space.
+The decoder samples a random point from the encoded distribution, and
+is trained to reconstruct its own input.
+The random sampling in the latent space is known as "reparametrization trick".
+
+The input vector $\mathbf{x}$ is transformed by the encoder in a pair of latent
+vectors $(\mathbf{z_{\mu}},\mathbf{z_{\sigma}})$, while the latent vector
+$\mathbf{z}\sim\mathcal{N}(\mathbf{z_{\mu}},\mathbf{z_{\sigma}})$ is sampled
+from a normal distribution with mean $\mathbf{z_\mu}$ and variance
+$\mathbf{z_{\sigma}}$.
+The output vector is then computed by feeding $\mathbf(z)$ into a decoder.
+
+Formally, a VAE has two objectives: 
+\begin{enumerate}
+    \item To maximize the likelihood of observed data $p_{\theta}(\mathbf{x})$
+    under the distribution parameterized by the decoder parameters $\theta$.
+    \item To learn an encoded distribution $q_{\phi}(\mathbf{z}|\mathbf{x})$ to
+    approximate the posterior distribution $p_{\theta}(\mathbf{z}|\mathbf{x})$.
+\end{enumerate}
+
+This two goals can be achieved by maximizing the Evidence Lower BOund (ELBO):
+\begin{align}
+    L_{\theta, \phi}(\mathbf{x})&=\ln(p_{\theta}(\mathbf{x}))-
+    D_{KL}(q_\phi(\mathbf{z}|\mathbf{x})\Vert p_{\theta}(\mathbf{z}|\mathbf{x}))
+    \\
+    &= \mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \left[p_\theta(\mathbf{x}|\mathbf{z})\right] - 
+    \mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \left[\ln{\frac{q_\phi(\mathbf{z}|\mathbf{x})}{p_\theta(\mathbf{z})}}\right]
+\end{align}
+
+Since we assume that $p_\theta(\mathbf{x}|\mathbf{z})=
+\mathcal{N}\left(\mathbf{D}_\theta(\mathbf{z}), \mathbb{I}\right)$, 
+where $D_\theta(\mathbf{z})$ is the reconstructed input vector), 
+the first term simplifies to the mean square error between the input and its
+reconstructed error. 
+The second term depends on the prior distribution $p_\theta(\mathbf{z})$ 
+chosen for the latent space.
+A common choice for the prior is the normal distribution 
+$\mathcal{N}(\mathbf{0}, \mathbb{I})$. 
+The reparametrization trick implies $q_\phi(\mathbf{z}|\mathbf{x}) = 
+\mathcal{N}(\mathbf{\mu}_\phi(\mathbf{x}),
+\mathbf{\sigma}^2_\phi(\mathbf{x}))$, therefore the ELBO is
+optimizable as:
+
+\begin{equation}    \label{ELBO-theoretical}
+    L_{\theta, \phi}(\mathbf{x})=
+    -\frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \left[\Vert\mathbf{x} - \mathbf{D_\theta(\mathbf{z})}\Vert^2\right] - 
+    \frac{1}{2} \sum_{i=1}^{d} \Big( \ln\mathbf{\sigma}_i^2(\mathbf{z})
+    + \mathbf{\mu}_i^2(\mathbf{z}) + \mathbf{\sigma}_i^2(\mathbf{z}) - 1 \Big)
+\end{equation}
+where $d$ is the dimensionality of the latent space.
+
+(!!! Esempio d'uso? Perché lo usiamo?)
 
 
-\subsection{Gaussian Mixture Models (GMM)}
+\subsection{Gaussian Mixture Models (GMM)}  \label{meth:gmm}
 
 
-\subsection{Negative log-likelihood}
+\subsection{Negative log-likelihood}    \label{meth:neg_ll}
 
 
-\subsection{Classification}
+\subsection{Classification}         \label{meth:classifier}
 
 
-\subsection{Hyperparameter Tuning}
+\subsection{Hyperparameter Tuning}  \label{meth:opt}
