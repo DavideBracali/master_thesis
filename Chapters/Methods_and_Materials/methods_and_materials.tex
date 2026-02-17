@@ -49,7 +49,7 @@ Pre-processing for this data consists in the application of notch filters to
 eliminate power line noise, and a bandpass Butterworth filter.
 
 The notch filters were applied at $50\ Hz$, $100\ Hz$, $150\ Hz$ and $200\ Hz$
-to remove the fundamental frequency and its fundamental harmonics
+to remove the fundamental frequency and its fundamental harmonics.
 A bandpass Butterworth 6th order zero-phase filter was applied on raw data to
 isolate frequencies between $0.5\ Hz$, as very low frequencies
 provide no useful information for this study \cite{eeg-book} and $249.5\ Hz$,
@@ -89,7 +89,7 @@ random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
 
 \begin{equation}
     \text{MI}(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
-    = \sum_{x\in\mathcal(X)}\sum_{y\in\mathcal(Y)}
+    = \sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}}
     {P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_{X}(x)\cdot P_{Y}(y)}}}
 \end{equation}
 where $D_{KL}$ is the Kullback–Leibler divergence, a statistical distance
@@ -399,7 +399,7 @@ The following metrics were computed:
     The frequency intervals used in this study are reported in table
     \ref{tab:bands}.
 
-\begin{table}[h]\label{tab:bands}
+\begin{table}[h]
 \centering
 \begin{tabular}{lcc}
 \hline
@@ -414,7 +414,7 @@ Ripple  & 80 -- 250 \\
 \hline
 \end{tabular}
 \caption{Relative powerbands considered in this study.}
-\label{tab:powerbands}
+\label{tab:bands}
 \end{table}
 
 
@@ -431,16 +431,21 @@ Unlike an autoencoder, encoder and decoder are connected through a probabilistic
 latent space.
 The encoder maps each input point into a probabilistic distribution into a
 lower-dimensional manifold known as latent space.
-The decoder samples a random point from the encoded distribution, and
-is trained to reconstruct its own input.
-The random sampling in the latent space is known as "reparametrization trick".
+The model then samples a random point from the encoded distribution, and passes
+it to an autoencoder trained to reconstruct the initial input.
 
 The input vector $\mathbf{x}$ is transformed by the encoder in a pair of latent
-vectors $(\mathbf{z_{\mu}},\mathbf{z_{\sigma}})$, while the latent vector
-$\mathbf{z}\sim\mathcal{N}(\mathbf{z_{\mu}},\mathbf{z_{\sigma}})$ is sampled
-from a normal distribution with mean $\mathbf{z_\mu}$ and variance
-$\mathbf{z_{\sigma}}$.
-The output vector is then computed by feeding $\mathbf(z)$ into a decoder.
+vectors $(\mu({\mathbf{x})},\sigma({\mathbf{x}}))$, while the latent vector
+$\mathbf{z}\sim\mathcal{N}(\mu(\mathbf{x}),\sigma^2(\mathbf{x}))$ is sampled
+from a normal distribution with mean $\mu(\mathbf{x})$ and variance
+$\sigma^2(\mathbf{x})$.
+The output vector is then computed by feeding $\mathbf{z}$ into a decoder.
+To make sampling differentiable the latent vector is sampled as:
+\begin{equation}
+    \mathbf{z}=\mu(\mathbf{x}) + \sigma(\mathbf{x})\odot\epsilon
+    \;\;\;\;\;\;\;\;\;\;\;\;\epsilon\sim\mathcal{N}(0,1)
+\end{equation}
+This is known as "reparametrization trick".
 
 Formally, a VAE has two objectives: 
 \begin{enumerate}
@@ -452,20 +457,22 @@ Formally, a VAE has two objectives:
 
 This two goals can be achieved by maximizing the Evidence Lower BOund (ELBO):
 \begin{align}
-    L_{\theta, \phi}(\mathbf{x})&=\ln(p_{\theta}(\mathbf{x}))-
-    D_{KL}(q_\phi(\mathbf{z}|\mathbf{x})\Vert p_{\theta}(\mathbf{z}|\mathbf{x}))
-    \\
-    &= \mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
-    \left[p_\theta(\mathbf{x}|\mathbf{z})\right] - 
+L_{\theta, \phi}(\mathbf{x}) &=
+    \ln p_{\theta}(\mathbf{x}) 
+    - D_{\text{KL}}\Big( q_\phi(\mathbf{z}|\mathbf{x}) \,\Vert\, p_{\theta}(\mathbf{z}|\mathbf{x}) \Big)
+    =\\
+    &= \mathbb{E}_{\mathbf{z}\sim q_\phi(\mathbf{z}|\mathbf{x})}
+    \left[\ln p_\theta(\mathbf{x}|\mathbf{z})\right] - 
     \mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
     \left[\ln{\frac{q_\phi(\mathbf{z}|\mathbf{x})}{p_\theta(\mathbf{z})}}\right]
 \end{align}
+where $D_{KL}$ is the Kullback–Leibler (KL) divergence.
 
 Since we assume that $p_\theta(\mathbf{x}|\mathbf{z})=
 \mathcal{N}\left(\mathbf{D}_\theta(\mathbf{z}), \mathbb{I}\right)$, 
-where $D_\theta(\mathbf{z})$ is the reconstructed input vector), 
+where $D_\theta(\mathbf{z})$ is the reconstructed input vector, 
 the first term simplifies to the mean square error between the input and its
-reconstructed error. 
+reconstructed error, plus an additive constant. 
 The second term depends on the prior distribution $p_\theta(\mathbf{z})$ 
 chosen for the latent space.
 A common choice for the prior is the normal distribution 
@@ -477,23 +484,185 @@ optimizable as:
 
 \begin{equation}    \label{ELBO-theoretical}
     L_{\theta, \phi}(\mathbf{x})=
-    -\frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    -\frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_\phi(\mathbf{z}|\mathbf{x})}
     \left[\Vert\mathbf{x} - \mathbf{D_\theta(\mathbf{z})}\Vert^2\right] - 
-    \frac{1}{2} \sum_{i=1}^{d} \Big( \ln\mathbf{\sigma}_i^2(\mathbf{z})
-    + \mathbf{\mu}_i^2(\mathbf{z}) + \mathbf{\sigma}_i^2(\mathbf{z}) - 1 \Big)
+    \frac{1}{2} \sum_{i=1}^{d} \Big( \ln\mathbf{\sigma}_{\phi i}^2(\mathbf{x})
+    + \mathbf{\mu}_{\phi i}^2(\mathbf{x}) +
+    \mathbf{\sigma}_{\phi i}^2(\mathbf{x}) - 1\Big)
 \end{equation}
 where $d$ is the dimensionality of the latent space.
 
-(!!! Esempio d'uso? Perché lo usiamo?)
+The loss function to minimize during training is therefore composed of the
+sum of the Mean Squared Error (MSE) between input and output and the KL
+divergence between the prior and the approximate posterior on the latent space.
+A popular variation of such loss includes a scalar term $\beta(t)$,
+optionally dependent on the training epoch $t$, to regulate the relative weight
+of the KL term with respect to the MSE term \cite{vae-beta-original}.
+We also decide to divide the KL term by the latent dimension $d$, so that
+the relative weight of the KL term is controlled solely by $\beta(t)$ and does 
+not depend on the dimensionality of the latent space.
+Therefore the loss function implemented in this process is:
+\begin{equation}
+    \mathcal{L}_{\theta, \phi}(\mathbf{x},t)=
+    \frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \left[\Vert\mathbf{x} - \mathbf{D_\theta(\mathbf{z})}\Vert^2\right] + 
+    \frac{\beta(t)}{2} \sum_{i=1}^{d} \Big( \ln\mathbf{\sigma}_{\phi i}^2
+    (\mathbf{x})
+    + \mathbf{\mu}_{\phi i}^2(\mathbf{x}) +
+    \mathbf{\sigma}_{\phi i}^2(\mathbf{x}) - 1 \Big)
+\end{equation}
 
+As shown by literature \cite{vae-beta}, if $\beta(t)$ is an increasing function 
+of the training epoch (a process known as "warm-up"), training becomes more 
+stable as posterior collapse (i.e. when the approximate posterior collapses to 
+the prior) is less likely to happen.
+
+In this work, a VAE is trained on the resting-state recordings of multiple
+patients.
+Because each patient provides training data of different length (from 2 to 7
+hours), we sample a fixed numbers of data points from the resting-state
+recordings of each patient.
+The sampling is uniform over time, ensuring that the selected points are spread
+across the entire recording rather than clustered in a short temporal segment.
+Validation split is set as $10\%$, as this portion of training data is used to
+monitor early-stopping.
+
+The size of the input and output layer is 22, because it is the number of
+extracted features (Section \ref{meth:features}).
+The encoder architecture consists in an arbitrary number of hidden layers,
+fully connected through ReLU activation functions.
+The number of neurons of each hidden layer decreases linearly from 22 to the
+latent dimension.
+The encoder terminates into two distinct linear layers that return mean
+$\mu({\mathbf{x})}$ and log-variance $\ln\sigma({\mathbf{x})}$ of the encoded
+distribution.
+After sampling
+$\mathbf{z}\sim\mathcal{N}(\mu({\mathbf{x})},\sigma({\mathbf{x}}))$ the latent
+vector is reconstructed by the decoder, with a specular architecture of hidden
+layers with respect to the encoder and linear activation functions.
+
+Training is executed in two steps:
+\begin{enumerate}
+    \item The first training phase sets $\beta(t)=0$, so that the model can
+    learn a meaningful encoding that enables for efficient 
+    reconstruction. Early-stopping is set with a patience of 5 epochs and a
+    $1\%$ tolerance.
+    \item The second training phase sets
+    $\beta(t)=\beta_{\text{max}}\min{(t/\beta_{\text{warmup}}, 1)}$, 
+    a linear increasing function that reaches $\beta_{\text{max}}$ after 
+    $\beta_{\text{warmup}}$ iterations.
+    After the first initial phase, now the model is forced to sacrifice
+    reconstruction to obtain a smooth and interpolable latent space
+    distribution. Early-stopping is set with a patience of 5 epochs and a
+    $1\%$ tolerance.
+\end{enumerate}
+
+This architecture depends on 5 hyperparameters, that will be optimized as
+explained in Section \ref{meth:opt}:
+\begin{itemize}
+    \item The learning rate $\eta$.
+    \item The number of hidden layers $n_{\text{hidden}}$.
+    \item The latent dimension $d$.
+    \item $\beta_{\text{warmup}}$
+    \item $\beta_{\text{max}}$
+\end{itemize}
+
+
+In this work we implement a VAE model because we are interested in a
+lower-dimensional representation of data that can extract complex non-linear
+patterns while keeping a smooth and interpolable structure.
+Other models could be used for the same task, such as linear alternatives like 
+Principal Components Analysis (PCA) and Partial Least Squares Regression (PLS).
+The VAE framework could also be extended to include a supervised term in the
+loss function to encourage separation between epileptogenic and healthy contacts
+during training.
+These alternatives were not explored in this study, but could be worth
+investigating in future research.
 
 \subsection{Gaussian Mixture Models (GMM)}  \label{meth:gmm}
+
+A Gaussian Mixture Model (GMM) is a probabilistic model that assumes all the data
+points are generated from a mixture of a finite number of Gaussian distributions
+with unknown parameters.
+A GMM assumes that data is generated by a weighted sum of normal distributions:
+\begin{equation}
+    p_\psi(\mathbf{x}) = \sum_{k=1}^{N_c}\pi_k\mathcal{N}
+    (\mathbf{x} \mid \mu_{\psi k}, \Sigma_{\psi k})
+\end{equation}
+where $N_c$ is the fixed number of Gaussian components.
+A GMM model is fit on data $\{\mathbf{x}_i\}_{i=1}^N$ maximizing the
+log-likelihood of the model $p_\psi(\mathbf{x})$ on the data:
+
+\begin{equation}
+    \hat{\psi} = \text{arg}\max_{\psi}\sum_{i=1}^N
+    \ln\left(\sum_{k=1}^{N_c}\pi_k\mathcal{N}
+    (\mathbf{x}_i \mid \mu_{\psi k}, \Sigma_{\psi k})\right)
+\end{equation}
+However, this equation does not have a closed form solution.
+To adress this problem,
+an Expectation-Maximization (EM) algorithm is used to maximize the likelihood 
+(Bishop, 2006, Cap.~9) \cite{bishop2006}.
+
+A GMM with an arbitrary number of components can be used to fit more complex
+distributions, and is particularly efficient in high dimensionality spaces
+when confronted against non-parametric methods.
+GMM assumes an underlying distribution for data, therefore the model does not
+have to estimate the density of data points like Kernel Density Estimators or
+k-Nearest Neighbors.
+With a moderate number of dimensions, GMM will train significantly faster than
+other density estimators.
+
+In this work we use a GMM with a fixed number of components $N_c$ to learn the
+distribution of resting-state activity in the latent space of the VAE described
+in Section \ref{meth:vae}:
+resting-state features are encoded in a lower-dimensional latent space, and a
+GMM fits the learned distribution of these latent representations, capturing the
+regions most frequently visited by healthy brain activity.
+The number of components $N_c$ will be optimized as explained in Section 
+\ref{meth:opt}.
 
 
 \subsection{Negative log-likelihood}    \label{meth:neg_ll}
 
+As mentioned in Section \ref{meth:vae} and Section \ref{meth:gmm},
+the VAE is trained on resting-state recordings and a GMM is fit on the latent
+space to learn the encoded distribution of the healthy state of the brain.
+When features extracted from seizure recordings are fed into the trained VAE,
+we expect that:
+\begin{itemize}
+    \item Healthy behavior will be encoded into regions of the latent space that
+    were frequently visited during training;
+    \item Anomalous behavior will be encoded into regions of the latent space
+    that were rarely or never visited during training.
+\end{itemize}
+
+To estimate how well seizure data is explained by the training distribution,
+we score the likelihood $\mathcal{L}$ of the GMM model for each contact at every
+step of the seizure.
+High likelihood values indicate conformity with the training distribution, while
+low values are indicative of deviations from the training distribution.
+We therefore use, for each seizure vector $\mathbf{x}_i$ the negative
+log-likelihood as a quantitative indicator for anomalous behavior with respect
+to the resting-state:
+\begin{equation}
+    -\log_{10}\mathcal{L}(\mathbf{\psi|x_i})    
+\end{equation}
+where $\psi$ represents the GMM parameters.
+
+The aim of this work is to classify the contacts belonging to the SOZ.
+By definition, a focal epileptic feature manifests a few seconds earlier in the
+SOZ, and subsequently spreads to a vaster area of the brain.
+The negative log-likelihood can therefore be used to highlight anomalous 
+patterns before the general seizure, as
+it serves as an universal indicator for a deviation in one or more features from
+its expected value assuming resting-state activity.
 
 \subsection{Classification}         \label{meth:classifier}
 
+!!! Descrivi il classificatore: 
+smoothing, peso temporale, peso betweenness, coordinate spaziali, thresholding
 
 \subsection{Hyperparameter Tuning}  \label{meth:opt}
+
+!!! Descrivi ottimizzazione iperparametri: cross-validation, 2 fasi, target,
+spiegare perché non ci interessano i falsi negativi

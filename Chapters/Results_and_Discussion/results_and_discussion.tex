@@ -12,7 +12,28 @@
 
 \section{Results and Discussion}
 
+\subsection{Analysis on a subset of patients}
+
+!!! Mostrare un paziente (se no diventa troppo lunga come immagini) come in
+presentazione mettendo gli altri 3 in appendice
+
+\subsubsection{Feature importance}
+
+!!! Grafico a barre delle features, giustificare la scelta della betweenness come
+peso per il classificatore
+
+\subsubsection{Global seizure dynamics}
+
+!!! Mostrare tutte e 22 le features, spiegando i trend più evidenti
+
+\subsubsection{A classification example}
+
+!!! Far vedere i plot dello spazio latente, della likelihood e 
+grafico a barre del segnale d'allarme spiegando cosa succede
+
 \subsection{Optimization Results}
+
+!!! Per entrambi mostrare best params, curve di ottimizzazione, boxplot del target
 
 \subsubsection{VAE and GMM}
 
@@ -20,11 +41,21 @@
 
 \subsection{Evaluation Metrics}
 
+!!! Boxplots di pazienti validation e test
+
 \subsection{Discussion}
 
 \subsubsection{Validation and Test Results}
 
+!!! Spiegare come mai il test viene molto peggio (pochi pazienti di training)
+Confronto con random classifier e Bartolomei
+
 \subsubsection{Hyperparameters Stability}
+
+!!! Spiegare perché il training dipende fortemente dai pazienti e i best params
+divergono (eterogeneità pazienti, distribuzioni latenti molto ampie)
 
 \subsubsection{Future developments}
 
+!!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
+modelli, classificatore deep learning
