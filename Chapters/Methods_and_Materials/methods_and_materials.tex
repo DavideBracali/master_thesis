@@ -136,7 +136,7 @@ therefore scale linearly with the number of time frames.
 
 The aim of this work is to develop an patient-independent algorithm to classify
 which regions of the brain belong to the SOZ.
-The proposed pipeline for this task is shown in figure \ref{fig:pipeline}), and
+The proposed pipeline for this task is shown in Figure \ref{fig:pipeline}), and
 can be summarized in the following steps:
 \begin{itemize}
     \item Feature extraction: a set of 22 metrics is computed from pre-processed
@@ -604,7 +604,7 @@ an Expectation-Maximization (EM) algorithm is used to maximize the likelihood
 (Bishop, 2006, Cap.~9) \cite{bishop2006}.
 
 A GMM with an arbitrary number of components can be used to fit more complex
-distributions, and is particularly efficient in high dimensionality spaces
+distributions, and is particularly efficient in moderate-dimensional spaces
 when confronted against non-parametric methods.
 GMM assumes an underlying distribution for data, therefore the model does not
 have to estimate the density of data points like Kernel Density Estimators or
@@ -641,13 +641,14 @@ we score the likelihood $\mathcal{L}$ of the GMM model for each contact at every
 step of the seizure.
 High likelihood values indicate conformity with the training distribution, while
 low values are indicative of deviations from the training distribution.
-We therefore use, for each seizure vector $\mathbf{x}_i$ the negative
-log-likelihood as a quantitative indicator for anomalous behavior with respect
-to the resting-state:
+We therefore use, for each seizure vector $\mathbf{x}_c(t)$ ($c$ indicates the
+contact while $t$ is the time index)
+the negative log-likelihood as a quantitative indicator for anomalous behavior
+with respect to the resting-state:
 \begin{equation}
-    -\log_{10}\mathcal{L}(\mathbf{\psi|x_i})    
+    \text{NLL}_c(t) = -\log_{10}\mathcal{L}\left(\psi|\mathbf{x}_c(t)\right)    
 \end{equation}
-where $\psi$ represents the GMM parameters.
+where $\psi$ represents the GMM parameters, $t$ indicates the time step.
 
 The aim of this work is to classify the contacts belonging to the SOZ.
 By definition, a focal epileptic feature manifests a few seconds earlier in the
@@ -659,10 +660,253 @@ its expected value assuming resting-state activity.
 
 \subsection{Classification}         \label{meth:classifier}
 
-!!! Descrivi il classificatore: 
-smoothing, peso temporale, peso betweenness, coordinate spaziali, thresholding
+As described in Section \ref{meth:neg_ll} we use the negative log-likelihood to
+describe, for each contact at each time step, deviations from resting-state
+activity during seizures.
+To decide which contact consitute the SOZ, we use a deterministic classifier
+that evaluates the time-series of the negative log-likelihood of each contact 
+during the seizure.
+In particular, the classifier evaluates log-likelihood in the interval
+$[t_{\text{onset}} - 10\ s, t_{\text{onset}} +20\ s]$, where $t_{\text{onset}}$
+is the reported time for the first electrical symptoms.
+The lower bound of this interval is justified by the fact that in some patients
+anomalies begin a few seconds before the reported onset, and the upper bound is
+chosen to capture the early phase of the seizure while limiting the influence of
+the general diffusion to a vaster area of the brain.
+
+First, negative log-likelihood is smoothed in time with the application of a 
+Gaussian 1-dimensional filter.
+This operation is preformed to remove noise from the time-series and to 
+ensure that only anomalies that are sustained for several seconds are detected.
+The filter application consists in the convolution of the negative
+log-likelihood and a Gaussian kernel with zero mean:
+\begin{equation}
+    \text{sNLL}_c(t)=\text{NLL}_c(t)\circledast B(t)
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    B(t)=\frac{1}{\sqrt{2\pi}\sigma_{filt}}
+    \exp{\left(-\frac{t^2}{2\sigma_{filt}^2}\right)}
+\end{equation}
+where $\sigma_{filt}$ was arbitrarily set to 3 based on the seizures of 
+the patients of this dataset.
+Anomalies sustained for more than $3\ s$ will be preserved, while shorter 
+anomalies will be smoothed out.
+
+Then two types of weights are applied:
+\begin{itemize}
+    \item A time weight that increases linearly for $t\leq t_{onset}$
+    and decreases exponentially for $t > t_{\text{onset}}$:
+    \begin{equation}
+    f_{t_C}(t) =
+    \begin{cases}
+    \dfrac{t - t_{\text{onset}}}{10},
+    & t_{\text{onset}}-10\leq t \leq t_{\text{onset}} \\[2mm]
+    \exp\!\Big(-\dfrac{(t-t_{\text{onset}})/20}{t_C}\Big),
+    & t_{\text{onset}} < t \leq t_{\text{onset}} + 20
+    \end{cases}
+    \end{equation}
+    where the characteristic time $t_C>0$ is a scalar constant that controls the
+    decay of the decreasing exponential.
+    \item A betweenness centrality
+    \footnote{The choice of betweenness centrality as a weight for the
+    log-likelihood is justified by a ranking of the most discriminative
+    features in a subset of 4 patients.
+    As will be explained in Section \ref{res:importance}, betweenness centrality
+    is the only significantly significant feature for distinguishing between
+    epileptogenic and healthy contacts during a seizure.}
+    weight based on its Z-score from the 
+    training distribution:
+    \begin{equation}
+        b_c(t) = \left|\frac{b_c(t)-\mu_{\text{train},c}}
+        {\sigma_{\text{train},c}}\right|
+    \end{equation}
+    where $\mu_{\text{train},c}$ is the mean of the betweenness centrality of
+    contact $c$ during training and $\sigma_{\text{train},c}$ is the standard
+    deviation of contact $c$ during training.
+    If $\sigma_{\text{train},c}=0$, the global standard deviation between all
+    contacts is used as a substitute.
+\end{itemize}
+
+An initial alarm score is computed as:
+\begin{equation}
+    A^*_c(t_C,\alpha) = \sum_{t = t_{\text{onset}} - 10}^{t_{\text{onset}} + 20} 
+    \left( \alpha\, f_{t_C}(t) + (1-\alpha)\, b_c(t) \right) \text{sNLL}_c(t)
+\end{equation}
+where $\alpha\in[0,1]$ is a scalar constant that regulates the relative 
+influence of the two weights.
+
+Because brain areas associated to the SOZ tend to thermocoagulated
+abundantly (to avoid having to re-operate), we compute
+a final alarm score that keeps into consideration the alarm scores of the 
+surrounding contacts.
+Let $\mathbf{s}_c=(s_{c,x}, s_{c,y}, s_{c,z})$ be the spatial coordinates of 
+contact $c$.
+Then, the final alarm score will add the initial score of all the other contacts
+$c'\neq c$ weighted by their distance.
+Formally:
+\begin{equation}
+    A_c(t_C,\alpha,k) = A^*_c + \sum_{c'\neq c}
+    \text{dist}(\mathbf{s}_c,\mathbf{s}_{c'})^k A^*_{c'}
+\end{equation}
+where
+$\text{dist}(\mathbf{s}_c, \mathbf{s}_{c'})=
+\Vert\mathbf{s}_c-\mathbf{s}_{c'}\Vert_2$
+and $k<0$ is a negative scalar constant that regulates the proximity scale.
+
+The alarm score is then normalized so that the sum of the alarm score on all
+contacts in a patient is equal to the number of contacts $C$.
+Equivalently, the average alarm score for the contact of a patient is always 
+equal to 1.
+Normalization allows to compare alarm scores of different patients with a
+different number of contacts.
+The normalized alarm score is:
+\begin{equation}
+    a_c(t_C,\alpha,k) = C\frac{A_c(t_C,\alpha,k)}{\sum_c A_c(t_C,\alpha,k)}
+\end{equation}
+
+Finally, to obtain a binary classification, $a_c$ is thresholded by a threshold
+$\tau$.
+If $a_c\geq\tau$ then the contact is labeled as SOZ, if $a_c<\tau$ the contact
+will be labeled as healthy:
+\begin{equation}
+    y_c(t_C,\alpha,k,\tau) = \theta(a_c(t_C,\alpha,k)-\tau)
+\end{equation}
+where $\theta(\cdot)$ is the Heavyside step function.
+
+The classification therefore depends on 4 hyperparameters:
+\begin{itemize}
+    \item The characteristic time $t_C$;
+    \item The relative ratio of weights $\alpha$;
+    \item The negative exponent that regulates proximity $k$;
+    \item The threshold $\tau$.
+\end{itemize}
+
 
 \subsection{Hyperparameter Tuning}  \label{meth:opt}
 
-!!! Descrivi ottimizzazione iperparametri: cross-validation, 2 fasi, target,
-spiegare perché non ci interessano i falsi negativi
+The proposed pipeline for this study depends on a total of 10 hyperparameters:
+\begin{itemize}
+    \item VAE and GMM parameters:
+    \begin{itemize}
+        \item The learning rate $\eta$;
+        \item The number of hidden layers $n_{\text{hidden}}$;
+        \item The latent dimension $d$;
+        \item $\beta_{\text{warmup}}$;
+        \item $\beta_{\text{max}}$;
+        \item The number of Gaussian components $N_c$;
+    \end{itemize}
+    \item Classifier parameters:
+    \begin{itemize}
+        \item The characteristic time $t_C$;
+        \item The relative ratio of weights $\alpha$;
+        \item The negative exponent that regulates proximity $k$;
+        \item The threshold $\tau$.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Immagini/patients.png}
+    \caption{Dataset partitioning strategy}
+    \label{fig:patients}
+\end{figure}
+
+To find the optimal values for these constants a Leave-One-Out Cross Validation
+(LOOCV) approach was employed.
+The 23 patients that constitute the dataset are divided based on the following
+logic (Figure \ref{fig:patients}):
+\begin{itemize}
+    \item 4 patients were held out as an independent test set.
+    \item 19 patients were used for training:
+    \begin{itemize}
+        \item 4 out of 19 patients are excluded from validation, as their
+        seizures have already been analyzed in order to define the classification
+        strategy discussed in Section \ref{meth:classifier}.
+        These patients are only used to train the model, but are not evaluated
+        as their results would be overestimated because of the choice of the
+        classification strategy.
+        \item 15 out of 19 patients were used both for training and validation.
+    \end{itemize}
+\end{itemize}
+
+This approach results in 15 training folds.
+Each fold is composed on 18 training patients, and one validation patient.
+This strategy estimates how a certain set of hyperparameters, optimized on 18
+patients, would generalize on a new patient that was never seen before by the
+model.
+
+Different training folds will generally produce different parameters. 
+For this reason, after performing LOOCV, the model is trained one final time
+using all 19 patients as training set to obtain a final configuration of
+parameters, and evaluates those parameters on the independent 4 patients test
+set.
+
+Hyperparameter tuning was performed using the Optuna optimization framework
+\cite{optuna}.
+To limit computation time and to reduce the hyperparameters space, 
+thus simplifying the optimization problem, we decided to adopt a 2-step strategy.
+First we optimize the VAE and GMM parameters, maximizing an intermediate target
+function that produces an efficient encoding and fit on the latent space.
+Then, once the VAE and GMM architecture is fixed, we optimize the classifier by
+maximizing binary evaluation metrics.
+
+\subsubsection{VAE and GMM}
+
+The first optimization step aims to find optimal parameters for the model
+architecture.
+This step depends on 6 hyperparameters: $\eta$, $n_{\text{hidden}}$, $d$,
+$\beta_{\text{warmup}}$, $\beta_{\text{max}}$, $N_c$.
+
+The optimization logic is to select a model architecture so that, during a 
+seizure, contacts associated with the SOZ exhibit low likelihood values
+more often than non-SOZ contacts (refer to Section \ref{meth:neg_ll} for the
+negative log-likelihood computation).
+This is justified by the fact that the classifier (discussed in Section
+\ref{meth:classifier}) will use the negative-log likelihood ($NNL$) to compute the
+alarm score.
+We therefore perform a one-sided Mann - Whitney U test \cite{mw} on the negative
+log-likelihood distributions of SOZ and non-SOZ contacts in the 
+$[t_{\text{onset}} - 10, t_{\text{onset}} + 20]$ interval during the seizure.
+The rank biserial correlation, defined as:
+\begin{equation}
+    r = \frac{2U}{n_1n_2}-1
+\end{equation}
+where $U$ is the test statistic in the Mann Whitney test and $n_1$ and $n_2$
+represent the sample size of the two distributions.
+$r=+1$ implies that all SOZ contacts have higher NLL than non-SOZ contacts,
+while $r=-1$ represents the opposite situation.
+High values of $r$ indicate that the model is able to assign low likelihood
+values to SOZ contacts more often, effectively recognizing the anomalous behavior
+of such channels.
+For this reason the rank biserial correlation $r$ serves as the objective
+function to be maximized in this step.
+
+\subsubsection{Classifier}
+
+The second part of the optimization process aims to find optimal parameters for
+the following hyperparameters: $t_C$, $\alpha$, $k$.
+The threshold $\tau$ is handled differently than the other parameters:
+For each candidate configuration of 
+the classifier produces a continuous alarm score. Rather than treating 
+𝜏
+τ as an additional hyperparameter to be sampled during optimization, we determine it deterministically after training by selecting the value that maximizes the median performance across patients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
