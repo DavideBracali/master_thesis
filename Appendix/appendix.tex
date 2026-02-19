@@ -1,2 +1,46 @@
 \addcontentsline{toc}{section}{Appendix}
 \section*{Appendix}
+
+\subsection{Automated Epileptogenicity Index}   \label{app:bartolomei}
+
+The original paper by Bartolomei et al. \cite{bartolomei} proposes the
+computation of an Epileptogenicity Index as:
+\begin{equation}
+    EI_i = \frac{1}{N_{d_i} - N_0 + 1}
+    \sum_{n = N_{d_i}}^{N_{d_i} + 5} ER_i[n],
+    \qquad \tau > 0
+\end{equation}
+where $ER[n]$ is the energy ratio, defined as:
+\begin{equation}
+    ER[n]=\frac{E_\gamma[n]+E_\beta[n]}{E_\theta[n]+E_\alpha[n]}
+\end{equation}
+where $E_{\theta,\alpha,\beta,\gamma}[n]$ represents the powerband
+(Section \ref{meth:features:spectral}) at time index $n$.
+while $N_{d_i}$ corresponds to the "change-point detection time", the time index
+corresponding to the first significant increment of the energy ratio, and
+$N_0=\min_{i}N_{d_i}$.
+
+The computation of $N_{d_i}$ depends on two parameters $\nu$ and $\lambda$:
+parameter $\nu$ corresponds to the magnitude of changes that
+should not raise an alarm while parameter $\lambda$ depends on the desired false
+alarm rate.
+The original paper proposes that both $\nu$ and $\lambda$ are patient-specific
+parameters to be decided by an epileptologist for each patient.
+This poses a problem for a comparison with the method proposed in this study,
+as having an unique set of parameters for all patients is a necessity.
+
+To address this problem we decide to use an alternative approach to compute
+$N_{d_i}$: an increment in the energy ratio is considered significant if its
+value surpasses its mean by $N_{std}$ standard deviations.
+$N_{std}$ is chosen fine-tuning on the training set, maximizing the median
+score defined in Section \ref{meth:opt:classifier}. 
+Classification is performed as proposed in the original paper,
+applying a $\tau=0.3$ threshold on the normalized scores:
+\begin{equation}
+    y_i=\theta\left(\frac{EI_i}{\sum_iEI_i}-0.3\right)
+\end{equation}
+where $\theta(\cdot)$ is the Heavyside step function.
+
+Using this approach, we intend to confront our model with an automated version 
+of the Epileptogenicity Index, as the original paper only proposes a
+semi-automated approach that requires patient-specific parameters.

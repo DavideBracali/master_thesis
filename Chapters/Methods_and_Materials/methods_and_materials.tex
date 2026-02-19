@@ -28,9 +28,16 @@ Each recording consists of several time series, one for each contact (typically
 Each contact is labeled as a letter, representing the electrode, followed by an
 integer number referring to a segment of that electrode.
 For example, contact "A1" represents the first segment of electrode "A".
+An 30 seconds example of sEEG recordings is visible in Figure \ref{fig:exseeg}.
 
-(!!! foto raw data??)
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Immagini/exseeg.png}
+    \caption{A 30 seconds extract of sEEG recordings during the onset of 
+    a seizure on a representative patient. Only six contacts are shown for
+    illustrative purposes.}
+    \label{fig:exseeg}
+\end{figure}
 
 Beside the recordings a database was also provided, including the list of the
 surgically removed brain regions.
@@ -39,8 +46,9 @@ thermocoagulation of the tissue surrounding the contacts labeled as SOZ.
 For the majority of patients, the removal of these regions resulted in a drastic 
 reduction of the symptoms of epilepsy. We will therefore consider this list as
 the ground truth for this project.
-The onset time of the seizure, reported by doctors and corresponding to the
-first electrical symptoms, was also included in the database.
+The spatial coordinates of each contacts and onset time of the seizure 
+(reported by doctors and corresponding to the first electrical symptoms)
+were also included in the database.
 
 
 \subsection{Pre-processing}
@@ -67,7 +75,7 @@ localized, and provide the opportunity to investigate the functional
 relationships between different regions of the brain.
 Each brain region can be mapped into a node, while an appropriate similarity
 measure between the recordings can be used to form weighted links.
-Because sEEG recordinggs are time series, such network will also be dynamic,
+Because sEEG recordings are time series, such network will also be dynamic,
 enabling us to gain insights on the evolution of the network before, during and
 after the seizure.
 
@@ -75,7 +83,7 @@ This approach is widely explored in literature \cite{eeg-book}, as epileptic
 seizures are characterized by anomalous and synchronized electrical activity
 \cite{WHO2016Epilepsy}.
 In particular, in focal epileptic seizures the abnormal activity is initially
-limited between the SOZ, and subsequently spreads to the entirity (or a vast
+limited between the SOZ, and subsequently spreads to the entirety (or a vast
 area) of the brain.
 Functional brain networks are powerful tools to model such synchronization and
 diffusion mechanisms.
@@ -86,7 +94,6 @@ For this work mutual information was chosen to quantify the dependencies of
 signal pairs, capturing linear and non-linear relationships to model the
 dynamics of an epileptic seizure. Mutual information between two discrete
 random variables $X\in\mathcal{X}$ and $Y\in\mathcal{Y}$ is defined as:
-
 \begin{equation}
     \text{MI}(X;Y) = D_{KL}(P_{(X,Y)}\ \Vert\ P_X \otimes P_Y)
     = \sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}}
@@ -173,16 +180,16 @@ can be summarized in the following steps:
 In order to distinguish between healthy and epileptogenic behavior in sEEG
 recordings, a set of features must be computed at each time frame in order to
 extract meaningful information from data.
-In this study we extract a total of 22 features, which can be grouped
-into three categories depending on their nature: network features, signal
-features and spectral features:
+In this study we extract a total of 22 local features to characterize each
+contact during a seizure.
+Local features can be grouped into three categories depending on their nature:
 \begin{enumerate}
     \item Network features: they are computed from a graph functional network to
     explore pair-wise relationships between signals.
     \item Signal features: metrics that can be extracted directly from the sEEG
     pre-processed time series.
     \item Spectral features: metrics that characterize the short-time Fourier
-    transform specrogram of data.
+    transform spectrogram of data.
 \end{enumerate}
 All metrics were extracted with a $1\ s$ temporal resolution, using
 non-overlapping sliding windows for feature extractions.
@@ -262,7 +269,7 @@ The global metrics used for this work are:
     (disassortative network) corresponds to the opposite tendency
     \cite{networks-ass}.
     
-    \item Average shortest path: the sum of shoretest path lengths between all
+    \item Average shortest path: the sum of shortest path lengths between all
     pairs of nodes:
     \begin{equation}
         a = \sum_{i\neq j}{\frac{d(i,j)}{n(n-1)}}
@@ -280,8 +287,8 @@ The global metrics used for this work are:
 
 \subsubsection{Signal features}
 
-Signal features can be computed directly from the pre-processed sEEG time-seires.
-Such features were choosen to capture epileptogenic patterns that are directly
+Signal features can be computed directly from the pre-processed sEEG time-series.
+Such features were chosen to capture epileptogenic patterns that are directly
 visible just looking at data, such as increased amplitude, sharp oscillations, 
 or sudden transient spikes.
 
@@ -299,7 +306,7 @@ The following metrics were computed for each contact:
     \cite{skewkurt}.
 
     \item Kurtosis coefficient: measures the tendency of the signal to produce
-    extreme values, using a normal distribution as refernce.
+    extreme values, using a normal distribution as reference.
     High Kurtosis indicates frequent large excursions from the mean, which
     correspond to sharp transients and spikes commonly seen in epilepsy.
     Has shown discriminative power in magnetoencephalography signals
@@ -316,13 +323,13 @@ The following metrics were computed for each contact:
     adjacent signal samples, represents the maximum steepness of the signal.
     
     \item Highuci fractal dimension: approximate box-counting dimension of the
-    fractal that underlines the time-seires.
+    fractal that underlines the time-series.
     Captures signal complexity and self-similarity, and can be a powerful
     discriminant in identifying seizure onset \cite{higuchi}.
 \end{itemize}
 
 
-\subsubsection{Spectral features}
+\subsubsection{Spectral features} \label{meth:features:spectral}
 
 Spectral features are derived from the spectrogram of pre-processed signals.
 The spectrogram, a time-dependent representation of the frequency domain of
@@ -344,7 +351,7 @@ The following metrics were computed:
     \item Spectral centroid: the mean of frequencies weighted by their power.
     Formally:
     \begin{equation}
-        S_\text{centroid} = \frac
+        s_\text{centroid} = \frac
         {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2f_n}}
         {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2}}
     \end{equation}
@@ -352,8 +359,8 @@ The following metrics were computed:
     \item Spectral spread: the average dispersion of frequencies around the
     centroid. Formally:
     \begin{equation}
-        S_\text{spread} = \sqrt{\frac
-        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2(f_n-S_\text{centroid})^2}}
+        s_\text{spread} = \sqrt{\frac
+        {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2(f_n-s_\text{centroid})^2}}
         {\sum_{n=0}^{F-1}{|Z_n(\mathbf{x})|^2}}}
     \end{equation}
      
@@ -361,10 +368,10 @@ The following metrics were computed:
     intended as the tendency to present peaks in the spectrum opposed to flat
     noise. Formally:
     \begin{equation}
-        S_\text{flatness}=
-        \frac{\exp\left(\frac{1}{F+1}\sum_{n=0}^{F-1}\ln
+        s_\text{flatness}=
+        \frac{\exp\left(\frac{1}{F}\sum_{n=0}^{F-1}\ln
         \left(|Z_n(\mathbf{x})|^2\right)+\epsilon\right)}
-        {\frac{1}{F+1}\sum_{n=0}^{F-1}|Z_n(\mathbf{x})|^2}
+        {\frac{1}{F}\sum_{n=0}^{F-1}|Z_n(\mathbf{x})|^2}
     \end{equation}
     where $\epsilon=10^{-12}$ is a small constant to ensure that the logarithm
     is always defined. 
@@ -373,7 +380,7 @@ The following metrics were computed:
     Sharp peaks will have low entropy while flat noise will produce high values.
     The definition is based on Shannon entropy, formally:
     \begin{equation}
-        S_\text{entropy}=
+        s_\text{entropy}=
         -\sum_{n=0}^{F-1}{p_n(\mathbf{x})\log_2{p_n(\mathbf{x})}}
     \end{equation}    
     where $p_n(\mathbf{x})=\frac{|Z_n(\mathbf{x})|^2} 
@@ -391,7 +398,7 @@ The following metrics were computed:
     Formally, the relative powerband between frequencies $a$ and $b$ is
     defined as:
     \begin{equation}
-    S_{\text{band}} = \frac{1}{C}
+    s_{\text{band}} = \frac{1}{C}
     \sum\limits_{f_n \in [a, b]} |Z_n(\mathbf{x})|^2
     \end{equation}
     where $C=\sum\limits_{n=0}^{F} |Z_n(\mathbf{x})|^2$ is a normalization factor
@@ -463,7 +470,7 @@ L_{\theta, \phi}(\mathbf{x}) &=
     =\\
     &= \mathbb{E}_{\mathbf{z}\sim q_\phi(\mathbf{z}|\mathbf{x})}
     \left[\ln p_\theta(\mathbf{x}|\mathbf{z})\right] - 
-    \mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \mathbb{E}_{\mathbf{z}\sim q_{\phi}(\mathbf{z}|\mathbf{x})}
     \left[\ln{\frac{q_\phi(\mathbf{z}|\mathbf{x})}{p_\theta(\mathbf{z})}}\right]
 \end{align}
 where $D_{KL}$ is the Kullback–Leibler (KL) divergence.
@@ -504,7 +511,7 @@ not depend on the dimensionality of the latent space.
 Therefore the loss function implemented in this process is:
 \begin{equation}
     \mathcal{L}_{\theta, \phi}(\mathbf{x},t)=
-    \frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_{\theta}(\mathbf{z}|\mathbf{x})}
+    \frac{1}{2}\mathbb{E}_{\mathbf{z}\sim q_{\phi}(\mathbf{z}|\mathbf{x})}
     \left[\Vert\mathbf{x} - \mathbf{D_\theta(\mathbf{z})}\Vert^2\right] + 
     \frac{\beta(t)}{2} \sum_{i=1}^{d} \Big( \ln\mathbf{\sigma}_{\phi i}^2
     (\mathbf{x})
@@ -529,6 +536,7 @@ monitor early-stopping.
 
 The size of the input and output layer is 22, because it is the number of
 extracted features (Section \ref{meth:features}).
+All features are standardized before entering the VAE as input.
 The encoder architecture consists in an arbitrary number of hidden layers,
 fully connected through ReLU activation functions.
 The number of neurons of each hidden layer decreases linearly from 22 to the
@@ -599,7 +607,7 @@ log-likelihood of the model $p_\psi(\mathbf{x})$ on the data:
     (\mathbf{x}_i \mid \mu_{\psi k}, \Sigma_{\psi k})\right)
 \end{equation}
 However, this equation does not have a closed form solution.
-To adress this problem,
+To address this problem,
 an Expectation-Maximization (EM) algorithm is used to maximize the likelihood 
 (Bishop, 2006, Cap.~9) \cite{bishop2006}.
 
@@ -663,7 +671,7 @@ its expected value assuming resting-state activity.
 As described in Section \ref{meth:neg_ll} we use the negative log-likelihood to
 describe, for each contact at each time step, deviations from resting-state
 activity during seizures.
-To decide which contact consitute the SOZ, we use a deterministic classifier
+To decide which contact constitute the SOZ, we use a deterministic classifier
 that evaluates the time-series of the negative log-likelihood of each contact 
 during the seizure.
 In particular, the classifier evaluates log-likelihood in the interval
@@ -676,7 +684,7 @@ the general diffusion to a vaster area of the brain.
 
 First, negative log-likelihood is smoothed in time with the application of a 
 Gaussian 1-dimensional filter.
-This operation is preformed to remove noise from the time-series and to 
+This operation is performed to remove noise from the time-series and to 
 ensure that only anomalies that are sustained for several seconds are detected.
 The filter application consists in the convolution of the negative
 log-likelihood and a Gaussian kernel with zero mean:
@@ -698,7 +706,7 @@ Then two types of weights are applied:
     \begin{equation}
     f_{t_C}(t) =
     \begin{cases}
-    \dfrac{t - t_{\text{onset}}}{10},
+    \dfrac{t - t_{\text{onset}}+10}{10},
     & t_{\text{onset}}-10\leq t \leq t_{\text{onset}} \\[2mm]
     \exp\!\Big(-\dfrac{(t-t_{\text{onset}})/20}{t_C}\Big),
     & t_{\text{onset}} < t \leq t_{\text{onset}} + 20
@@ -710,13 +718,13 @@ Then two types of weights are applied:
     \footnote{The choice of betweenness centrality as a weight for the
     log-likelihood is justified by a ranking of the most discriminative
     features in a subset of 4 patients.
-    As will be explained in Section \ref{res:importance}, betweenness centrality
+    As will be explained in Section \ref{res:anal:importance}, betweenness centrality
     is the only significantly significant feature for distinguishing between
     epileptogenic and healthy contacts during a seizure.}
     weight based on its Z-score from the 
     training distribution:
     \begin{equation}
-        b_c(t) = \left|\frac{b_c(t)-\mu_{\text{train},c}}
+        z_c(t) = \left|\frac{b_c(t)-\mu_{\text{train},c}}
         {\sigma_{\text{train},c}}\right|
     \end{equation}
     where $\mu_{\text{train},c}$ is the mean of the betweenness centrality of
@@ -729,7 +737,7 @@ Then two types of weights are applied:
 An initial alarm score is computed as:
 \begin{equation}
     A^*_c(t_C,\alpha) = \sum_{t = t_{\text{onset}} - 10}^{t_{\text{onset}} + 20} 
-    \left( \alpha\, f_{t_C}(t) + (1-\alpha)\, b_c(t) \right) \text{sNLL}_c(t)
+    \left( \alpha\, f_{t_C}(t) + (1-\alpha)\, z_c(t) \right) \text{sNLL}_c(t)
 \end{equation}
 where $\alpha\in[0,1]$ is a scalar constant that regulates the relative 
 influence of the two weights.
@@ -829,7 +837,7 @@ logic (Figure \ref{fig:patients}):
 \end{itemize}
 
 This approach results in 15 training folds.
-Each fold is composed on 18 training patients, and one validation patient.
+Each fold is composed of 18 training patients, and one validation patient.
 This strategy estimates how a certain set of hyperparameters, optimized on 18
 patients, would generalize on a new patient that was never seen before by the
 model.
@@ -841,7 +849,21 @@ parameters, and evaluates those parameters on the independent 4 patients test
 set.
 
 Hyperparameter tuning was performed using the Optuna optimization framework
-\cite{optuna}.
+\cite{optuna}, performing parameters search using a combination of algorithms
+based on Bayesian optimization.
+At each iteration a new promising configuration of candidate parameters is
+proposed, based on the previous values of the target to maximize.
+To monitor overfitting during LOOCV, validation performance are evaluated for
+each best-so-far configuration of parameters.
+If training continues for many iterations, the model may overfit the training
+data, leading to overly optimistic training performance but poor generalization 
+to unseen subjects.
+This is important because when the model is trained for test evaluation no
+validation set is available, as all patients are used for training.
+For this reason, the final training is stopped at the iteration corresponding to
+the maximum median validation target across LOOCV folds, selecting the best
+compromise between optimization and generalization.
+
 To limit computation time and to reduce the hyperparameters space, 
 thus simplifying the optimization problem, we decided to adopt a 2-step strategy.
 First we optimize the VAE and GMM parameters, maximizing an intermediate target
@@ -849,7 +871,7 @@ function that produces an efficient encoding and fit on the latent space.
 Then, once the VAE and GMM architecture is fixed, we optimize the classifier by
 maximizing binary evaluation metrics.
 
-\subsubsection{VAE and GMM}
+\subsubsection{VAE and GMM}     \label{meth:opt:vaegmm}
 
 The first optimization step aims to find optimal parameters for the model
 architecture.
@@ -861,7 +883,7 @@ seizure, contacts associated with the SOZ exhibit low likelihood values
 more often than non-SOZ contacts (refer to Section \ref{meth:neg_ll} for the
 negative log-likelihood computation).
 This is justified by the fact that the classifier (discussed in Section
-\ref{meth:classifier}) will use the negative-log likelihood ($NNL$) to compute the
+\ref{meth:classifier}) will use the negative-log likelihood ($NLL$) to compute the
 alarm score.
 We therefore perform a one-sided Mann - Whitney U test \cite{mw} on the negative
 log-likelihood distributions of SOZ and non-SOZ contacts in the 
@@ -880,22 +902,140 @@ of such channels.
 For this reason the rank biserial correlation $r$ serves as the objective
 function to be maximized in this step.
 
-\subsubsection{Classifier}
+\subsubsection{Classifier}  \label{meth:opt:classifier}
 
 The second part of the optimization process aims to find optimal parameters for
 the following hyperparameters: $t_C$, $\alpha$, $k$.
-The threshold $\tau$ is handled differently than the other parameters:
+The threshold $\tau$ is handled differently than the other parameters.
 For each candidate configuration of 
 the classifier produces a continuous alarm score. Rather than treating 
-𝜏
-τ as an additional hyperparameter to be sampled during optimization, we determine it deterministically after training by selecting the value that maximizes the median performance across patients.
+$\tau$ as an additional hyperparameter to be sampled during optimization, we 
+determine it deterministically by selecting the value that 
+maximizes the overall performance across patients.
 
+In this step we maximize a composition of binary classification metrics.
+In future sections we will refer to the following metric as "score":
+\begin{equation}    \label{eq:score}
+    S = \frac{PPV+SPC}{2}\cdot f(TP)
+\end{equation}
+where:
+\begin{itemize}
+    \item $PPV$ (Positive Predicted Values) is the precision, defined as the 
+    fraction of predicted positive values that are labeled as positives:
+    \begin{equation}
+        PPV = \frac{TP}{TP + FP}
+    \end{equation}
+    where $TP$ is the number of True Positives and $FP$ is the number of False
+    Positives.
+    
+    \item $SPC$ is the specificity, defined as the fraction of labeled negative
+    values that are correctly classified as negative:
+    \begin{equation}
+        SPC = \frac{TN}{TN + FP}
+    \end{equation}
+    where $TN$ is the number of True Negatives and $FP$ is the number of False
+    Positives.
 
+    \item $f(TP)$ is a penalty term in the
+    form of a sigmoid function of the number of True Positives:
+    \begin{equation}
+        f(TP)=\frac{1}{1+\exp{\left(-(TP-2)\right)}}
+    \end{equation}
+    This term is introduced because optimizing only precision and specificity 
+    often favors degenerate solutions in which very few contacts are predicted
+    as positive.
+    In such cases, precision and specificity are both artificially high
+    despite the model detecting only a minimal number of true positives.
+    $f(TP)$ heavily penalizes configurations with less than 3 True Positives,
+    and quickly saturates to 1 afterwards:
+    \begin{itemize}
+        \item $f(1)\approx0.27$
+        \item $f(2)=0.5$
+        \item $f(3)\approx0.73$
+        \item $f(4)\approx0.88$
+        \item $f(5)\approx0.95$
+        \item $f(6)\approx0.98$
+    \end{itemize}
+\end{itemize}
 
+After computing the continuous alarm scores $a^{(p)}_c(t_C,\alpha,k)$ for each
+contact on patient $p$ on the training set ${p_1,p_2,...}$, the score $S_p$
+depends on the threshold $\tau$ to apply.
+The threshold is selected from a discrete grid of uniformly spaced values in the
+interval, maximizing the median score on all training patients:
+\begin{equation}
+    \tau_{best}=\text{arg}\max_{\tau\in\mathcal{T}}
+    \left(\text{median}_{p\in\{p_1,p_2,...\}}S_p(\tau,t_C,\alpha,k)\right)
+\end{equation}
+where $\mathcal{T}=\{1.0,1.1,...,2.0\}$.
 
+Finally the objective function to maximize during training is:
 
+\begin{equation}
+    \text{median}_{p\in\{p_1,p_2,...\}}S_p(\tau_{best},t_C,\alpha,k)
+\end{equation}
 
+Notice how none of the terms that constitute the score (equation \ref{eq:score})
+depends on the number of False Negatives ($FN$).
+This choice is motivated by the fact that, for this work, we consider the list 
+of thermocoagulated contacts as ground truth.
+The clinical decision on which areas of the brain must be removed is taken
+based on the observations of many seizures, however the dataset for this work
+only includes one seizure.
+This implies that, during the seizure that we observe, some thermocoagulated
+contacts may not show anomalies, as seizure dynamics can vary substantially.
+With this choice of the objective function we train a model to recognize only 
+the contacts that show clear anomalous patterns during the observed seizures
+without penalizing the model if some thermocoagulated contacts are classified
+as negative.
 
+\subsection{Evaluation}
+
+To quantify the classification performance we compute a set of evaluation
+metrics on both validation and test results. 
+We also compare the model to:
+\begin{itemize}
+    \item A random classifier with a probability of $0.5$.
+    \item An automated version\footnote{
+    Bartolomei et al. method depends on patient specific parameters to be set by
+    an epileptologist, therefore the original algorithm cannot be implemented.
+    An automated version of the algorithm has been employed for this study as
+    explained in Section \ref{app:bartolomei} of the appendix.
+    } of the Epileptogenicity Index (EI) proposed by
+    Bartolomei et al. \cite{bartolomei}.
+\end{itemize}
+Let $\pi_p$ represent the labeled positive ratio for each patient. 
+The following metrics were computed for evaluation:
+\begin{itemize}
+    \item Precision (PPV):
+    \begin{equation}
+        PPV = \frac{TP}{TP + FP}
+    \end{equation}
+    A random classifier will return an expected value of $PPV_{rand}=\pi_p$. 
+ 
+    \item Specificity (SPC):
+    \begin{equation}
+        SPC = \frac{TN}{TN + FP}
+    \end{equation}
+    A random classifier will return an expected value of $SPC_{rand}=0.5$. 
+    
+    \item Balanced Accuracy (BA):
+    \begin{equation}
+        BA = \frac{TPR + SPC}{2}=
+        \frac{1}{2}\frac{TP}{TP + FN}+\frac{1}{2}\frac{TN}{TN + FP}
+    \end{equation} 
+    A random classifier will return an expected value of $BA=0.5$.
+
+    \item Area Under Curve of the Receiver Operating Characteristic (ROC - AUC):
+    the ROC curve plots the True Positives rate and the False Positives Rate
+    as the threshold varies. 
+    The corresponding AUC provides a threshold-independent measure of the 
+    model’s discriminative ability, and is directly related to the
+    probability that the model produces an higher alarm score $a_c$
+    (Section \ref{meth:classifier}) for a randomly selected positive as opposed 
+    to a randomly selected negative \cite{rocauc}. 
+    A random classifier will return an expected value of $BA=0.5$.
+\end{itemize}
 
 
 

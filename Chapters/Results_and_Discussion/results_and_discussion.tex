@@ -10,52 +10,133 @@
 % \fancyhead[LO,LE]{\nouppercase\firstleftmark}
 %\fancyhead[RO,RE]{\thesubsection\enspace\subsectiontitle}
 
-\section{Results and Discussion}
+\section{Results and Discussion}    
 
-\subsection{Analysis on a subset of patients}
+\subsection{Analysis on a subset of patients}   \label{res:anal}
 
 !!! Mostrare un paziente (se no diventa troppo lunga come immagini) come in
 presentazione mettendo gli altri 3 in appendice
 
-\subsubsection{Feature importance}\label{res:importance}
+\subsubsection{Feature importance}  \label{res:anal:importance}
 
 !!! Grafico a barre delle features, giustificare la scelta della betweenness come
 peso per il classificatore
 
-\subsubsection{Global seizure dynamics}
+\subsubsection{Global seizure dynamics}     \label{res:anal:global}
 
 !!! Mostrare tutte e 22 le features, spiegando i trend più evidenti
 
-\subsubsection{A classification example}
+\subsubsection{A classification example}    \label{res:anal:example}
 
 !!! Far vedere i plot dello spazio latente, della likelihood e 
 grafico a barre del segnale d'allarme spiegando cosa succede
 
-\subsection{Optimization Results}
+\subsection{Optimization Results}       \label{res:opt}
 
-!!! Per entrambi mostrare best params, curve di ottimizzazione, boxplot del target
+Hyperparameter optimization was performed as described in Section \ref{meth:opt}.
+In this section we will present the final parameters,
+the distribution of the best parameters for the cross-validation,
+the learning curves, and the distributions of the optimization target for
+training, validation and test set.
+The results presented in this section will be discussed in Section
+\ref{res:discussion}.
 
-\subsubsection{VAE and GMM}
+\subsubsection{VAE and GMM}         \label{res:opt:vaegmm}
 
-\subsubsection{Alarm Classifier}
+Optimization of the VAE and GMM architecture was performed for 300 iterations on
+each LOOCV fold.
+As discussed in Section \ref{meth:opt} the validation target\footnote{
+Rank biserial correlation of one-sided Mann-Whitney test comparing the negative
+log-likelihood of SOZ and non-SOZ contacts during a seizure. Refer to Section
+\ref{meth:opt:vaegmm} for details.}
+on each fold was monitored during training.
+The median validation target stopped increasing after iteration 190!!
+(!!! valutare se inserire immagine),
+for this reason the final training before evalutating test patients was limited
+to 190!! iterations.
 
-\subsection{Evaluation Metrics}
+Figure \ref{fig:opt1_params} shows the best parameters for each LOOCV fold,
+while Table \ref{tab:opt1_params} presents the best parameters returned by the
+final training procedure.
+The learning process of the final training is shown in Figure
+\ref{fig:opt1_learn} and Figure \ref{fig:opt1_target} displays the 
+target distribution on training, validation and test set.
 
-!!! Boxplots di pazienti validation e test
+!!! Tabella e Figure
+\newpage %!!!!!! togliere
+\subsubsection{Classifier}      \label{res:opt:classifier}
 
-\subsection{Discussion}
+Optimization of the alarm classifier was performed for 200 iterations on
+each LOOCV fold.
+The median validation target\footnote{
+Arithmetic average of precision (PPV) and specificity (SPC) multiplied by a
+penalty function. Refer to Section \ref{meth:opt:classifier} for details.}
+stopped increasing after iteration !!,
+(!!! valutare se inserire immagine, qui proprio non mi ricordo il numero),
+therefore the final training was limited to !! iterations.
 
-\subsubsection{Validation and Test Results}
+Figure \ref{fig:opt2_params} shows the best parameters for each LOOCV fold,
+while Table \ref{tab:opt2_params} presents the best parameters returned by the
+final training procedure.
+The learning process of the final training is shown in Figure
+\ref{fig:opt2_learn} and Figure \ref{fig:opt2_target} displays the 
+target distribution on training, validation and test set.
+Because the target for this phase of optimization is itself a binary evaluation
+metric, Figure \ref{fig:opf2_target} also reports a comparison with the random
+classifier and the automated version of the Epileptogenicity Index proposed by 
+Bartolomei et al. \cite{bartolomei}.
 
-!!! Spiegare come mai il test viene molto peggio (pochi pazienti di training)
-Confronto con random classifier e Bartolomei
+!!! tabella e figure
 
-\subsubsection{Hyperparameters Stability}
+
+\subsection{Evaluation Metrics}     \label{res:eval}
+
+This section reports precision (PPV), specificity (SPC), balanced
+accuracy (BA) and ROC-AUC for training, validation and test patients, 
+while comparing such distributions with
+the results that would obtain a random classifier and the automated version of
+the Epileptogenicity Index proposed by Bartolomei et al. \cite{bartolomei}.
+
+Figure \ref{fig:eval} and Table \ref{tab:eval} summarize the evaluation results.
+It is important to remind, as explained in Section \ref{meth:opt:classifier},
+that the ground truth may label as positive contacts that do not show
+epileptogenic behavior in the single seizure that is available for each patient.
+For this reason we consider precision and specificity as meaningful statistics
+as they do not depend on the number of False Positives.
+ROC-AUC and balanced accuracy are reported anyway, however their distributions
+may be a conservative estimate of the actual discriminative capabilities of the
+model.
+
+!!! OCCHIO!!!! Potrebbero esserci dei bugs nel calcolo della specificity i p.val
+sono strani
+
+\subsection{Discussion}         \label{res:discussion}
+
+From Figure \ref{fig:eval} and Table \ref{tab:eval} it is evident that:
+\begin{itemize}
+   \item Training and validation distributions are similar across all metrics.
+   \item Test distributions are substantially lower with respect to training
+   and validation distributions for both precision and specificity.
+   \item Test distributions are not significantly are not significantly 
+   different from those obtained with a random classifier.
+\end{itemize}
+
+These results are likely a consequence of the limited number of patients provided
+for this study and the great heterogeneity in the individual dynamics of each
+patient.
+
+
+The automated version of the Epileptogenic Index often fails to 
+detect a meaningful number of True Positives, resulting in low precision
+and high specificity on both validation and test set.
+
+!!!Confronto con random classifier e Bartolomei
+
 
 !!! Spiegare perché il training dipende fortemente dai pazienti e i best params
 divergono (eterogeneità pazienti, distribuzioni latenti molto ampie)
 
-\subsubsection{Future developments}
+\subsubsection{Future developments}              \label{res:discussion:future}
 
 !!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
 modelli, classificatore deep learning
