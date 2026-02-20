@@ -569,7 +569,7 @@ This architecture depends on 5 hyperparameters, that will be optimized as
 explained in Section \ref{meth:opt}:
 \begin{itemize}
     \item The learning rate $\eta$.
-    \item The number of hidden layers $n_{\text{hidden}}$.
+    \item The number of hidden layers $L$.
     \item The latent dimension $d$.
     \item $\beta_{\text{warmup}}$
     \item $\beta_{\text{max}}$
@@ -796,7 +796,7 @@ The proposed pipeline for this study depends on a total of 10 hyperparameters:
     \item VAE and GMM parameters:
     \begin{itemize}
         \item The learning rate $\eta$;
-        \item The number of hidden layers $n_{\text{hidden}}$;
+        \item The number of hidden layers $L$;
         \item The latent dimension $d$;
         \item $\beta_{\text{warmup}}$;
         \item $\beta_{\text{max}}$;
@@ -875,7 +875,7 @@ maximizing binary evaluation metrics.
 
 The first optimization step aims to find optimal parameters for the model
 architecture.
-This step depends on 6 hyperparameters: $\eta$, $n_{\text{hidden}}$, $d$,
+This step depends on 6 hyperparameters: $\eta$, $L$, $d$,
 $\beta_{\text{warmup}}$, $\beta_{\text{max}}$, $N_c$.
 
 The optimization logic is to select a model architecture so that, during a 

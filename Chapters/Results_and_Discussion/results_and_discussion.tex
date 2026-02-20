@@ -60,10 +60,59 @@ while Table \ref{tab:opt1_params} presents the best parameters returned by the
 final training procedure.
 The learning process of the final training is shown in Figure
 \ref{fig:opt1_learn} and Figure \ref{fig:opt1_target} displays the 
-target distribution on training, validation and test set.                                                                                                      
+target distribution on training, validation and test set.
 
-!!! Tabella e Figure
-\newpage %!!!!!! togliere
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/opt/best_params_1.png}
+    \caption{Best parameters in cross-validation for VAE and GMM optimization.}
+    \label{fig:opt1_params}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Immagini/opt/optimization_curve_1.png}
+    \caption{Learning curve in the final training of VAE and GMM optimization.}
+    \label{fig:opt1_learn}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Parameter} & \textbf{Best value} \\
+\hline
+$\beta_\text{max}$     & 1  \\
+$\beta_\text{warmup}$  & 10 \\
+$d$                    & 2  \\
+$\eta$                 & 0.024 \\
+$L$                    & 0 \\
+$N_c$                  & 2 \\
+\hline
+\end{tabular}
+\caption{Best parameters for the final training of VAE and GMM optimization.}
+\label{tab:opt1_params}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/opt/contrast_distributions_val.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/opt/contrast_distributions_test.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{Training, validation and test distributions of optimization target 
+    for VAE and GMM optimization.}
+    \label{fig:opt1_target}
+\end{figure}
+
+
 \subsubsection{Classifier}      \label{res:opt:classifier}
 
 Optimization of the alarm classifier was performed for 200 iterations on
@@ -71,9 +120,9 @@ each LOOCV fold.
 The median validation target\footnote{
 Arithmetic average of precision (PPV) and specificity (SPC) multiplied by a
 penalty function. Refer to Section \ref{meth:opt:classifier} for details.}
-stopped increasing after iteration !!,
-(!!! valutare se inserire immagine, qui proprio non mi ricordo il numero),
-therefore the final training was limited to !! iterations.
+stopped increasing after iteration 173,
+(!!! valutare se inserire immagine),
+therefore the final training was limited to 173 iterations.
 
 Figure \ref{fig:opt2_params} shows the best parameters for each LOOCV fold,
 while Table \ref{tab:opt2_params} presents the best parameters returned by the
@@ -86,7 +135,56 @@ metric, Figure \ref{fig:opf2_target} also reports a comparison with the random
 classifier and the automated version of the Epileptogenicity Index proposed by 
 Bartolomei et al. \cite{bartolomei}.
 
-!!! tabella e figure
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/opt/best_params_2.png}
+    \caption{Best parameters in cross-validation for the classifier optimization.}
+    \label{fig:opt2_params}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Parameter} & \textbf{Best value} \\
+\hline
+$\alpha$               & 0.96  \\
+$k$                    & -2.3 \\
+$t_C$                  & 1.8  \\
+$\tau$                 & 1.2 \\
+\hline
+\end{tabular}
+\caption{Best parameters for the final training of the classifier optimization.}
+\label{tab:opt2_params}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Immagini/opt/optimization_curve_2.png}
+    \caption{Learning curve in the final training of the classifier optimization.}
+    \label{fig:opt2_learn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/opt/score_distributions_val.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/opt/score_distributions_test.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{Training, validation and test distributions of optimization target 
+    for the classifier optimization.}
+    \label{fig:opt2_target}
+\end{figure}
 
 
 \subsection{Evaluation Metrics}     \label{res:eval}
@@ -107,8 +205,77 @@ ROC-AUC and balanced accuracy are reported anyway, however their distributions
 may be a conservative estimate of the actual discriminative capabilities of the
 model.
 
-!!! OCCHIO!!!! Potrebbero esserci dei bugs nel calcolo della specificity i p.val
-sono strani
+!!! Tabella
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_val_set/prec_distributions.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_test_set/prec_distributions.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{Precision (PPV) distributions in training, validation and test set.}
+    \label{fig:prec}
+\end{figure}
+
+\begin{figure}[H]
+\end{figure}
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_val_set/spec_distributions.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_test_set/spec_distributions.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{Specificity (SPC) distributions in training, validation and test set.}
+    \label{fig:spec}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_val_set/ba_distributions.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_test_set/ba_distributions.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{Balanced Accuracy (BA) distributions in training, validation and test set.}
+    \label{fig:ba}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_val_set/auc_distributions.png}
+        \caption{Cross-validation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Immagini/eval_test_set/auc_distributions.png}
+        \caption{Final training and test}
+    \end{subfigure}
+    \caption{ROC-AUC distributions in training, validation and test set.}
+    \label{fig:auc}
+\end{figure}
+
 
 \subsection{Discussion}         \label{res:discussion}
 
