@@ -50,17 +50,17 @@ Rank biserial correlation of one-sided Mann-Whitney test comparing the negative
 log-likelihood of SOZ and non-SOZ contacts during a seizure. Refer to Section
 \ref{meth:opt:vaegmm} for details.}
 on each fold was monitored during training.
-The median validation target stopped increasing after iteration 190!!
+The median validation target stopped increasing after iteration 193
 (!!! valutare se inserire immagine),
 for this reason the final training before evalutating test patients was limited
-to 190!! iterations.
+to 193 iterations.
 
 Figure \ref{fig:opt1_params} shows the best parameters for each LOOCV fold,
 while Table \ref{tab:opt1_params} presents the best parameters returned by the
 final training procedure.
 The learning process of the final training is shown in Figure
 \ref{fig:opt1_learn} and Figure \ref{fig:opt1_target} displays the 
-target distribution on training, validation and test set.
+target distribution on training, validation and test set.                                                                                                      
 
 !!! Tabella e Figure
 \newpage %!!!!!! togliere
@@ -112,23 +112,7 @@ sono strani
 
 \subsection{Discussion}         \label{res:discussion}
 
-From Figure \ref{fig:eval} and Table \ref{tab:eval} it is evident that:
-\begin{itemize}
-   \item Training and validation distributions are similar across all metrics.
-   \item Test distributions are substantially lower with respect to training
-   and validation distributions for both precision and specificity.
-   \item Test distributions are not significantly are not significantly 
-   different from those obtained with a random classifier.
-\end{itemize}
 
-These results are likely a consequence of the limited number of patients provided
-for this study and the great heterogeneity in the individual dynamics of each
-patient.
-
-
-The automated version of the Epileptogenic Index often fails to 
-detect a meaningful number of True Positives, resulting in low precision
-and high specificity on both validation and test set.
 
 !!!Confronto con random classifier e Bartolomei
 
@@ -136,7 +120,7 @@ and high specificity on both validation and test set.
 !!! Spiegare perché il training dipende fortemente dai pazienti e i best params
 divergono (eterogeneità pazienti, distribuzioni latenti molto ampie)
 
-\subsubsection{Future developments}              \label{res:discussion:future}
+\subsection{Future developments}              \label{res:discussion:future}
 
 !!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
 modelli, classificatore deep learning
