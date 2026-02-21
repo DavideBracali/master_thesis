@@ -14,17 +14,66 @@
 
 \subsection{Analysis on a subset of patients}   \label{res:anal}
 
-!!! Mostrare un paziente (se no diventa troppo lunga come immagini) come in
-presentazione mettendo gli altri 3 in appendice
+In this section, we present a detailed analysis of the seizure dynamics on a
+subset of 4 patients.
+This analysis was performed in order mainly for three reasons:
+\begin{itemize}
+    \item To define the most discriminative local features to differentiate
+    between contacts that were labeled as SOZ and healthy regions of the brain;
+    \item To understand the similarities across different patients in the global
+    dynamics of a seizure;
+    \item To illustrate a classification example for one representative
+    patient in order to interpret intermediate results in the pipeline.
+\end{itemize}
+
+Because this investigation was performed preliminarily and defined design
+choices in the model pipeline, we decided to exclude these 4 patients from the 
+model evaluation to prevent any potential information leakage that would lead to
+an overestimation of the model performances.
+They appear as part of the training set in the hyperparameter optimization, but
+are never included in neither validation and test set.
 
 \subsubsection{Feature importance}  \label{res:anal:importance}
 
-!!! Grafico a barre delle features, giustificare la scelta della betweenness come
-peso per il classificatore
+This section aims to define the most important local features in discriminating
+between SOZ and healthy brain regions during the onset of a feature.
+A two-sided Mann-Whitney test was performed on the distributions of each of the 
+22 local features during the onset of the seizure, defined as a $[t_\text{onset}
+-10\ s, t_\text{onset} + 20\ s]$ interval.
+Both rank biserial correlation (whose definition is reported in Section
+\ref{meth:opt:vaegmm}) and p-value are reported, to measure effect size and
+statistical significance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Immagini/feature_effect_size.png}
+    \caption{Discriminative power of local features in a subset of 4 patients.}
+    \label{fig:effect_size}
+\end{figure}
+
+Figure \ref{fig:effect_size} displays how betweenness centrality has both the 
+larges effect size and the only significant p-value.
+Equivalently, it is the only local feature whose distribution in the seizure
+onset is significantly different between SOZ and non-SOZ labeled contacts.
+
+This result directly influences the architecture of the alarm classifier
+described in Section \ref{meth:classifier}, as the negative log-likelihood is 
+weighted according to the absolute value of the Z-score of betweenness
+centrality.
+However, the proposed model does not solely rely on betweenness centrality, but
+considers a negative log-likelihood score that reflects the anomalies 
+across the joint distribution of all different features.
+Betweenness centrality is only used, together with the temporal index, as a 
+weighting factor for anomalies, amplifying those occurring when the most
+discriminative feature shows strong deviations.
 
 \subsubsection{Global seizure dynamics}     \label{res:anal:global}
 
-!!! Mostrare tutte e 22 le features, spiegando i trend più evidenti
+This section displays and analyzes the global feature dynamics during a seizure.
+To avoid overloading the reader with an excessive amount of figures, only one
+representative patient will be shown.
+However, every pattern reported in this section is observable in all the 4
+patients included in the analysis.
 
 \subsubsection{A classification example}    \label{res:anal:example}
 
@@ -327,15 +376,13 @@ capabilities of the model.
 
 The automated version of Bartolomei et al. Epileptogenicity Index was proven
 incapable to return acceptable classification performances on both validation 
-and test patients. !! continua
-
-
-
-
-
-
-!!!Confronto con random classifier e Bartolomei
-
+and test patients.
+Its low precision (Figure \ref{fig:prec}) and high specificity (Figure 
+\ref{fig:spec}) values suggest that the model only classifies a few contacts as 
+positive, and the majority of predicted positives is usually labeled as negative.
+This proves that Bartolomei et al. model cannot replicate the performances 
+reported in the original paper when generalized to multiple patients using an
+unique set of parameters.
 
 
 \subsection{Future developments}              \label{res:discussion:future}
