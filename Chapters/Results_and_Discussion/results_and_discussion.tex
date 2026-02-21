@@ -59,7 +59,7 @@ Figure \ref{fig:opt1_params} shows the best parameters for each LOOCV fold,
 while Table \ref{tab:opt1_params} presents the best parameters returned by the
 final training procedure.
 The learning process of the final training is shown in Figure
-\ref{fig:opt1_learn} and Figure \ref{fig:opt1_target} displays the 
+\ref{fig:opt1_learn}, while Figure \ref{fig:opt1_target} displays the 
 target distribution on training, validation and test set.
 
 \begin{figure}[H]
@@ -128,10 +128,10 @@ Figure \ref{fig:opt2_params} shows the best parameters for each LOOCV fold,
 while Table \ref{tab:opt2_params} presents the best parameters returned by the
 final training procedure.
 The learning process of the final training is shown in Figure
-\ref{fig:opt2_learn} and Figure \ref{fig:opt2_target} displays the 
+\ref{fig:opt2_learn}, while Figure \ref{fig:opt2_target} displays the 
 target distribution on training, validation and test set.
 Because the target for this phase of optimization is itself a binary evaluation
-metric, Figure \ref{fig:opf2_target} also reports a comparison with the random
+metric, Figure \ref{fig:opt2_target} also reports a comparison with the random
 classifier and the automated version of the Epileptogenicity Index proposed by 
 Bartolomei et al. \cite{bartolomei}.
 
@@ -189,13 +189,14 @@ $\tau$                 & 1.2 \\
 
 \subsection{Evaluation Metrics}     \label{res:eval}
 
-This section reports precision (PPV), specificity (SPC), balanced
-accuracy (BA) and ROC-AUC for training, validation and test patients, 
+This section reports precision (Figure \ref{fig:prec}), specificity (Figure
+\ref{fig:spec}), balanced accuracy (Figure \ref{fig:ba}) and ROC-AUC
+(Figure \ref{fig:auc}) for training, validation and test patients, 
 while comparing such distributions with
 the results that would obtain a random classifier and the automated version of
 the Epileptogenicity Index proposed by Bartolomei et al. \cite{bartolomei}.
 
-Figure \ref{fig:eval} and Table \ref{tab:eval} summarize the evaluation results.
+Table \ref{tab:eval} summarizes the evaluation results.
 It is important to remind, as explained in Section \ref{meth:opt:classifier},
 that the ground truth may label as positive contacts that do not show
 epileptogenic behavior in the single seizure that is available for each patient.
@@ -225,7 +226,6 @@ model.
 \end{figure}
 
 \begin{figure}[H]
-\end{figure}
     \centering
     \begin{subfigure}{0.9\textwidth}
         \centering
@@ -279,13 +279,64 @@ model.
 
 \subsection{Discussion}         \label{res:discussion}
 
+Although promising results were obtained during cross-validation, it is evident 
+that the proposed model failed to generalize to a subset of unseen patients:
+Figure \ref{fig:prec} and Figure \ref{fig:spec} show that the 
+model obtained worse precision and specificity distributions on test patients
+compared to those observed in the training and validation sets.
+While all validation metrics distributions significantly differ from the ones
+produced by the random classifier, the same cannot be said for test
+distributions\footnote{
+Given the limited number of independent test patients ($N = 4$), the statistical 
+power of the Mann–Whitney test is inherently low. Therefore, the lack of 
+statistical significance should not be interpreted as evidence of equivalent
+performance.
+Nevertheless, the performance drop observed on the test set shows that the model
+struggles to generalize to new patients and is probably overfitting the training
+patients.}.
+
+This result is likely to be a consequence of two factors: the combination of 
+a limited number of patients and a great heterogeinity in seizure and resting
+-state dynamics. (!!! valutare se inserire il discorso degli spazi latenti magari
+con immagine colorata)
+In the LOOCV setting, the selected hyperparameters are highly sensitive to the
+specific training fold, as
+the replacement of a single patient in the training set leads to substantially
+different optimal hyperparameters (Figure \ref{fig:opt1_params} and Figure
+\ref{fig:opt2_params}).
+As a consequence, training target distributions during optimization present
+very high variance (Figure \ref{fig:opt1_target} and Figure
+\ref{fig:opt2_target}), as the model struggles to
+find an unique set of parameters to obtain acceptable performances on all
+patients.
+
+It is also worth noticing the instability of the VAE and GMM optimization
+learning curve in Figure \ref{fig:opt1_learn}, indicative that the model
+performance is highly sensitive on small variations of the parameters.
+Together with the fold-dependent sensitivity observed in LOOCV, this further
+explains the limited generalization capabilities on unseen patients.
+
+Validation performances, on the other hand, appear comparable with the training
+set.
+However it should be noted that the number of training iterations before 
+evaluation of the test set was selected based on the validation performance
+itself.
+Because of the diversity between validation and test set, validation
+performances represents an optimistic estimate of the real generalization
+capabilities of the model.
+
+The automated version of Bartolomei et al. Epileptogenicity Index was proven
+incapable to return acceptable classification performances on both validation 
+and test patients. !! continua
+
+
+
+
 
 
 !!!Confronto con random classifier e Bartolomei
 
 
-!!! Spiegare perché il training dipende fortemente dai pazienti e i best params
-divergono (eterogeneità pazienti, distribuzioni latenti molto ampie)
 
 \subsection{Future developments}              \label{res:discussion:future}
 
