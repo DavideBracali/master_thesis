@@ -75,10 +75,34 @@ representative patient will be shown.
 However, every pattern reported in this section is observable in all the 4
 patients included in the analysis.
 
+!!!! La mettiamo questa sezione???? I pattern comuni sono abbastanza pochi e 
+gli onset sono molto diversi
+
 \subsubsection{A classification example}    \label{res:anal:example}
 
-!!! Far vedere i plot dello spazio latente, della likelihood e 
-grafico a barre del segnale d'allarme spiegando cosa succede
+To present the behavior of the proposed model, we present a classification 
+example on a representative patient from the analyzed subset.
+This case study presents the training and anomaly detection process in the
+latent space, and shows how local feature deviations translate into alarm scores.  
+To avoid overloading the reader with an excessive amount of figures, only one
+representative patient will be shown.
+(!!! fare anche appendice).
+
+Figure \ref{fig:exDE:tr} displays the VAE encoding of the resting-state local 
+features of training patients.
+Partial overlap between different patients is visible, indicating that the VAE
+can successfully encode similarities between the brain activity of different 
+patients.
+However, regions of the latent space predominantly occupied by a specific
+patient exist, indicating different resting state dynamics across patients.
+This behavior can be interpreted as a consequence of the great heterogeneity in 
+EEG recordings: common patterns between patients exist, but the differences in
+individual brain activity result in patient-specific regions of the latent space.
+A moderate number of outliers is also present, indicating that even resting-state
+activity can show anomalous behavior.
+These outliers may reflect atypical behavioral or cognitive states occurring
+during resting-state recordings, as patients are not under strict experimental
+control and may engage in voluntary activities that alter their neural dynamics.
 
 \subsection{Optimization Results}       \label{res:opt}
 
@@ -94,6 +118,14 @@ The results presented in this section will be discussed in Section
 
 Optimization of the VAE and GMM architecture was performed for 300 iterations on
 each LOOCV fold.
+Each iteration proposes a new set of parameters for the VAE and GMM
+architecture, training the model on the candidate parameters.
+To limit computation time, the VAE and GMM were trained on an uniformly sampled 
+subset of 200 seconds of temporal observations drawn between the training
+patients.
+Each temporal observation includes the resting-state features of all contacts
+for the corresponding training patient at the specified time index.
+
 As discussed in Section \ref{meth:opt} the validation target\footnote{
 Rank biserial correlation of one-sided Mann-Whitney test comparing the negative
 log-likelihood of SOZ and non-SOZ contacts during a seizure. Refer to Section
@@ -166,6 +198,14 @@ $N_c$                  & 2 \\
 
 Optimization of the alarm classifier was performed for 200 iterations on
 each LOOCV fold.
+Preliminarily to the classifier optimization, VAE and GMM are trained on an 
+uniformly sampled subset of 2000 seconds of temporal observations drawn between 
+the training patients, using the best parameters reported in Table
+\ref{tab:opt1_params}.
+At each iteration a new set of parameters is proposed to the classifier, that
+receives as input the negative log-likelihood returned by the optimized VAE and
+GMM.
+
 The median validation target\footnote{
 Arithmetic average of precision (PPV) and specificity (SPC) multiplied by a
 penalty function. Refer to Section \ref{meth:opt:classifier} for details.}
