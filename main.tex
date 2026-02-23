@@ -11,7 +11,8 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{subcaption}
-
+\usepackage[backend=biber,style=numeric, sorting=none]{biblatex}
+\addbibresource{biblio.bib}
 
 \usepackage[sfdefault,lf]{carlito}
 
@@ -59,7 +60,7 @@
     
         \vspace{0.3em}
         
-        \large{!!!! autore cit}
+        \large{!!!! autore cittttttttt}
     
     \end{flushright}
     \vfill
@@ -128,7 +129,6 @@
 
 
 \addcontentsline{toc}{section}{References}
-\bibliographystyle{unsrt}
-\bibliography{biblio}
+\printbibliography
 
 \end{document}

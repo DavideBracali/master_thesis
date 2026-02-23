@@ -88,6 +88,13 @@ To avoid overloading the reader with an excessive amount of figures, only one
 representative patient will be shown.
 (!!! fare anche appendice).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_lanent_space.png}
+    \caption{Latent space of resting-state activity.}
+    \label{fig:exDE:tr}
+\end{figure}
+
 Figure \ref{fig:exDE:tr} displays the VAE encoding of the resting-state local 
 features of training patients.
 Partial overlap between different patients is visible, indicating that the VAE
@@ -98,11 +105,70 @@ patient exist, indicating different resting state dynamics across patients.
 This behavior can be interpreted as a consequence of the great heterogeneity in 
 EEG recordings: common patterns between patients exist, but the differences in
 individual brain activity result in patient-specific regions of the latent space.
-A moderate number of outliers is also present, indicating that even resting-state
-activity can show anomalous behavior.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_gmm.png}
+    \caption{GMM fit of resting-state latent distribution.}
+    \label{fig:exDE:tr_gmm}
+\end{figure}
+
+Figure \ref{fig:exDE:tr_gmm}, displaying the GMM fit on the training distribution,
+shows that moderate number of low-likelihood outliers is present in the training 
+set, indicating that even resting-state activity can show anomalous behavior.
 These outliers may reflect atypical behavioral or cognitive states occurring
 during resting-state recordings, as patients are not under strict experimental
 control and may engage in voluntary activities that alter their neural dynamics.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_gmm_test.png}
+    \caption{VAE encoding of the seizure onset on GMM fit of resting-state feaures.}
+    \label{fig:exDE:tr_gmm_test}
+    %!!!!!!!!!! sostituire immagine con nuovo titolo
+\end{figure}
+
+Figure \ref{fig:exDE:tr_gmm_test} shows how features are encoded in the latent
+space during the $[t_\text{onset} - 10, t_\text{onset} + 20]$ time interval.
+Red dots represent the contacts labeled as SOZ, while green dots correspond to
+non-SOZ contacts.
+As expected, both SOZ and non-SOZ contacts present a mix of typical and 
+anomalous behavior during the seizure.
+The SOZ may exhibit typical activity before or after the onset, and 
+healthy regions will show epileptogenic behavior during the transition from
+localized to general features.
+This plot shows that the log-likelihood distribution of the encoded features 
+alone cannot detemine which contacts contribute to the seizure onset, but its
+evolution in time must be considered as well.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{Immagini/example/DE/neg_ll.pdf}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{Immagini/example/DE/neg_ll_smooth.pdf}
+    \end{subfigure}
+    \caption{Negative log-likelihood score of seizure data.
+    The red line represents the onset while the green line is
+    positioned 20 seconds after the onset.}
+    \label{fig:exDE:neg_ll}
+\end{figure}
+
+Figure \ref{fig:exDE:neg_ll} plots the negative log-likelihood time series of
+each contact.
+This time series serves as input for the alarm classifier, and can be used to
+visually assess how well each contact conforms to the resting-state distribution
+during the seizure:
+in this particular example most of the contacts that compose the SOZ light up
+a few seconds before the generalized seizure, identifiable by the simultaneus
+and widespread anomalies.
+
+
 
 \subsection{Optimization Results}       \label{res:opt}
 
@@ -285,7 +351,8 @@ while comparing such distributions with
 the results that would obtain a random classifier and the automated version of
 the Epileptogenicity Index proposed by Bartolomei et al. \cite{bartolomei}.
 
-Table \ref{tab:eval} summarizes the evaluation results.
+Table \ref{tab:eval_val} and table \ref{tab:eval_test} summarize the evaluation 
+results.
 It is important to remind, as explained in Section \ref{meth:opt:classifier},
 that the ground truth may label as positive contacts that do not show
 epileptogenic behavior in the single seizure that is available for each patient.
@@ -295,7 +362,71 @@ ROC-AUC and balanced accuracy are reported anyway, however their distributions
 may be a conservative estimate of the actual discriminative capabilities of the
 model.
 
-!!! Tabella
+\begin{table}[h]
+\centering
+\begin{subtable}{0.4\textwidth}
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{TRAINING SET} & \textbf{Median} & \textbf{IQR} \\
+\hline
+Precision           & $0.620$ & $[0.223,0.857]$  \\
+Specificity         & $0.973$ & $[0.918, 0.997]$ \\
+Balanced Accuracy   & $0.613$ & $[0.534, 0.680]$ \\
+ROC-AUC             & $0.827$ & $[0.613, 0.859]$ \\
+\hline
+\end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}{0.4\textwidth}
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{VALIDATION SET} & \textbf{Median} & \textbf{IQR} \\
+\hline
+Precision           & $0.667$ & $[0.237, 0.894]$  \\
+Specificity         & $0.968$ & $[0.927, 0.997]$ \\
+Balanced Accuracy   & $0.624$ & $[0.555, 0.672]$ \\
+ROC-AUC             & $0.827$ & $[0.640, 0.873]$ \\
+\hline
+\end{tabular}
+\end{subtable}
+\caption{Evaluation metrics of LOOCV.}
+\label{tab:eval_val}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{subtable}{0.4\textwidth}
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{TRAINING SET} & \textbf{Median} & \textbf{IQR} \\
+\hline
+Precision           & $0.714$ & $[0.417, 0.821]$  \\
+Specificity         & $0.980$ & $[0.933, 0.989]$ \\
+Balanced Accuracy   & $0.628$ & $[0.548, 0.674]$ \\
+ROC-AUC             & $0.796$ & $[0.627, 0.841]$ \\
+\hline
+\end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}{0.4\textwidth}
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{TEST SET} & \textbf{Median} & \textbf{IQR} \\
+\hline
+Precision           & $0.172$ & $[0.152, 0.215]$  \\
+Specificity         & $0.846$ & $[0.800, 0.875]$ \\
+Balanced Accuracy   & $0.652$ & $[0.593, 0.691]$ \\
+ROC-AUC             & $0.722$ & $[0.579, 0.796]$ \\
+\hline
+\end{tabular}
+\end{subtable}
+\caption{Evaluation metrics on validation patients.}
+\label{tab:eval_test}
+\end{table}
 
 \begin{figure}[H]
     \centering
