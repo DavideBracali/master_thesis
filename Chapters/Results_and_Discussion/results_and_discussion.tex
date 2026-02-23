@@ -163,10 +163,23 @@ Figure \ref{fig:exDE:neg_ll} plots the negative log-likelihood time series of
 each contact.
 This time series serves as input for the alarm classifier, and can be used to
 visually assess how well each contact conforms to the resting-state distribution
-during the seizure:
-in this particular example most of the contacts that compose the SOZ light up
+during the seizure: most of the contacts that compose the SOZ light up
 a few seconds before the generalized seizure, identifiable by the simultaneus
 and widespread anomalies.
+Gaussian smoothing reduces noise while preserving prolonged anomalies,
+mantaining meaninfgul information while discarding isolated peaks.
+
+The negative log-likelihood time series is then processed through the alarm
+classifier, that produces a continuous alarm score that is thresholded to
+obtain a binary classification.
+The ranking of suspicious contacts is shown in Figure \ref{fig:exDE:alarm}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.2\textwidth]{Immagini/example/DE/alarm.pdf}
+    \label{fig:exDE:alarm}
+    \caption{!!! Come mai non è centrato? Cambiare immagine, mostrare magari i top 30}
+\end{figure}
 
 
 
