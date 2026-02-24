@@ -490,7 +490,7 @@ specific training fold, as
 the replacement of a single patient in the training set leads to substantially
 different optimal hyperparameters (Figure \ref{fig:opt1_params} and Figure
 \ref{fig:opt2_params} in Section \ref{res:opt}).
-This result is "rafforzato" by the fact that the VAE encoding of resting-state 
+This result is reinforced by the fact that the VAE encoding of resting-state 
 activity presents high variability between different patients (Figure
 \ref{fig:exDE:tr} in Section \ref{res:anal:example}).
 As a consequence, training target distributions during optimization present
@@ -514,6 +514,20 @@ Because of the diversity between validation and test set, validation
 performances represents an optimistic estimate of the real generalization
 capabilities of the model.
 
+The VAE optimization also resulted in a surprising parameter choice: Table
+\ref{tab:opt1_params} reports that the optimal number of hidden layers as
+$L=0$, both for the final training and across all training folds during
+cross-validation. 
+This result is unexpected, as it indicates that the latent space is built by
+sampling from a normal distribution whose mean and log-variance that are built
+from a linear combination of the resting-state feautures.
+The reparametrization trick still introduces non-linearity, but the best
+encoder model is essentially a linear perceptron.
+Optimization may prefer an almost-linear model to obtain acceptable overall
+performance on all training patients, whereas a more complex model would
+memorize noisy patterns and lose generalization capabilities in such a diverse
+dataset.
+
 The automated version of Bartolomei et al. Epileptogenicity Index was proven
 incapable to return acceptable classification performances on both validation 
 and test patients.
@@ -530,3 +544,20 @@ unique set of parameters.
 !!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
 modelli, classificatore deep learning
 
+The proposed pipeline provides an initial approach to the generalization of 
+the SOZ localization in multiple patients.
+However, several critical points have emerged from the results, suggesting
+possible directions for improvement.
+
+The dataset proved to be very diverse, while a moderately low number of 
+patients was available for this study.
+As a consequence, all metrics reported in Section \ref{res:eval} highlight that
+the model struggles to find an unique set of parameters to generalize to many 
+patients, obtaining low performances on test patients and high-variance 
+distributions on training and validation patients.
+
+A greater patient availability may improve generalization on test patients.
+However it would probably not be sufficient to reduce the variance of encoded
+data, as feeding a moderate number of patients to the encoder proved to result 
+in a sparse latent space that wrongfully detects atypical behavior even in
+resting state activity ().
