@@ -14,16 +14,13 @@
 
 \subsection{Analysis on a subset of patients}   \label{res:anal}
 
-In this section, we present a detailed analysis of the seizure dynamics on a
-subset of 4 patients.
-This analysis was performed in order mainly for three reasons:
+In this section, we analyze the onset dynamics on a subset of 4 patients.
+This analysis was performed in order to:
 \begin{itemize}
-    \item To define the most discriminative local features to differentiate
+    \item Define the most discriminative local features to differentiate
     between contacts that were labeled as SOZ and healthy regions of the brain;
-    \item To understand the similarities across different patients in the global
-    dynamics of a seizure;
-    \item To illustrate a classification example for one representative
-    patient in order to interpret intermediate results in the pipeline.
+    \item Illustrate a classification example for one representative
+    patient and interpret intermediate results in the pipeline.
 \end{itemize}
 
 Because this investigation was performed preliminarily and defined design
@@ -67,17 +64,6 @@ Betweenness centrality is only used, together with the temporal index, as a
 weighting factor for anomalies, amplifying those occurring when the most
 discriminative feature shows strong deviations.
 
-\subsubsection{Global seizure dynamics}     \label{res:anal:global}
-
-This section displays and analyzes the global feature dynamics during a seizure.
-To avoid overloading the reader with an excessive amount of figures, only one
-representative patient will be shown.
-However, every pattern reported in this section is observable in all the 4
-patients included in the analysis.
-
-!!!! La mettiamo questa sezione???? I pattern comuni sono abbastanza pochi e 
-gli onset sono molto diversi
-
 \subsubsection{A classification example}    \label{res:anal:example}
 
 To present the behavior of the proposed model, we present a classification 
@@ -88,9 +74,9 @@ To avoid overloading the reader with an excessive amount of figures, only one
 representative patient will be shown.
 (!!! fare anche appendice).
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_lanent_space.png}
+    \includegraphics[width=0.8\textwidth]{Immagini/example/DE/tr_lanent_space.png}
     \caption{Latent space of resting-state activity.}
     \label{fig:exDE:tr}
 \end{figure}
@@ -106,10 +92,9 @@ This behavior can be interpreted as a consequence of the great heterogeneity in
 EEG recordings: common patterns between patients exist, but the differences in
 individual brain activity result in patient-specific regions of the latent space.
 
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_gmm.png}
+    \includegraphics[width=0.8\textwidth]{Immagini/example/DE/tr_gmm.png}
     \caption{GMM fit of resting-state latent distribution.}
     \label{fig:exDE:tr_gmm}
 \end{figure}
@@ -123,10 +108,10 @@ control and may engage in voluntary activities that alter their neural dynamics.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Immagini/example/DE/tr_gmm_test.png}
+    \includegraphics[width=0.8\textwidth]{Immagini/example/DE/tr_gmm_test.png}
     \caption{VAE encoding of the seizure onset on GMM fit of resting-state feaures.}
     \label{fig:exDE:tr_gmm_test}
-    %!!!!!!!!!! sostituire immagine con nuovo titolo
+    %!!! sostituire immagine con nuovo titolo
 \end{figure}
 
 Figure \ref{fig:exDE:tr_gmm_test} shows how features are encoded in the latent
@@ -172,11 +157,12 @@ mantaining meaninfgul information while discarding isolated peaks.
 The negative log-likelihood time series is then processed through the alarm
 classifier, that produces a continuous alarm score that is thresholded to
 obtain a binary classification.
-The ranking of suspicious contacts is shown in Figure \ref{fig:exDE:alarm}.
+The ranking of the top 50 suspicious contacts is shown in Figure
+\ref{fig:exDE:alarm}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.2\textwidth]{Immagini/example/DE/alarm.pdf}
+    \includegraphics[width=\textwidth]{Immagini/example/DE/alarm.pdf}
     \label{fig:exDE:alarm}
     \caption{!!! Come mai non è centrato? Cambiare immagine, mostrare magari i top 30}
 \end{figure}
@@ -210,8 +196,7 @@ Rank biserial correlation of one-sided Mann-Whitney test comparing the negative
 log-likelihood of SOZ and non-SOZ contacts during a seizure. Refer to Section
 \ref{meth:opt:vaegmm} for details.}
 on each fold was monitored during training.
-The median validation target stopped increasing after iteration 193
-(!!! valutare se inserire immagine),
+The median validation target stopped increasing after iteration 193,
 for this reason the final training before evalutating test patients was limited
 to 193 iterations.
 
@@ -289,7 +274,6 @@ The median validation target\footnote{
 Arithmetic average of precision (PPV) and specificity (SPC) multiplied by a
 penalty function. Refer to Section \ref{meth:opt:classifier} for details.}
 stopped increasing after iteration 173,
-(!!! valutare se inserire immagine),
 therefore the final training was limited to 173 iterations.
 
 Figure \ref{fig:opt2_params} shows the best parameters for each LOOCV fold,
@@ -528,15 +512,17 @@ Nevertheless, the performance drop observed on the test set shows that the model
 struggles to generalize to new patients and is probably overfitting the training
 patients.}.
 
-This result is likely to be a consequence of two factors: the combination of 
+This result is likely to be a consequence the of combination of two factors:
 a limited number of patients and a great heterogeinity in seizure and resting
--state dynamics. (!!! valutare se inserire il discorso degli spazi latenti magari
-con immagine colorata)
+-state dynamics.
 In the LOOCV setting, the selected hyperparameters are highly sensitive to the
 specific training fold, as
 the replacement of a single patient in the training set leads to substantially
 different optimal hyperparameters (Figure \ref{fig:opt1_params} and Figure
-\ref{fig:opt2_params}).
+\ref{fig:opt2_params} in Section \ref{res:opt}).
+This result is "rafforzato" by the fact that the VAE encoding of resting-state 
+activity presents high variability between different patients (Figure
+\ref{fig:exDE:tr} in Section \ref{res:anal:example}).
 As a consequence, training target distributions during optimization present
 very high variance (Figure \ref{fig:opt1_target} and Figure
 \ref{fig:opt2_target}), as the model struggles to
