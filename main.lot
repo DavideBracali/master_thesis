@@ -1,0 +1,6 @@
+\babel@toc {english}{}\relax 
+\contentsline {table}{\numberline {1}{\ignorespaces Relative powerbands considered in this study.}}{10}{table.caption.4}%
+\contentsline {table}{\numberline {2}{\ignorespaces Best parameters for the final training of VAE and GMM optimization.}}{30}{table.caption.14}%
+\contentsline {table}{\numberline {3}{\ignorespaces Best parameters for the final training of the classifier optimization.}}{33}{table.caption.17}%
+\contentsline {table}{\numberline {4}{\ignorespaces Evaluation metrics of LOOCV.}}{36}{table.caption.20}%
+\contentsline {table}{\numberline {5}{\ignorespaces Evaluation metrics of final training and test set.}}{36}{table.caption.21}%

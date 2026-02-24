@@ -111,7 +111,6 @@ control and may engage in voluntary activities that alter their neural dynamics.
     \includegraphics[width=0.8\textwidth]{Immagini/example/DE/tr_gmm_test.png}
     \caption{VAE encoding of the seizure onset on GMM fit of resting-state feaures.}
     \label{fig:exDE:tr_gmm_test}
-    %!!! sostituire immagine con nuovo titolo
 \end{figure}
 
 Figure \ref{fig:exDE:tr_gmm_test} shows how features are encoded in the latent
@@ -157,17 +156,15 @@ mantaining meaninfgul information while discarding isolated peaks.
 The negative log-likelihood time series is then processed through the alarm
 classifier, that produces a continuous alarm score that is thresholded to
 obtain a binary classification.
-The ranking of the top 50 suspicious contacts is shown in Figure
+The ranking of the top 100 suspicious contacts is shown in Figure
 \ref{fig:exDE:alarm}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{Immagini/example/DE/alarm.pdf}
+    \caption{!!! Come mai non è centrato? Cambiare immagine, mostrare magari i top 100}
     \label{fig:exDE:alarm}
-    \caption{!!! Come mai non è centrato? Cambiare immagine, mostrare magari i top 30}
 \end{figure}
-
-
 
 \subsection{Optimization Results}       \label{res:opt}
 
@@ -359,72 +356,45 @@ ROC-AUC and balanced accuracy are reported anyway, however their distributions
 may be a conservative estimate of the actual discriminative capabilities of the
 model.
 
-\begin{table}[h]
-\centering
-\begin{subtable}{0.4\textwidth}
-\centering
-\begin{tabular}{lcc}
-\hline
-\textbf{TRAINING SET} & \textbf{Median} & \textbf{IQR} \\
-\hline
-Precision           & $0.620$ & $[0.223,0.857]$  \\
-Specificity         & $0.973$ & $[0.918, 0.997]$ \\
-Balanced Accuracy   & $0.613$ & $[0.534, 0.680]$ \\
-ROC-AUC             & $0.827$ & $[0.613, 0.859]$ \\
-\hline
-\end{tabular}
-\end{subtable}
-\hfill
-\begin{subtable}{0.4\textwidth}
-\centering
-\begin{tabular}{lcc}
-\hline
-\textbf{VALIDATION SET} & \textbf{Median} & \textbf{IQR} \\
-\hline
-Precision           & $0.667$ & $[0.237, 0.894]$  \\
-Specificity         & $0.968$ & $[0.927, 0.997]$ \\
-Balanced Accuracy   & $0.624$ & $[0.555, 0.672]$ \\
-ROC-AUC             & $0.827$ & $[0.640, 0.873]$ \\
-\hline
-\end{tabular}
-\end{subtable}
-\caption{Evaluation metrics of LOOCV.}
-\label{tab:eval_val}
-\end{table}
+\begin{table}[h] 
+\centering 
+\begin{tabular}{lcccc} 
+\toprule
+ & \multicolumn{2}{c}{\textbf{TRAINING SET}}  
+ & \multicolumn{2}{c}{\textbf{VALIDATION SET}} \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & \textbf{Median} & \textbf{IQR}  
+ & \textbf{Median} & \textbf{IQR} \\ 
+\midrule
+Precision          & 0.620 & {[0.223, 0.857]} & 0.667 & {[0.237, 0.894]} \\ 
+Specificity        & 0.973 & {[0.918, 0.997]} & 0.968 & {[0.927, 0.997]} \\ 
+Balanced Accuracy  & 0.613 & {[0.534, 0.680]} & 0.624 & {[0.555, 0.672]} \\ 
+ROC-AUC            & 0.795 & {[0.613, 0.859]} & 0.827 & {[0.640, 0.873]} \\ 
+\bottomrule
+\end{tabular} 
+\caption{Evaluation metrics of LOOCV.} 
+\label{tab:eval_val} 
+\end{table} 
 
-\begin{table}[h]
-\centering
-\begin{subtable}{0.4\textwidth}
-\centering
-\begin{tabular}{lcc}
-\hline
-\textbf{TRAINING SET} & \textbf{Median} & \textbf{IQR} \\
-\hline
-Precision           & $0.714$ & $[0.417, 0.821]$  \\
-Specificity         & $0.980$ & $[0.933, 0.989]$ \\
-Balanced Accuracy   & $0.628$ & $[0.548, 0.674]$ \\
-ROC-AUC             & $0.796$ & $[0.627, 0.841]$ \\
-\hline
-\end{tabular}
-\end{subtable}
-\hfill
-\begin{subtable}{0.4\textwidth}
-\centering
-\begin{tabular}{lcc}
-\hline
-\textbf{TEST SET} & \textbf{Median} & \textbf{IQR} \\
-\hline
-Precision           & $0.172$ & $[0.152, 0.215]$  \\
-Specificity         & $0.846$ & $[0.800, 0.875]$ \\
-Balanced Accuracy   & $0.652$ & $[0.593, 0.691]$ \\
-ROC-AUC             & $0.722$ & $[0.579, 0.796]$ \\
-\hline
-\end{tabular}
-\end{subtable}
-\caption{Evaluation metrics on validation patients.}
-\label{tab:eval_test}
+\begin{table}[h] 
+\centering 
+\begin{tabular}{lcccc} 
+\toprule
+ & \multicolumn{2}{c}{\textbf{TRAINING SET}}  
+ & \multicolumn{2}{c}{\textbf{TEST SET}} \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & \textbf{Median} & \textbf{IQR}  
+ & \textbf{Median} & \textbf{IQR} \\ 
+\midrule
+Precision         & 0.714 & {[0.417, 0.821]} & 0.172 & {[0.152, 0.215]} \\ 
+Specificity       & 0.980 & {[0.933, 0.989]} & 0.846 & {[0.800, 0.875]} \\ 
+Balanced Accuracy & 0.628 & {[0.548, 0.674]} & 0.652 & {[0.593, 0.691]} \\ 
+ROC-AUC           & 0.796 & {[0.627, 0.841]} & 0.722 & {[0.579, 0.796]} \\ 
+\bottomrule
+\end{tabular} 
+\caption{Evaluation metrics of final training and test set.} 
+\label{tab:eval_test} 
 \end{table}
-
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.9\textwidth}
@@ -559,3 +529,4 @@ unique set of parameters.
 
 !!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
 modelli, classificatore deep learning
+
