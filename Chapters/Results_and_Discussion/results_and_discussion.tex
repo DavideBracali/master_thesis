@@ -516,8 +516,8 @@ capabilities of the model.
 
 The VAE optimization also resulted in a surprising parameter choice: Table
 \ref{tab:opt1_params} reports that the optimal number of hidden layers as
-$L=0$, both for the final training and across all training folds during
-cross-validation. 
+$L=0$, both for the final training and across the majority of training folds 
+during cross-validation. 
 This result is unexpected, as it indicates that the latent space is built by
 sampling from a normal distribution whose mean and log-variance that are built
 from a linear combination of the resting-state feautures.
@@ -541,9 +541,6 @@ unique set of parameters.
 
 \subsection{Future developments}              \label{res:discussion:future}
 
-!!! Idee su come migliorare: fine tuning, VAE supervisionato, provare altri
-modelli, classificatore deep learning
-
 The proposed pipeline provides an initial approach to the generalization of 
 the SOZ localization in multiple patients.
 However, several critical points have emerged from the results, suggesting
@@ -558,6 +555,40 @@ distributions on training and validation patients.
 
 A greater patient availability may improve generalization on test patients.
 However it would probably not be sufficient to reduce the variance of encoded
-data, as feeding a moderate number of patients to the encoder proved to result 
-in a sparse latent space that wrongfully detects atypical behavior even in
-resting state activity ().
+data, as training the model with a moderate number of patients proved to result 
+in a sparse latent space and variable performance.
+To achieve so, patient specific fine-tuning could be employed in the training
+process:
+after an initial training phase using all the other patients, the pre-trained
+VAE adjusts its weights using the resting-state activity of the patient to be
+evaluated as input.
+This technique could adapt the encoded distribution to be patient specific,
+potentially reducing its variance and improve anomaly detection,
+however optimization would become much more time consuming:
+because training must be performed on each training patients, computation
+time would scale linearly with the number of training patients during
+optimization.
+
+Another suboptimal result is that the VAE optimization converged to a model
+with no hidden layers, preferring a linear encoder and decoder architecture
+in the majority of training folds:
+The current implementation does not not fully exploit its non-linear feature
+extraction potential.
+For this reason, future work might explore different models to perform
+dimensionality reduction.
+Linear models could be tested, for example Principal Component Analysis (PCA,
+unsupervised) or Partial Least Square (PLS, supervised) regression.
+Additionally, the choice of using a GMM to fit the encoded distribution should
+not be intended as unique, but different density estimation methods could be
+tested.
+In a large-scale study on this topic, every step of the pipeline should be
+compared against its possible alternatives in order to understand their
+strenghts and limitations.
+
+The decision to preform a two-step hyperparameter optimization is also a
+limitation itself.
+It reduces the dimensionality of the parameters space reducing the number of
+iterations required for convergence and improving stability, but makes the
+final results heavily dependend on the choice of the intermediate target. 
+Different objective functions could be experimented in order to achieve
+optimal results, for example minimizing the VAE validation loss.
