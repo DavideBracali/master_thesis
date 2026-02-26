@@ -12,3 +12,34 @@
 
 \section{Conclusions}
 
+This study proposes an approach to generalize SOZ localization to different
+patients using a unique set of parameters.
+
+The proposed pipeline obtained good overall performances on training and
+validation patients, however all evaluation metrics appear highly variable,
+highlighting the challenge of finding universal parameters to fit such a
+diverse dataset.
+Despite obtaining promising results during cross-validation, the evaluation of
+unseen patients resulted in a substantial drop in performances.
+Major limitations were also observed for the Epileptogenicity
+Index proposed by Bartolomei et al.:
+although being a widely established algorithm for SOZ localization on
+single-patient settings, such model fails to correctly classify a meaningful 
+number of SOZ regions when the same parameters are applied to multiple patients.
+
+This behavior suggests that, although the proposed pipeline still leaves room 
+for improvement, the primary challenge of the task lies in the intrinsic nature
+of the dataset.
+sEEG data inherently presents inter-patient heterogeneity, both because of
+subjective variability in brain activity and because of differences in the 
+positioning of the electrodes during data acquisition.
+The number of available patients for this study was also moderately low,
+limiting generalization capabilities on unseen patients.
+A larger set of patients would be preferable for this reaserch, however
+potential strategies have been proposed to account for the problem of intrinsic
+data variability.
+
+Despite these challenges, the proposed framework provides an initial approach
+to the SOZ localization of unseen patients in focal epilepsy.
+While still not ready for clinical use, directions for future improvement have
+been identified for a more robust and patient-adaptive approach.
