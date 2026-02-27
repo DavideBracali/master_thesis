@@ -29,7 +29,7 @@ medications, as drug-resistance is a frequent complication \cite{ep-eadie}.
 
 Seizures consist of the disruption of the normal balance between 
 excitatory and inhibitory neurotransmission,
-Resulting in abnormal, excessive and synchronized neuronal activity.
+resulting in abnormal, excessive and synchronized neuronal activity.
 Epileptic seizures are a highly heterogeneous phenomena.
 They can arise from a variety of underlying conditions, and in approximately
 $50\%$ of cases, the cause remains unknown \cite{WHO2016Epilepsy}.
@@ -46,7 +46,7 @@ Generalized seizures involve rapid and near-simultaneous abnormal electrical
 activity across both cerebral hemispheres, without a stable onset zone. 
 Focal seizures initially present electrical symptoms in a specific region of
 the brain, called Seizure Onset Zone (SOZ).
-Once initiated the seizure may spread to adjacent areas, involving a vaster 
+Once initiated, the seizure may spread to adjacent areas, involving a vaster 
 area of the brain. \cite{ep-class}
 
 At seizure onset, neurons exhibit a transition from normal asynchronous activity
@@ -78,8 +78,8 @@ Each electrode consists of multiple recording sites, which we will
 refer as "contacts", capturing electrical activity from different depths within
 the brain.
 
-The strength of sEEG, when compared to standard intracranial 
-electroencephalography (iEEG) or non-invasive magnetoencephalography (MEG),
+The strength of sEEG, when compared to electrocorticography (ECoG)
+or non-invasive magnetoencephalography (MEG),
 is to be able to provide in-depth recordings of electric signals in otherwise
 unreachable brain areas. 
 However, sEEG is an invasive procedure that requires surgery during the
@@ -87,14 +87,14 @@ electrode implatation, therfore it may only be used on patients that do not
 respond to medical treatment and who are potential candidates to receive brain
 surgery in order to control their symptoms.
 
-\subsubsection{Challenges and limitations}
+\subsection{Challenges and limitations}
 
 Research on SOZ localization is rapidly evolving in recent years.
 The increasing availability of high-resolution electrophysiological recordings
 and improved computational tools has enabled more sophisticated analyses of
 seizure dynamics, progressively transitioning from visual assessment to
 quantitative, systematic and reproducible algorithms.
-In recent years, machine learning approaches have beem increasingly integrated
+In recent years, machine learning approaches have been increasingly integrated
 with graph network theory, as many studies model epileptic seizures as a
 network phenomenon involving the mutual relationships in the whole brain
 rather than a purely focal event. 
@@ -119,7 +119,7 @@ actual SOZ \cite{ep-hetero2}.
 
 Additionally, the lack of a standardized acquisition protocol makes
 comprehensive studies particularly challenging \cite{ep-rev}.
-Even within the same acquisition center, the positioning of iEEG or sEEG
+Even within the same acquisition center, the positioning of ECoG or sEEG
 sensors is different for each patient, as it is usually conditioned by
 preliminar analysis.
 The unification of multiple patients in a unique dataset inevitably results in
@@ -132,7 +132,12 @@ Only a small part of the studies reported in literature uses publicly available
 dataset, while the majority of reaserch uses private data with a typically
 low number of patients (the average sample size between studies is 23 patients
 \cite{ep-rev}).
-This further complicates the problem of data heterogeneity.
+It has been observed that studies with lower sample size generally report higher
+accuracy and sensitivity, while studies with larger sample sizes tend to have 
+lower performance. 
+This trend suggests that high-performance results may be easier to achieve in
+studies with limited data but may not generalize well because of data
+heterogeneity \cite{ep-rev2}. 
 
 To evaluate classification performance and assist supervised methods, the list
 of resected or thermocoagulated regions is often used as ground truth for the
@@ -186,3 +191,27 @@ dynamics are identified as outliers in the expected resting-state distribution.
 This approach is purposly unsupervised, to provide robustness against possible
 ground truth inaccuracies.
 
+A key objective in this work is the development of a patient-independent model.
+We aim to select a unique set of parameters to produce an accurate SOZ
+classification on multiple patients, as many existing methods are tailored to
+single patients and require manual tuning or individualized calibration
+\cite{ep-rev2}.
+While effective in controlled settings, these strategies limit scalability and
+automation.
+
+The proposed method uses an automatic pipeline to capture common 
+statistical properties of sEEG signals despite the individual differences
+between multiple patients.
+Hyperparameter optimization is performed to select a unique set of parameters
+for all patients, and cross-validation was used to estimate generalization
+capabilites on unseen patients.
+The model is then evaluated on an independent set of test patients, reporting
+established classification metrics.
+
+Particular attention was paid to avoid information leakage: patients used for 
+designing the algorithm were never included in validation or test sets.
+Similarly, test patients were completely unseen during both training and
+validation, and no data from these patients was used at any stage of model
+development.
+Such separation ensures that the reported performance reflects, without
+overestimating, the true generalization capabilites of the model.
