@@ -155,4 +155,34 @@ settings, particularly in resource-constrained environments \cite{ep-rev}.
 
 \subsection{Thesis objective}
 
-!!! Spiegare chiaramente cosa vogliamo fare
+The objective of this thesis is to develop an artificial intelligence pipeline
+for SOZ localization of multiple patients affected by focal epilepsy.
+We aim to design a patient-independent algorithm which is able to distinguish 
+between resting-state and epileptogenic activity in sEEG recordings in order to
+classify each brain region as SOZ or healthy tissue.
+
+The proposed method combines network theory, deep learning, anomaly detection
+and classification approaches to localize the SOZ.
+Meaningful features are extracted from sEEG time-series capturing signal,
+spectral and network patterns to characterize each channel.
+This approach combines both single-channel dynamics and the mutual
+relationships between different channels.
+Resting-state activity of multiple patients is used to train the model to learn
+an encoded representation of the expected behavior of a healthy brain.
+Epileptogenic activity is detected as a deviation from resting-state patterns,
+and the SOZ detection is implemented by the dynamic evolution of the anomaly
+level associated with each brain region.
+
+Instead of directly modeling seizure activity, which is highly heterogeneous
+both across and within patients, the proposed framework focuses on learning
+the statistical structure of resting-state brain activity, which is more
+abundant and less variable than seizure dynamics.
+A Variational Autoencoder (VAE) performs non-linear dimensionality reduction
+to construct a smooth, interpolable, lower-dimensional encoded representation
+of the joint distribution of features.
+SOZ localization can be formulated as the identification of statistical
+anomalies in the encoded distribution of resting-state features: pathological
+dynamics are identified as outliers in the expected resting-state distribution.
+This approach is purposly unsupervised, to provide robustness against possible
+ground truth inaccuracies.
+
