@@ -14,8 +14,6 @@
 
 \subsection{Epilepsy}
 
-\subsubsection{Epileptic seizures}
-
 Epilepsy is a chronic noncommunicable neurological disorder characterized as 
 the recurrence of unprovoked seizures, which are brief episodes of abnormal
 electrical activity in the brain.
@@ -27,7 +25,7 @@ estimated that approximately 50 million people suffer from epilepsy, and
 about $5\%$ of people will have experienced at least an unprovoked seizure by
 the age of 80 \cite{ep-wilden}.
 Approximately $69\%$ of the cases can be controlled using anti-seizure
-medications, as drug-resistence is a frequent complication \cite{ep-eadie}.
+medications, as drug-resistance is a frequent complication \cite{ep-eadie}.
 
 Seizures consist of the disruption of the normal balance between 
 excitatory and inhibitory neurotransmission,
@@ -38,18 +36,18 @@ $50\%$ of cases, the cause remains unknown \cite{WHO2016Epilepsy}.
 Significant variability exists in the type, severity and anatomical origin of a
 seizure.
 Such differences are present both between different patients and between
-different seizures of the same patients \cite{ep-pennell}.  
+different seizures of the same patients \cite{ep-hetero}.  
 
-\subsubsection{Seizure Onset Zone (SOZ)}
+\subsection{Seizure Onset Zone (SOZ)}
 
-Epileptic seizure are distinguished in two major types: generalized seizures
+Epileptic seizures are distinguished in two major types: generalized seizures
 and focal seizures.
 Generalized seizures involve rapid and near-simultaneous abnormal electrical
 activity across both cerebral hemispheres, without a stable onset zone. 
 Focal seizures initially present electrical symptoms in a specific region of
 the brain, called Seizure Onset Zone (SOZ).
 Once initiated the seizure may spread to adjacent areas, involving a vaster 
-area of the brain.
+area of the brain. \cite{ep-class}
 
 At seizure onset, neurons exhibit a transition from normal asynchronous activity
 to excessive and synchronized firing.
@@ -59,35 +57,101 @@ These patterns can vary between patients or between different seizures of the
 same patient, but consistently present a transition between normal and 
 epileptogenic state.
 The SOZ is defined by the brain regions that present the earliest detectable
-deviations from the normal background activity of neurons.
+deviations from the normal background activity of neurons \cite{ep-seiz}.
 
-!!! qui va citata roba eh
+In drug-resistant focal epilepsy, surgical treatment represents the best chance 
+to drastically reduce (or potentially eliminate) the frequency of future
+seizures.
+Different types of surgery exist, including resective surgery and
+radiofrequency thermocoagulation, but all methods aim to remove, destroy, or
+functionally disconnect the SOZ from the rest of the brain.
+In this context, the accurate localization of the SOZ has major clinical
+relevance for pre-surgery planning \cite{ep-sozsurg}.
 
-\subsection{SOZ localization}
+\subsection{Stereo-electroencephalography}
 
-\subsubsection{Clinical relevance}
+Because an epileptic seizure is a dynamic transition, SOZ localization requires
+a time-resolved measurement of electrical brain activity.
+Stereoelectroencephalography (sEEG) is the practice of recording
+electroencephalographic signals using surgically implanted electrodes.
+Each electrode consists of multiple recording sites, which we will
+refer as "contacts", capturing electrical activity from different depths within
+the brain.
 
-!!! Spiegare l'intervento e riportare qualche statistica di guarigione
+The strength of sEEG, when compared to standard intracranial 
+electroencephalography (iEEG) or non-invasive magnetoencephalography (MEG),
+is to be able to provide in-depth recordings of electric signals in otherwise
+unreachable brain areas. 
+However, sEEG is an invasive procedure that requires surgery during the
+electrode implatation, therfore it may only be used on patients that do not
+respond to medical treatment and who are potential candidates to receive brain
+surgery in order to control their symptoms.
 
-\subsubsection{Stereo-electroencephalography}
+\subsubsection{Challenges and limitations}
 
-!!! Spiegare nel dettaglio l'acquisizione dati
+Research on SOZ localization is rapidly evolving in recent years.
+The increasing availability of high-resolution electrophysiological recordings
+and improved computational tools has enabled more sophisticated analyses of
+seizure dynamics, progressively transitioning from visual assessment to
+quantitative, systematic and reproducible algorithms.
+In recent years, machine learning approaches have beem increasingly integrated
+with graph network theory, as many studies model epileptic seizures as a
+network phenomenon involving the mutual relationships in the whole brain
+rather than a purely focal event. 
+Despite recent methodological advances, major limitations still challenge the
+robustness and generalizability of SOZ localization methods \cite{ep-rev}.
 
-%Stereoelectroencephalography (sEEG) is the practice of recording
-%electroencephalographic signals using surgically implanted electrodes.
-%Each electrode consists of multiple recording sites, which we will
-%refer as "contacts", capturing electrical activity from different depths within
-%the brain. This practice may be used on patients with epilepsy that do not
-%respond to medical treatment and who are potential candidates to receive brain
-%surgery in order to control their symptoms.
+Epilepsy is itself a very heterogeneous disorder, presenting both inter-patient
+and intra-patient differences in seizure dynamics.
+Epilepsy can be caused by a variety of underlying conditions and seizure
+patterns depend on the specific cause, which is however only identified in
+approximately half of cases \cite{WHO2016Epilepsy}.
+Seizures can originate from many brain regions, and exhibit substantially
+different behavior depending on the anatomical location of the SOZ.
+The performance of machine learning models was shown to heavily depend on the
+SOZ location, performing significantly worse on specific regions of the brain
+\cite{ep-rev}.
+while performing worse on more complex forms of epilepsy.    
+The onset area has also been observed to vary across different
+seizures within the same patient,
+therfore the analysis of a single seizure may lead to an underestimation of the
+actual SOZ \cite{ep-hetero2}.
 
-%The strength of sEEG, when compared to standard electroencephalography (EEG),
-%is to be able to record electrical brain signals in deep 
+Additionally, the lack of a standardized acquisition protocol makes
+comprehensive studies particularly challenging \cite{ep-rev}.
+Even within the same acquisition center, the positioning of iEEG or sEEG
+sensors is different for each patient, as it is usually conditioned by
+preliminar analysis.
+The unification of multiple patients in a unique dataset inevitably results in
+the inclusion of many brain areas, resulting in highly variable brain signals
+in both seizures and resting-state activity.
 
+As in many medical machine learning application, data availability is often a
+limitation.
+Only a small part of the studies reported in literature uses publicly available
+dataset, while the majority of reaserch uses private data with a typically
+low number of patients (the average sample size between studies is 23 patients
+\cite{ep-rev}).
+This further complicates the problem of data heterogeneity.
 
-\subsubsection{Problems and limitations}
+To evaluate classification performance and assist supervised methods, the list
+of resected or thermocoagulated regions is often used as ground truth for the
+SOZ localization.
+A further complication consists in the reliability of ground truths, as 
+long-term postoperative follow-ups are often absent or report insufficient data.
+If similar seizures still persist after surgery, it may indicate that the SOZ
+reported in the ground truth was inaccurately localized. 
+Studies reporting longer follow-up durations may provide more reliable insights 
+into the long-term clinical utility of the method \cite{ep-rev}.
 
-!!! Spiegare lo stato attuale della ricerca e i problemi legati ad essa
+Another limitation consists in the high requirement of computational resources.
+While deep learning models achieve better performances with respect to 
+traditional machine learning methods, high complexity translates in long
+computation time.
+Network analysis enables to capture complex relationships between different
+brain regions, but often requires heavy computation.
+The need for computational infrastructure may limit adoption in clinical 
+settings, particularly in resource-constrained environments \cite{ep-rev}. 
 
 \subsection{Thesis objective}
 
