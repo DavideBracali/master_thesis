@@ -28,7 +28,8 @@ are never included in neither validation and test set.
 
 A two-sided Mann-Whitney test was performed on the distributions of each of the 
 22 local features during the onset of the seizure, defined as a $[t_\text{onset}
--10\ s, t_\text{onset} + 20\ s]$ interval.
+-10\ s, t_\text{onset} + 20\ s]$ interval, corresponding to the same temporal
+window adopted by the classifier described in Section \ref{meth:classifier}.
 Both rank biserial correlation (whose definition is reported in Section
 \ref{meth:opt:vaegmm}) and p-value are reported, to measure effect size and
 statistical significance.
@@ -207,30 +208,30 @@ target distribution on training, validation and test set.
     \label{fig:opt1_params}
 \end{figure}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Parameter} & \textbf{Sampling interval} & \textbf{Scale} & \textbf{Best value} \\
+\hline
+$\beta_\text{max}$     & $\{1,\, \dots,\, 30\}$  & linear    & 1      \\
+$\beta_\text{warmup}$  & $\{1,\, \dots,\, 15\}$  & linear & 10     \\  %!!! ahia...
+$d$                    & $\{1,\, \dots,\, 10\}$  & linear & 2      \\
+$\eta$                 & $[10^{-4},\, 10^{-2}]$  & log    & 0.00238  \\
+$L$                    & $\{1,\, \dots,\, 5\}$   & linear & 0 \\
+$N_c$                  & $\{1,\, \dots,\, 30\}$  & linear & 2      \\
+\hline
+\end{tabular}
+\caption{Search space and best parameters for the final training of the VAE and GMM optimization.}
+\label{tab:opt1_params}
+\end{table}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Immagini/opt/optimization_curve_1.png}
     \caption{Learning curve in the final training of VAE and GMM optimization.}
     \label{fig:opt1_learn}
 \end{figure}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lcc}
-\hline
-\textbf{Parameter} & \textbf{Best value} \\
-\hline
-$\beta_\text{max}$     & 1  \\
-$\beta_\text{warmup}$  & 10 \\
-$d$                    & 2  \\
-$\eta$                 & 0.024 \\
-$L$                    & 0 \\
-$N_c$                  & 2 \\
-\hline
-\end{tabular}
-\caption{Best parameters for the final training of VAE and GMM optimization.}
-\label{tab:opt1_params}
-\end{table}
 
 \begin{figure}[H]
     \centering
@@ -291,14 +292,14 @@ Bartolomei et al. \cite{bartolomei}.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{lcc}
+\begin{tabular}{lcccc}
 \hline
-\textbf{Parameter} & \textbf{Best value} \\
+\textbf{Parameter} & \textbf{Sampling interval} & \textbf{Scale} & \textbf{Best value} \\
 \hline
-$\alpha$               & 0.96  \\
-$k$                    & -2.3 \\
-$t_C$                  & 1.8  \\
-$\tau$                 & 1.2 \\
+$\alpha$  & $[10^{-2},\, 1.0]$              & linear & 0.960 \\
+$k$       & $[-3,\,-1]$                     & linear & -2.27 \\
+$t_C$     & $[10^{-2},\, 2.0]$              & linear & 1.83  \\
+$\tau$    & $\{1.00,1.05, \dots, 2.00\}$    & linear & 1.20  \\
 \hline
 \end{tabular}
 \caption{Best parameters for the final training of the classifier optimization.}
@@ -478,7 +479,7 @@ Nevertheless, the performance drop observed on the test set indicates that the
 model overfits training data and struggles to generalize to unseen patients.}.
 
 This result is likely to be a consequence of the combination of two factors:
-a limited number of patients and a great heterogeneity  in seizure and 
+a limited number of patients and a great heterogeneity in seizure and 
 resting-state dynamics.
 In the LOOCV setting, the selected hyperparameters are highly sensitive to the
 specific training fold, as
@@ -505,8 +506,6 @@ set.
 However it should be noted that the number of training iterations before 
 evaluation of the test set was selected based on the validation performance
 itself.
-Because of the low number of patients, both training and validation set are not
-representative for the test set.
 Therefore validation performances only represent an optimistic estimate of the 
 real generalization capabilities of the model.
 
@@ -550,14 +549,16 @@ possible directions for improvement.
 
 A moderately low number of patients was available for this study and,
 as discussed in Section \ref{res:discussion}, the dataset exhibits high
-inter-patient heterogeneity .
+inter-patient heterogeneity.
 As a consequence, all metrics reported in Section \ref{res:eval} highlight that
 the model struggles to find a unique set of parameters to generalize to many 
 patients, obtaining low performances on test patients and high-variance 
 distributions on training and validation patients.
-Because of the low sample size, design choices according the validation set 
-result in significantly lower test performances, as training and validation
-set are not representative for unseen patients.
+Because of the limited sample size and inter-patient variability, design choices
+guided by the validation set do not necessarily generalize to unseen patients,
+leading to significantly lower performance on the test set.
+In this setting, the training and validation patients may not be fully
+representative of the variability encountered in new subjects.
 
 A greater patient availability may improve generalization on test patients.
 However it would probably not be sufficient to reduce the variance of encoded

@@ -4,8 +4,37 @@
     \addcontentsline{toc}{section}{Abstract}
     \section*{Abstract}
     
-    !!!! abstract
-    
+    In drug-resistant focal epilepsy, surgical treatment represents the best
+    chance to reduce seizure frequency, and accurate localization of the
+    Seizure Onset Zone (SOZ) is critical for pre-surgery planning.
+    However, the high inter-patient heterogeneity of stereo-electroencephalography
+    (sEEG) recordings makes the development of generalizable, patient-independent
+    methods particularly challenging.
+
+    This study proposes an automated pipeline for the localization of the SOZ
+    in multiple patients using a unique set of parameters.
+    Meaningful features are extracted from sEEG measures:
+    signal features characterize the time domain, spectral features capture
+    information from the frequency domain, network features model the functional
+    relationships between brain regions.
+
+    A Variational Autoencoder (VAE) produces a latent representation of the
+    resting-state features, while a Gaussian Mixture Model (GMM) fits the
+    encoded distribution and scores the likelihood of seizure features.
+    A classifier decides which brain regions compose the SOZ based on the
+    negative log-likelihood of seizure features, which is used as an indicator
+    for anomaly detection.
+    Hyperparameter optimization was performed, and the model performance
+    was estimated using both Leave-One-Out Cross Validation (LOOCV) and
+    evaluation of a test set of unseen patients.
+
+    The proposed model achieved promising results during cross-validation,
+    however a significant performance drop was observed on unseen test patients,
+    reflecting the intrinsic heterogeneity of sEEG recordings across subjects.
+    Results highlight that inter-patient variability remains the primary
+    challenge in SOZ localization, however potential strategies are proposed
+    to direct future work towards patient-adaptive approaches.
     \vfill
     \hspace{0pt}
 \pagebreak
+

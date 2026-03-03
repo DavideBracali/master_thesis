@@ -29,15 +29,30 @@ parameters to be decided by an epileptologist for each patient.
 This poses a problem for a comparison with the method proposed in this study,
 as having an unique set of parameters for all patients is a necessity.
 
-To address this problem we decide to use an alternative approach to compute
-$N_{d_i}$: an increment in the energy ratio is considered significant if its
-value surpasses its mean by $N_{std}$ standard deviations.
-$N_{std}$ is chosen fine-tuning on the training set, maximizing the median
-score defined in Section \ref{meth:opt:classifier}. 
-Classification is performed as proposed in the original paper,
+To address this problem we decide to compute an automated version of the
+algorithm, where $\nu$ and $\lambda$ are chosen fine-tuning on the training set,
+maximizing the median score defined in Section \ref{meth:opt:classifier}.
+Fine-tuning was performed on a two dimensional grid, and its result is reported
+in Table \ref{tab:bartolomei}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Parameter} & \textbf{Sampling interval} & \textbf{Scale} & \textbf{Best value} \\
+\hline
+$\nu$      & $\{1.00,1.05, \dots,\, 2.00\}$  & linear    & 1.50      \\
+$\lambda$  & $\{50,51, \dots,\, 70\}$  & linear & 60     \\ 
+\hline
+\end{tabular}
+\caption{Search space and best parameters for the final training of automated Epileptogenicity Index.}
+\label{tab:bartolomei}
+\end{table}
+
+Classification is then performed as proposed in the original paper,
 applying a $\tau=0.3$ threshold on the normalized scores:
 \begin{equation}
-    y_i=\theta\left(\frac{EI_i}{\sum_iEI_i}-0.3\right)
+    y_i=\theta\left(\frac{EI_i}{\max_i EI_i}-0.3\right)
 \end{equation}
 where $\theta(\cdot)$ is the Heavyside step function.
 
@@ -46,4 +61,3 @@ of the Epileptogenicity Index, as the original paper only proposes a
 semi-automated approach that requires patient-specific parameters.
 
 
-!!! cambiare !!!!

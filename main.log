@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.12.12)  26 FEB 2026 16:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.12.12)  3 MAR 2026 22:23
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -359,73 +359,92 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count323
 \@lastruleclass=\count324
 \@thisrulewidth=\dimen259
+) (c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+ (c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen260
+\ar@mcellbox=\box58
+\extrarowheight=\dimen261
+\NC@list=\toks27
+\extratabsurround=\skip73
+\backup@length=\skip74
+\ar@cellbox=\box59
+)
+\TX@col@width=\dimen262
+\TX@old@table=\dimen263
+\TX@old@col=\dimen264
+\TX@target=\dimen265
+\TX@delta=\dimen266
+\TX@cols=\count325
+\TX@ftn=\toks28
 ) (c:/texlive/2025/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2025/07/10 v3.21 programmable bibliographies (PK/MW)
  (c:/texlive/2025/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count325
+\lrq@indent=\count326
  (c:/texlive/2025/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 )) (c:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count326
-\c@listtotal=\count327
-\c@listcount=\count328
-\c@liststart=\count329
-\c@liststop=\count330
-\c@citecount=\count331
-\c@citetotal=\count332
-\c@multicitecount=\count333
-\c@multicitetotal=\count334
-\c@instcount=\count335
-\c@maxnames=\count336
-\c@minnames=\count337
-\c@maxitems=\count338
-\c@minitems=\count339
-\c@citecounter=\count340
-\c@maxcitecounter=\count341
-\c@savedcitecounter=\count342
-\c@uniquelist=\count343
-\c@uniquename=\count344
-\c@refsection=\count345
-\c@refsegment=\count346
-\c@maxextratitle=\count347
-\c@maxextratitleyear=\count348
-\c@maxextraname=\count349
-\c@maxextradate=\count350
-\c@maxextraalpha=\count351
-\c@abbrvpenalty=\count352
-\c@highnamepenalty=\count353
-\c@lownamepenalty=\count354
-\c@maxparens=\count355
-\c@parenlevel=\count356
-\blx@tempcnta=\count357
-\blx@tempcntb=\count358
-\blx@tempcntc=\count359
-\c@blx@maxsection=\count360
-\blx@maxsegment@0=\count361
-\blx@notetype=\count362
-\blx@parenlevel@text=\count363
-\blx@parenlevel@foot=\count364
-\blx@sectionciteorder@0=\count365
-\blx@sectionciteorderinternal@0=\count366
-\blx@entrysetcounter=\count367
-\blx@biblioinstance=\count368
-\labelnumberwidth=\skip73
-\labelalphawidth=\skip74
-\biblabelsep=\skip75
-\bibitemsep=\skip76
-\bibnamesep=\skip77
-\bibinitsep=\skip78
-\bibparsep=\skip79
-\bibhang=\skip80
+\c@tabx@nest=\count327
+\c@listtotal=\count328
+\c@listcount=\count329
+\c@liststart=\count330
+\c@liststop=\count331
+\c@citecount=\count332
+\c@citetotal=\count333
+\c@multicitecount=\count334
+\c@multicitetotal=\count335
+\c@instcount=\count336
+\c@maxnames=\count337
+\c@minnames=\count338
+\c@maxitems=\count339
+\c@minitems=\count340
+\c@citecounter=\count341
+\c@maxcitecounter=\count342
+\c@savedcitecounter=\count343
+\c@uniquelist=\count344
+\c@uniquename=\count345
+\c@refsection=\count346
+\c@refsegment=\count347
+\c@maxextratitle=\count348
+\c@maxextratitleyear=\count349
+\c@maxextraname=\count350
+\c@maxextradate=\count351
+\c@maxextraalpha=\count352
+\c@abbrvpenalty=\count353
+\c@highnamepenalty=\count354
+\c@lownamepenalty=\count355
+\c@maxparens=\count356
+\c@parenlevel=\count357
+\blx@tempcnta=\count358
+\blx@tempcntb=\count359
+\blx@tempcntc=\count360
+\c@blx@maxsection=\count361
+\blx@maxsegment@0=\count362
+\blx@notetype=\count363
+\blx@parenlevel@text=\count364
+\blx@parenlevel@foot=\count365
+\blx@sectionciteorder@0=\count366
+\blx@sectionciteorderinternal@0=\count367
+\blx@entrysetcounter=\count368
+\blx@biblioinstance=\count369
+\labelnumberwidth=\skip75
+\labelalphawidth=\skip76
+\biblabelsep=\skip77
+\bibitemsep=\skip78
+\bibnamesep=\skip79
+\bibinitsep=\skip80
+\bibparsep=\skip81
+\bibhang=\skip82
 \blx@bcfin=\read3
 \blx@bcfout=\write3
 \blx@langwohyphens=\language50
-\c@mincomprange=\count369
-\c@maxcomprange=\count370
-\c@mincompwidth=\count371
+\c@mincomprange=\count370
+\c@maxcomprange=\count371
+\c@mincompwidth=\count372
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -435,88 +454,88 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count372
-\c@savedafterword=\count373
-\c@annotator=\count374
-\c@savedannotator=\count375
-\c@author=\count376
-\c@savedauthor=\count377
-\c@bookauthor=\count378
-\c@savedbookauthor=\count379
-\c@commentator=\count380
-\c@savedcommentator=\count381
-\c@editor=\count382
-\c@savededitor=\count383
-\c@editora=\count384
-\c@savededitora=\count385
-\c@editorb=\count386
-\c@savededitorb=\count387
-\c@editorc=\count388
-\c@savededitorc=\count389
-\c@foreword=\count390
-\c@savedforeword=\count391
-\c@holder=\count392
-\c@savedholder=\count393
-\c@introduction=\count394
-\c@savedintroduction=\count395
-\c@namea=\count396
-\c@savednamea=\count397
-\c@nameb=\count398
-\c@savednameb=\count399
-\c@namec=\count400
-\c@savednamec=\count401
-\c@translator=\count402
-\c@savedtranslator=\count403
-\c@shortauthor=\count404
-\c@savedshortauthor=\count405
-\c@shorteditor=\count406
-\c@savedshorteditor=\count407
-\c@labelname=\count408
-\c@savedlabelname=\count409
-\c@institution=\count410
-\c@savedinstitution=\count411
-\c@lista=\count412
-\c@savedlista=\count413
-\c@listb=\count414
-\c@savedlistb=\count415
-\c@listc=\count416
-\c@savedlistc=\count417
-\c@listd=\count418
-\c@savedlistd=\count419
-\c@liste=\count420
-\c@savedliste=\count421
-\c@listf=\count422
-\c@savedlistf=\count423
-\c@location=\count424
-\c@savedlocation=\count425
-\c@organization=\count426
-\c@savedorganization=\count427
-\c@origlocation=\count428
-\c@savedoriglocation=\count429
-\c@origpublisher=\count430
-\c@savedorigpublisher=\count431
-\c@publisher=\count432
-\c@savedpublisher=\count433
-\c@language=\count434
-\c@savedlanguage=\count435
-\c@origlanguage=\count436
-\c@savedoriglanguage=\count437
-\c@pageref=\count438
-\c@savedpageref=\count439
-\shorthandwidth=\skip81
-\shortjournalwidth=\skip82
-\shortserieswidth=\skip83
-\shorttitlewidth=\skip84
-\shortauthorwidth=\skip85
-\shorteditorwidth=\skip86
-\locallabelnumberwidth=\skip87
-\locallabelalphawidth=\skip88
-\localshorthandwidth=\skip89
-\localshortjournalwidth=\skip90
-\localshortserieswidth=\skip91
-\localshorttitlewidth=\skip92
-\localshortauthorwidth=\skip93
-\localshorteditorwidth=\skip94
+\c@afterword=\count373
+\c@savedafterword=\count374
+\c@annotator=\count375
+\c@savedannotator=\count376
+\c@author=\count377
+\c@savedauthor=\count378
+\c@bookauthor=\count379
+\c@savedbookauthor=\count380
+\c@commentator=\count381
+\c@savedcommentator=\count382
+\c@editor=\count383
+\c@savededitor=\count384
+\c@editora=\count385
+\c@savededitora=\count386
+\c@editorb=\count387
+\c@savededitorb=\count388
+\c@editorc=\count389
+\c@savededitorc=\count390
+\c@foreword=\count391
+\c@savedforeword=\count392
+\c@holder=\count393
+\c@savedholder=\count394
+\c@introduction=\count395
+\c@savedintroduction=\count396
+\c@namea=\count397
+\c@savednamea=\count398
+\c@nameb=\count399
+\c@savednameb=\count400
+\c@namec=\count401
+\c@savednamec=\count402
+\c@translator=\count403
+\c@savedtranslator=\count404
+\c@shortauthor=\count405
+\c@savedshortauthor=\count406
+\c@shorteditor=\count407
+\c@savedshorteditor=\count408
+\c@labelname=\count409
+\c@savedlabelname=\count410
+\c@institution=\count411
+\c@savedinstitution=\count412
+\c@lista=\count413
+\c@savedlista=\count414
+\c@listb=\count415
+\c@savedlistb=\count416
+\c@listc=\count417
+\c@savedlistc=\count418
+\c@listd=\count419
+\c@savedlistd=\count420
+\c@liste=\count421
+\c@savedliste=\count422
+\c@listf=\count423
+\c@savedlistf=\count424
+\c@location=\count425
+\c@savedlocation=\count426
+\c@organization=\count427
+\c@savedorganization=\count428
+\c@origlocation=\count429
+\c@savedoriglocation=\count430
+\c@origpublisher=\count431
+\c@savedorigpublisher=\count432
+\c@publisher=\count433
+\c@savedpublisher=\count434
+\c@language=\count435
+\c@savedlanguage=\count436
+\c@origlanguage=\count437
+\c@savedoriglanguage=\count438
+\c@pageref=\count439
+\c@savedpageref=\count440
+\shorthandwidth=\skip83
+\shortjournalwidth=\skip84
+\shortserieswidth=\skip85
+\shorttitlewidth=\skip86
+\shortauthorwidth=\skip87
+\shorteditorwidth=\skip88
+\locallabelnumberwidth=\skip89
+\locallabelalphawidth=\skip90
+\localshorthandwidth=\skip91
+\localshortjournalwidth=\skip92
+\localshortserieswidth=\skip93
+\localshorttitlewidth=\skip94
+\localshortauthorwidth=\skip95
+\localshorteditorwidth=\skip96
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/blx-compat.def
@@ -526,19 +545,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
-\c@textcitecount=\count440
-\c@textcitetotal=\count441
-\c@textcitemaxnames=\count442
-\c@biburlbigbreakpenalty=\count443
-\c@biburlbreakpenalty=\count444
-\c@biburlnumpenalty=\count445
-\c@biburlucpenalty=\count446
-\c@biburllcpenalty=\count447
+\c@textcitecount=\count441
+\c@textcitetotal=\count442
+\c@textcitemaxnames=\count443
+\c@biburlbigbreakpenalty=\count444
+\c@biburlbreakpenalty=\count445
+\c@biburlnumpenalty=\count446
+\c@biburlucpenalty=\count447
+\c@biburllcpenalty=\count448
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count448
+\c@smartand=\count449
 )
 Package biblatex Info: Trying to load bibliography style 'numeric'...
 Package biblatex Info: ... file 'numeric.bbx' found.
@@ -548,8 +567,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2025/07/10 v3.21 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count449
-\c@bbx:relatedtotal=\count450
+\c@bbx:relatedcount=\count450
+\c@bbx:relatedtotal=\count451
 ))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -578,7 +597,7 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2025-11-14 L3 programming layer (loader) 
  (c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count451
+\l__color_backend_stack_int=\count452
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2025-11-14 L3 programming layer (loader) 
@@ -597,11 +616,11 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 ) (c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
  (c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks27
-\XKV@tempa@toks=\toks28
-\XKV@tempb@toks=\toks29
+\XKV@toks=\toks29
+\XKV@tempa@toks=\toks30
+\XKV@tempb@toks=\toks31
 )
-\XKV@depth=\count452
+\XKV@depth=\count453
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
@@ -626,20 +645,20 @@ LaTeX Info: Redefining \textulc on input line 49.
 Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
 )
 Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
-\g__lipsum_par_int=\count453
-\l__lipsum_a_int=\count454
-\l__lipsum_b_int=\count455
+\g__lipsum_par_int=\count454
+\l__lipsum_a_int=\count455
+\l__lipsum_b_int=\count456
  (c:/texlive/2025/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex)) (c:/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
-\ttl@box=\box58
-\beforetitleunit=\skip95
-\aftertitleunit=\skip96
-\ttl@plus=\dimen260
-\ttl@minus=\dimen261
-\ttl@toksa=\toks30
-\titlewidth=\dimen262
-\titlewidthlast=\dimen263
-\titlewidthfirst=\dimen264
+\ttl@box=\box60
+\beforetitleunit=\skip97
+\aftertitleunit=\skip98
+\ttl@plus=\dimen267
+\ttl@minus=\dimen268
+\ttl@toksa=\toks32
+\titlewidth=\dimen269
+\titlewidthlast=\dimen270
+\titlewidthfirst=\dimen271
 ) (c:/texlive/2025/texmf-dist/tex/latex/fancyhdr/extramarks.sty
 Package: extramarks 2025/02/07 v5.2 Extra marks for LaTeX
 \c__mark_class_extramarks-left_mark=\marks4
@@ -649,32 +668,32 @@ Package: extramarks 2025/02/07 v5.2 Extra marks for LaTeX
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count456
-\@quotereset=\count457
-LaTeX Font Info:    Trying to load font information for OT1+Crlt-LF on input line 43.
+\@quotelevel=\count457
+\@quotereset=\count458
+LaTeX Font Info:    Trying to load font information for OT1+Crlt-LF on input line 44.
 (c:/texlive/2025/texmf-dist/tex/latex/carlito/OT1Crlt-LF.fd
 File: OT1Crlt-LF.fd 2022/10/05 (autoinst) Font definitions for OT1/Crlt-LF.
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -712,24 +731,24 @@ LaTeX Font Info:    ... okay on input line 43.
 
 (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count458
-\scratchdimen=\dimen265
-\scratchbox=\box59
-\nofMPsegments=\count459
-\nofMParguments=\count460
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count461
-\MPscratchDim=\dimen266
-\MPnumerator=\count462
-\makeMPintoPDFobject=\count463
-\everyMPtoPDFconversion=\toks32
+\scratchcounter=\count459
+\scratchdimen=\dimen272
+\scratchbox=\box61
+\nofMPsegments=\count460
+\nofMParguments=\count461
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count462
+\MPscratchDim=\dimen273
+\MPnumerator=\count463
+\makeMPintoPDFobject=\count464
+\everyMPtoPDFconversion=\toks34
 ) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 43.
+Package hyperref Info: Link coloring OFF on input line 44.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -749,10 +768,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 43.
-Package biblatex Info: Reference segment=0 on input line 43.
-\c@mv@tabular=\count464
-\c@mv@boldtabular=\count465
+Package biblatex Info: Reference section=0 on input line 44.
+Package biblatex Info: Reference segment=0 on input line 44.
+\c@mv@tabular=\count465
+\c@mv@boldtabular=\count466
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -786,7 +805,7 @@ Package biblatex Info: Reference segment=0 on input line 43.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
  (./Title_page/titlepage.tex
-<logo_unibo.png, id=169, 185.0112pt x 133.6995pt>
+<logo_unibo.png, id=145, 185.0112pt x 133.6995pt>
 File: logo_unibo.png Graphic file (type png)
 <use logo_unibo.png>
 Package pdftex.def Info: logo_unibo.png  used on input line 8.
@@ -811,10 +830,10 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.71 
+l.72 
       [1
 
-] (./Abstract/abstract.tex) [1] (./main.toc
+] (./Abstract/abstract.tex [1]) (./main.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
  (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -835,6 +854,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout7 = `main.lot'.
 
  [5] (./Chapters/Introduction/introduction.tex
+Overfull \hbox (4.41995pt too wide) in paragraph at lines 30--40
+\OT1/Crlt-LF/m/n/12 cause re-mains un-known [[]1[]]. Sig-nif-i-cant vari-abil-ity ex-ists in the type, sever-ity and anatom-
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -851,8 +874,17 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.72 \subsubsection{Stereo-electroencephalography}
-                                                   [1])
+l.70 
+      [1]
+Overfull \hbox (2.33585pt too wide) in paragraph at lines 73--80
+\OT1/Crlt-LF/m/n/12 resolved mea-sure-ment of elec-tri-cal brain ac-tiv-ity. Stere-o-elec-troen-cephalog-ra-phy (sEEG)
+ []
+
+
+Overfull \hbox (5.42937pt too wide) in paragraph at lines 81--89
+[]\OT1/Crlt-LF/m/n/12 The strength of sEEG, when com-pared to elec-tro-cor-ticog-ra-phy (ECoG) or non-invasive
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -865,11 +897,37 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[2] (./Chapters/Methods_and_Materials/methods_and_materials.tex
-<Immagini/exseeg.png, id=319, 732.8178pt x 426.393pt>
+[2]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[3])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[4] (./Chapters/Methods_and_Materials/methods_and_materials.tex
+<Immagini/exseeg.png, id=324, 732.8178pt x 426.393pt>
 File: Immagini/exseeg.png Graphic file (type png)
 <use Immagini/exseeg.png>
-Package pdftex.def Info: Immagini/exseeg.png  used on input line 35.
+Package pdftex.def Info: Immagini/exseeg.png  used on input line 33.
 (pdftex.def)             Requested size: 418.25368pt x 243.35883pt.
 
 
@@ -884,8 +942,8 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[3 <./Immagini/exseeg.png>]
-Overfull \hbox (0.19891pt too wide) in paragraph at lines 56--58
+[5 <./Immagini/exseeg.png>]
+Overfull \hbox (0.19891pt too wide) in paragraph at lines 54--56
 \OT1/Crlt-LF/m/n/12 Pre-processing for this data con-sists in the ap-pli-ca-tion of notch fil-ters to elim-i-nate power
  []
 
@@ -901,13 +959,27 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[4]
-<Immagini/pipeline.png, id=343, 1165.956pt x 227.04825pt>
+[6]
+<Immagini/pipeline.png, id=350, 673.76718pt x 754.31813pt>
 File: Immagini/pipeline.png Graphic file (type png)
 <use Immagini/pipeline.png>
-Package pdftex.def Info: Immagini/pipeline.png  used on input line 139.
-(pdftex.def)             Requested size: 418.25368pt x 81.44627pt.
-LaTeX Font Info:    Trying to load font information for TS1+Crlt-LF on input line 149.
+Package pdftex.def Info: Immagini/pipeline.png  used on input line 137.
+(pdftex.def)             Requested size: 418.25368pt x 468.25943pt.
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[7]
+LaTeX Font Info:    Trying to load font information for TS1+Crlt-LF on input line 147.
  (c:/texlive/2025/texmf-dist/tex/latex/carlito/TS1Crlt-LF.fd
 File: TS1Crlt-LF.fd 2022/10/05 (autoinst) Font definitions for TS1/Crlt-LF.
 )
@@ -923,14 +995,14 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[5{c:/texlive/2025/texmf-dist/fonts/enc/dvips/carlito/crlt_j4hweq.enc} <./Immagini/pipeline.png>]
-Overfull \hbox (4.6536pt too wide) in paragraph at lines 189--191
-[]\OT1/Crlt-LF/m/n/12 Signal fea-tures: met-rics that can be ex-tracted di-rectly from the sEEG pre-processed
+[8 <./Immagini/pipeline.png>]
+Overfull \hbox (3.26094pt too wide) in paragraph at lines 150--155
+\OT1/Crlt-LF/m/n/12 codes data in a lower-dimensional rep-re-sen-ta-tion. The model is trained on resting-
  []
 
 
-Overfull \hbox (2.41054pt too wide) in paragraph at lines 191--193
-[]\OT1/Crlt-LF/m/n/12 Spectral fea-tures: met-rics that char-ac-ter-ize the short-time Fourier trans-form spec-
+Underfull \hbox (badness 10000) in paragraph at lines 195--204
+
  []
 
 
@@ -945,7 +1017,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[6]
+[9{c:/texlive/2025/texmf-dist/fonts/enc/dvips/carlito/crlt_j4hweq.enc}]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -958,8 +1030,13 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[7]
-Overfull \hbox (15.74936pt too wide) in paragraph at lines 308--314
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 254--260
+
+ []
+
+
+Overfull \hbox (15.74936pt too wide) in paragraph at lines 292--298
 \OT1/Crlt-LF/m/n/12 com-monly seen in epilepsy. Has shown dis-crim-i-na-tive power in mag-ne-toen-cephalog-
  []
 
@@ -975,7 +1052,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[8]
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 348--356
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -988,12 +1069,40 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[9]
+[12]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
 
 
-Overfull \hbox (15.6342pt too wide) in paragraph at lines 444--451
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[13]
+<Immagini/vae.png, id=441, 602.25pt x 411.78844pt>
+File: Immagini/vae.png Graphic file (type png)
+<use Immagini/vae.png>
+Package pdftex.def Info: Immagini/vae.png  used on input line 472.
+(pdftex.def)             Requested size: 418.25368pt x 285.99419pt.
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[14]
+Overfull \hbox (15.6342pt too wide) in paragraph at lines 477--484
 []\OT1/Crlt-LF/m/n/12 The in-put vec-tor $\OT1/cmr/bx/n/12 x$ \OT1/Crlt-LF/m/n/12 is trans-formed by the en-coder in a pair of la-tent vec-tors $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^V\OT1/cmr/m/n/12 ([]\OML/cmm/m/it/12 ; ^^[\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x\OT1/cmr/m/n/12 ))$\OT1/Crlt-LF/m/n/12 ,
  []
 
@@ -1009,8 +1118,8 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[10]
-Overfull \hbox (11.17491pt too wide) in paragraph at lines 478--491
+[15 <./Immagini/vae.png>]
+Overfull \hbox (11.17491pt too wide) in paragraph at lines 512--525
 \OT1/Crlt-LF/m/n/12 mal dis-tri-bu-tion $\OMS/cmsy/m/n/12 N\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 0\OML/cmm/m/it/12 ; \U/msb/m/n/12 I\OT1/cmr/m/n/12 )$\OT1/Crlt-LF/m/n/12 . The reparametriza-tion trick im-plies $\OML/cmm/m/it/12 q[]\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 z\OMS/cmsy/m/n/12 j\OT1/cmr/bx/n/12 x\OT1/cmr/m/n/12 ) = \OMS/cmsy/m/n/12 N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^V[]\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; ^^[[]\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x\OT1/cmr/m/n/12 ))$\OT1/Crlt-LF/m/n/12 ,
  []
 
@@ -1026,81 +1135,10 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[11]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[12]
-Overfull \hbox (0.18604pt too wide) in paragraph at lines 568--570
+[16]
+Overfull \hbox (0.18604pt too wide) in paragraph at lines 602--607
 []\OT1/Crlt-LF/m/n/12 This ar-chi-tec-ture de-pends on 5 hy-per-pa-ram-e-ters, that will be op-ti-mized as ex-plained
  []
-
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[13]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[14]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[15]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[16]
-<Immagini/patients.png, id=487, 698.61pt x 493.24275pt>
-File: Immagini/patients.png Graphic file (type png)
-<use Immagini/patients.png>
-Package pdftex.def Info: Immagini/patients.png  used on input line 816.
-(pdftex.def)             Requested size: 418.25368pt x 295.30067pt.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -1127,9 +1165,22 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[18 <./Immagini/patients.png>]
-Overfull \hbox (5.222pt too wide) in paragraph at lines 851--866
-\OT1/Crlt-LF/m/n/12 [[]22[]], per-form-ing pa-ram-e-ters search us-ing a com-bi-na-tion of al-go-rithms based on Bayesian
+[18]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[19]
+Underfull \hbox (badness 4036) in paragraph at lines 838--838
+[]|\OT1/Crlt-LF/m/n/12 Number of epochs re-quired for
  []
 
 
@@ -1144,20 +1195,13 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[19]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
 [20]
+<Immagini/patients.png, id=517, 698.61pt x 493.24275pt>
+File: Immagini/patients.png Graphic file (type png)
+<use Immagini/patients.png>
+Package pdftex.def Info: Immagini/patients.png  used on input line 864.
+(pdftex.def)             Requested size: 418.25368pt x 295.30067pt.
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1170,7 +1214,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[21])
+[21]
+Overfull \hbox (5.65639pt too wide) in paragraph at lines 881--896
+\OT1/Crlt-LF/m/n/12 [[]28[]], per-form-ing pa-ram-e-ters search us-ing a com-bi-na-tion of al-go-rithms based on Bayesian
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1183,11 +1231,63 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[22] (./Chapters/Results_and_Discussion/results_and_discussion.tex
-<Immagini/feature_effect_size.png, id=541, 1011.78pt x 433.62pt>
+[22 <./Immagini/patients.png>]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[23]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[24]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[25])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[26] (./Chapters/Results_and_Discussion/results_and_discussion.tex
+<Immagini/feature_effect_size.png, id=570, 1011.78pt x 433.62pt>
 File: Immagini/feature_effect_size.png Graphic file (type png)
 <use Immagini/feature_effect_size.png>
-Package pdftex.def Info: Immagini/feature_effect_size.png  used on input line 38.
+Package pdftex.def Info: Immagini/feature_effect_size.png  used on input line 39.
 (pdftex.def)             Requested size: 418.25368pt x 179.25421pt.
 
 
@@ -1202,16 +1302,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[23 <./Immagini/feature_effect_size.png>]
-<Immagini/example/DE/tr_lanent_space.png, id=549, 713.7867pt x 569.0058pt>
+[27 <./Immagini/feature_effect_size.png>]
+<Immagini/example/DE/tr_lanent_space.png, id=579, 713.7867pt x 569.0058pt>
 File: Immagini/example/DE/tr_lanent_space.png Graphic file (type png)
 <use Immagini/example/DE/tr_lanent_space.png>
-Package pdftex.def Info: Immagini/example/DE/tr_lanent_space.png  used on input line 71.
+Package pdftex.def Info: Immagini/example/DE/tr_lanent_space.png  used on input line 72.
 (pdftex.def)             Requested size: 334.60422pt x 266.72949pt.
-<Immagini/example/DE/tr_gmm.png, id=551, 696.6828pt x 568.0422pt>
+<Immagini/example/DE/tr_gmm.png, id=581, 696.6828pt x 568.0422pt>
 File: Immagini/example/DE/tr_gmm.png Graphic file (type png)
 <use Immagini/example/DE/tr_gmm.png>
-Package pdftex.def Info: Immagini/example/DE/tr_gmm.png  used on input line 89.
+Package pdftex.def Info: Immagini/example/DE/tr_gmm.png  used on input line 90.
 (pdftex.def)             Requested size: 334.60422pt x 272.82184pt.
 
 
@@ -1226,11 +1326,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[24 <./Immagini/example/DE/tr_lanent_space.png>]
-<Immagini/example/DE/tr_gmm_test.png, id=559, 685.8423pt x 567.3195pt>
+[28 <./Immagini/example/DE/tr_lanent_space.png>]
+<Immagini/example/DE/tr_gmm_test.png, id=588, 685.8423pt x 567.3195pt>
 File: Immagini/example/DE/tr_gmm_test.png Graphic file (type png)
 <use Immagini/example/DE/tr_gmm_test.png>
-Package pdftex.def Info: Immagini/example/DE/tr_gmm_test.png  used on input line 103.
+Package pdftex.def Info: Immagini/example/DE/tr_gmm_test.png  used on input line 104.
 (pdftex.def)             Requested size: 334.60422pt x 276.78572pt.
 
 
@@ -1245,16 +1345,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[25 <./Immagini/example/DE/tr_gmm.png>]
-<Immagini/example/DE/neg_ll.pdf, id=566, 2377.28778pt x 1614.99515pt>
+[29 <./Immagini/example/DE/tr_gmm.png>]
+<Immagini/example/DE/neg_ll.pdf, id=595, 2377.28778pt x 1614.99515pt>
 File: Immagini/example/DE/neg_ll.pdf Graphic file (type pdf)
 <use Immagini/example/DE/neg_ll.pdf>
-Package pdftex.def Info: Immagini/example/DE/neg_ll.pdf  used on input line 125.
+Package pdftex.def Info: Immagini/example/DE/neg_ll.pdf  used on input line 126.
 (pdftex.def)             Requested size: 376.42575pt x 255.71843pt.
-<Immagini/example/DE/neg_ll_smooth.pdf, id=567, 2377.28778pt x 1665.57425pt>
+<Immagini/example/DE/neg_ll_smooth.pdf, id=596, 2377.28778pt x 1665.57425pt>
 File: Immagini/example/DE/neg_ll_smooth.pdf Graphic file (type pdf)
 <use Immagini/example/DE/neg_ll_smooth.pdf>
-Package pdftex.def Info: Immagini/example/DE/neg_ll_smooth.pdf  used on input line 130.
+Package pdftex.def Info: Immagini/example/DE/neg_ll_smooth.pdf  used on input line 131.
 (pdftex.def)             Requested size: 376.42575pt x 263.72714pt.
 
 
@@ -1269,7 +1369,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[26 <./Immagini/example/DE/tr_gmm_test.png>]
+[30 <./Immagini/example/DE/tr_gmm_test.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1282,14 +1382,14 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[27 <./Immagini/example/DE/neg_ll.pdf> <./Immagini/example/DE/neg_ll_smooth.pdf
+[31 <./Immagini/example/DE/neg_ll.pdf> <./Immagini/example/DE/neg_ll_smooth.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Immagini/example/DE/neg_ll_smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Immagini/example/DE/alarm.pdf, id=1646, 867.24pt x 361.35pt>
+<Immagini/example/DE/alarm.pdf, id=1675, 867.24pt x 361.35pt>
 File: Immagini/example/DE/alarm.pdf Graphic file (type pdf)
 <use Immagini/example/DE/alarm.pdf>
-Package pdftex.def Info: Immagini/example/DE/alarm.pdf  used on input line 158.
+Package pdftex.def Info: Immagini/example/DE/alarm.pdf  used on input line 159.
 (pdftex.def)             Requested size: 418.25368pt x 174.27309pt.
 
 
@@ -1304,11 +1404,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[28 <./Immagini/example/DE/alarm.pdf>]
-<Immagini/opt/best_params_1.png, id=1970, 750.8853pt x 1206.1863pt>
+[32 <./Immagini/example/DE/alarm.pdf>]
+<Immagini/opt/best_params_1.png, id=1999, 750.8853pt x 1206.1863pt>
 File: Immagini/opt/best_params_1.png Graphic file (type png)
 <use Immagini/opt/best_params_1.png>
-Package pdftex.def Info: Immagini/opt/best_params_1.png  used on input line 205.
+Package pdftex.def Info: Immagini/opt/best_params_1.png  used on input line 206.
 (pdftex.def)             Requested size: 334.60422pt x 537.49661pt.
 
 
@@ -1323,13 +1423,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[29]
-<Immagini/opt/optimization_curve_1.png, id=1976, 422.7795pt x 328.8285pt>
-File: Immagini/opt/optimization_curve_1.png Graphic file (type png)
-<use Immagini/opt/optimization_curve_1.png>
-Package pdftex.def Info: Immagini/opt/optimization_curve_1.png  used on input line 212.
-(pdftex.def)             Requested size: 292.77629pt x 227.72983pt.
-
+[33]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1342,16 +1436,21 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[30 <./Immagini/opt/best_params_1.png>]
-<Immagini/opt/contrast_distributions_val.png, id=1983, 549.9747pt x 280.76895pt>
+[34 <./Immagini/opt/best_params_1.png>]
+<Immagini/opt/optimization_curve_1.png, id=2010, 422.7795pt x 328.8285pt>
+File: Immagini/opt/optimization_curve_1.png Graphic file (type png)
+<use Immagini/opt/optimization_curve_1.png>
+Package pdftex.def Info: Immagini/opt/optimization_curve_1.png  used on input line 231.
+(pdftex.def)             Requested size: 292.77629pt x 227.72983pt.
+<Immagini/opt/contrast_distributions_val.png, id=2011, 549.9747pt x 280.76895pt>
 File: Immagini/opt/contrast_distributions_val.png Graphic file (type png)
 <use Immagini/opt/contrast_distributions_val.png>
-Package pdftex.def Info: Immagini/opt/contrast_distributions_val.png  used on input line 239.
+Package pdftex.def Info: Immagini/opt/contrast_distributions_val.png  used on input line 240.
 (pdftex.def)             Requested size: 418.25368pt x 213.5237pt.
-<Immagini/opt/contrast_distributions_test.png, id=1984, 1085.55562pt x 614.295pt>
+<Immagini/opt/contrast_distributions_test.png, id=2012, 1085.55562pt x 614.295pt>
 File: Immagini/opt/contrast_distributions_test.png Graphic file (type png)
 <use Immagini/opt/contrast_distributions_test.png>
-Package pdftex.def Info: Immagini/opt/contrast_distributions_test.png  used on input line 245.
+Package pdftex.def Info: Immagini/opt/contrast_distributions_test.png  used on input line 246.
 (pdftex.def)             Requested size: 418.25368pt x 236.6777pt.
 
 
@@ -1366,7 +1465,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[31 <./Immagini/opt/optimization_curve_1.png>]
+[35 <./Immagini/opt/optimization_curve_1.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1379,11 +1478,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[32 <./Immagini/opt/contrast_distributions_val.png> <./Immagini/opt/contrast_distributions_test.png>]
-<Immagini/opt/best_params_2.png, id=2005, 751.608pt x 801.4743pt>
+[36 <./Immagini/opt/contrast_distributions_val.png> <./Immagini/opt/contrast_distributions_test.png>]
+<Immagini/opt/best_params_2.png, id=2034, 751.608pt x 801.4743pt>
 File: Immagini/opt/best_params_2.png Graphic file (type png)
 <use Immagini/opt/best_params_2.png>
-Package pdftex.def Info: Immagini/opt/best_params_2.png  used on input line 286.
+Package pdftex.def Info: Immagini/opt/best_params_2.png  used on input line 287.
 (pdftex.def)             Requested size: 334.60422pt x 356.8078pt.
 
 
@@ -1398,11 +1497,11 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[33]
-<Immagini/opt/optimization_curve_2.png, id=2011, 410.4936pt x 328.8285pt>
+[37]
+<Immagini/opt/optimization_curve_2.png, id=2040, 410.4936pt x 328.8285pt>
 File: Immagini/opt/optimization_curve_2.png Graphic file (type png)
 <use Immagini/opt/optimization_curve_2.png>
-Package pdftex.def Info: Immagini/opt/optimization_curve_2.png  used on input line 311.
+Package pdftex.def Info: Immagini/opt/optimization_curve_2.png  used on input line 312.
 (pdftex.def)             Requested size: 292.77629pt x 234.54361pt.
 
 
@@ -1417,16 +1516,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[34 <./Immagini/opt/best_params_2.png>]
-<Immagini/opt/score_distributions_val.png, id=2017, 623.6901pt x 317.2653pt>
+[38 <./Immagini/opt/best_params_2.png>]
+<Immagini/opt/score_distributions_val.png, id=2046, 623.6901pt x 317.2653pt>
 File: Immagini/opt/score_distributions_val.png Graphic file (type png)
 <use Immagini/opt/score_distributions_val.png>
-Package pdftex.def Info: Immagini/opt/score_distributions_val.png  used on input line 320.
+Package pdftex.def Info: Immagini/opt/score_distributions_val.png  used on input line 321.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
-<Immagini/opt/score_distributions_test.png, id=2018, 623.6901pt x 317.2653pt>
+<Immagini/opt/score_distributions_test.png, id=2047, 623.6901pt x 317.2653pt>
 File: Immagini/opt/score_distributions_test.png Graphic file (type png)
 <use Immagini/opt/score_distributions_test.png>
-Package pdftex.def Info: Immagini/opt/score_distributions_test.png  used on input line 326.
+Package pdftex.def Info: Immagini/opt/score_distributions_test.png  used on input line 327.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
 
 
@@ -1441,7 +1540,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[35 <./Immagini/opt/optimization_curve_2.png>]
+[39 <./Immagini/opt/optimization_curve_2.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1454,16 +1553,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[36 <./Immagini/opt/score_distributions_val.png> <./Immagini/opt/score_distributions_test.png>]
-<Immagini/eval_val_set/prec_distributions.png, id=2039, 623.6901pt x 317.2653pt>
+[40 <./Immagini/opt/score_distributions_val.png> <./Immagini/opt/score_distributions_test.png>]
+<Immagini/eval_val_set/prec_distributions.png, id=2068, 623.6901pt x 317.2653pt>
 File: Immagini/eval_val_set/prec_distributions.png Graphic file (type png)
 <use Immagini/eval_val_set/prec_distributions.png>
-Package pdftex.def Info: Immagini/eval_val_set/prec_distributions.png  used on input line 398.
+Package pdftex.def Info: Immagini/eval_val_set/prec_distributions.png  used on input line 399.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
-<Immagini/eval_test_set/prec_distributions.png, id=2040, 623.6901pt x 317.2653pt>
+<Immagini/eval_test_set/prec_distributions.png, id=2069, 623.6901pt x 317.2653pt>
 File: Immagini/eval_test_set/prec_distributions.png Graphic file (type png)
 <use Immagini/eval_test_set/prec_distributions.png>
-Package pdftex.def Info: Immagini/eval_test_set/prec_distributions.png  used on input line 404.
+Package pdftex.def Info: Immagini/eval_test_set/prec_distributions.png  used on input line 405.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
 
 
@@ -1478,16 +1577,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[37]
-<Immagini/eval_val_set/spec_distributions.png, id=2045, 623.6901pt x 317.2653pt>
+[41]
+<Immagini/eval_val_set/spec_distributions.png, id=2074, 623.6901pt x 317.2653pt>
 File: Immagini/eval_val_set/spec_distributions.png Graphic file (type png)
 <use Immagini/eval_val_set/spec_distributions.png>
-Package pdftex.def Info: Immagini/eval_val_set/spec_distributions.png  used on input line 415.
+Package pdftex.def Info: Immagini/eval_val_set/spec_distributions.png  used on input line 416.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
-<Immagini/eval_test_set/spec_distributions.png, id=2046, 623.6901pt x 317.2653pt>
+<Immagini/eval_test_set/spec_distributions.png, id=2075, 623.6901pt x 317.2653pt>
 File: Immagini/eval_test_set/spec_distributions.png Graphic file (type png)
 <use Immagini/eval_test_set/spec_distributions.png>
-Package pdftex.def Info: Immagini/eval_test_set/spec_distributions.png  used on input line 421.
+Package pdftex.def Info: Immagini/eval_test_set/spec_distributions.png  used on input line 422.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
 
 
@@ -1502,16 +1601,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[38 <./Immagini/eval_val_set/prec_distributions.png> <./Immagini/eval_test_set/prec_distributions.png>]
-<Immagini/eval_val_set/ba_distributions.png, id=2053, 623.6901pt x 317.2653pt>
+[42 <./Immagini/eval_val_set/prec_distributions.png> <./Immagini/eval_test_set/prec_distributions.png>]
+<Immagini/eval_val_set/ba_distributions.png, id=2083, 623.6901pt x 317.2653pt>
 File: Immagini/eval_val_set/ba_distributions.png Graphic file (type png)
 <use Immagini/eval_val_set/ba_distributions.png>
-Package pdftex.def Info: Immagini/eval_val_set/ba_distributions.png  used on input line 432.
+Package pdftex.def Info: Immagini/eval_val_set/ba_distributions.png  used on input line 433.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
-<Immagini/eval_test_set/ba_distributions.png, id=2054, 623.6901pt x 317.2653pt>
+<Immagini/eval_test_set/ba_distributions.png, id=2084, 623.6901pt x 317.2653pt>
 File: Immagini/eval_test_set/ba_distributions.png Graphic file (type png)
 <use Immagini/eval_test_set/ba_distributions.png>
-Package pdftex.def Info: Immagini/eval_test_set/ba_distributions.png  used on input line 438.
+Package pdftex.def Info: Immagini/eval_test_set/ba_distributions.png  used on input line 439.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
 
 
@@ -1526,16 +1625,16 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[39 <./Immagini/eval_val_set/spec_distributions.png> <./Immagini/eval_test_set/spec_distributions.png>]
-<Immagini/eval_val_set/auc_distributions.png, id=2061, 623.6901pt x 317.2653pt>
+[43 <./Immagini/eval_val_set/spec_distributions.png> <./Immagini/eval_test_set/spec_distributions.png>]
+<Immagini/eval_val_set/auc_distributions.png, id=2091, 623.6901pt x 317.2653pt>
 File: Immagini/eval_val_set/auc_distributions.png Graphic file (type png)
 <use Immagini/eval_val_set/auc_distributions.png>
-Package pdftex.def Info: Immagini/eval_val_set/auc_distributions.png  used on input line 449.
+Package pdftex.def Info: Immagini/eval_val_set/auc_distributions.png  used on input line 450.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
-<Immagini/eval_test_set/auc_distributions.png, id=2062, 623.6901pt x 317.2653pt>
+<Immagini/eval_test_set/auc_distributions.png, id=2092, 623.6901pt x 317.2653pt>
 File: Immagini/eval_test_set/auc_distributions.png Graphic file (type png)
 <use Immagini/eval_test_set/auc_distributions.png>
-Package pdftex.def Info: Immagini/eval_test_set/auc_distributions.png  used on input line 455.
+Package pdftex.def Info: Immagini/eval_test_set/auc_distributions.png  used on input line 456.
 (pdftex.def)             Requested size: 376.42575pt x 191.48378pt.
 
 
@@ -1550,7 +1649,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[40 <./Immagini/eval_val_set/ba_distributions.png> <./Immagini/eval_test_set/ba_distributions.png>]
+[44 <./Immagini/eval_val_set/ba_distributions.png> <./Immagini/eval_test_set/ba_distributions.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1563,7 +1662,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[41 <./Immagini/eval_val_set/auc_distributions.png> <./Immagini/eval_test_set/auc_distributions.png>]
+[45 <./Immagini/eval_val_set/auc_distributions.png> <./Immagini/eval_test_set/auc_distributions.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1576,7 +1675,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[42])
+[46])
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1589,7 +1688,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[43]
+[47]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1602,7 +1701,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[44] (./Chapters/Conclusions/conclusions.tex)
+[48] (./Chapters/Conclusions/conclusions.tex)
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1615,7 +1714,7 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[45] (./Appendix/appendix.tex)
+[49] (./Appendix/appendix.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1628,13 +1727,36 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[46]
-Overfull \hbox (11.50067pt too wide) in paragraph at lines 134--134
+[50])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[51]
+Overfull \hbox (11.54745pt too wide) in paragraph at lines 135--135
 []\OT1/Crlt-LF/m/n/12 John A. Wilden and Aaron A. Cohen-Gadol. ``Eval-u-a-tion of First Non-febrile Seizures''.
  []
 
 
-Overfull \hbox (40.92899pt too wide) in paragraph at lines 134--134
+Overfull \hbox (84.75996pt too wide) in paragraph at lines 135--135
+[]\OT1/Crlt-LF/m/n/12 C. Zhang et al. ``Util-ity of mag-ne-toen-cephalog-ra-phy com-bined with stereo-electroencephalography
+ []
+
+
+Overfull \hbox (7.2876pt too wide) in paragraph at lines 135--135
+[]\OT1/Crlt-LF/m/n/12 N.M. Broti, M. Iwasaki, and Y. Ono. ``Ma-chine learn-ing de-tec-tion of epilep-tic seizure
+ []
+
+
+Overfull \hbox (40.97577pt too wide) in paragraph at lines 135--135
 \OT1/Crlt-LF/m/n/12 Uni-ver-sity Press, Nov. 2017. ISBN: 9780190228484. DOI: []$\OT1/cmtt/m/n/12 10 . 1093 / med / 9780190228484 .
  []
 
@@ -1650,18 +1772,35 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[47]
-Overfull \hbox (19.40642pt too wide) in paragraph at lines 134--134
+[52]
+Overfull \hbox (19.4532pt too wide) in paragraph at lines 135--135
 []$\OT1/cmtt/m/n/12 10 . 1093 / braincomms / fcaa036$[]\OT1/Crlt-LF/m/n/12 . URL: []$\OT1/cmtt/m/n/12 https : / / doi . org / 10 . 1093 / braincomms /
  []
 
 
-Overfull \hbox (4.77596pt too wide) in paragraph at lines 134--134
+Overfull \hbox (24.23035pt too wide) in paragraph at lines 135--135
+[]$\OT1/cmtt/m/n/12 https : / / www . sciencedirect . com / science / article / pii / 0167278988900814$[]\OT1/Crlt-LF/m/n/12 . 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (5.69046pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.49998pt}.
+
+[53]
+Overfull \hbox (4.82274pt too wide) in paragraph at lines 135--135
 []\OT1/Crlt-LF/m/n/12 Diederik P Kingma and Max Welling. \OT1/Crlt-LF/m/it/12 Auto-Encoding Vari-a-tional Bayes\OT1/Crlt-LF/m/n/12 . 2022. arXiv:
  []
 
 
-Overfull \hbox (14.86288pt too wide) in paragraph at lines 134--134
+Overfull \hbox (14.90967pt too wide) in paragraph at lines 135--135
 []\OT1/Crlt-LF/m/n/12 Takuya Ak-iba et al. \OT1/Crlt-LF/m/it/12 Op-tuna: A Next-generation Hy-per-pa-ram-e-ter Op-ti-miza-tion Frame-
  []
 
@@ -1677,43 +1816,30 @@ Package fancyhdr Warning: \footskip is too small (5.69046pt):
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.49998pt}.
 
-[48]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-0.49998pt}.
-
-
-Package fancyhdr Warning: \footskip is too small (5.69046pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\footskip}{14.49998pt}.
-
-[49] (./main.aux)
+[54] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B06F8A3D9F544BED26F4A4A4C8B5C539;6218.
+(rerunfilecheck)             Checksum: D5249C6DF6F19538C4D7435BD8605C8E;5326.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 23474 strings out of 468661
- 421448 string characters out of 5444542
- 1336953 words of memory out of 5000000
- 51693 multiletter control sequences out of 15000+600000
+ 23646 strings out of 468661
+ 424519 string characters out of 5444542
+ 1341238 words of memory out of 5000000
+ 51844 multiletter control sequences out of 15000+600000
  671559 words of font info for 87 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 75i,13n,80p,728b,2269s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,80p,1216b,2251s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/carlito/Crlt-Bold.pfb><c:/texlive/2025/texmf-dist/fonts/type1/google/carlito/Crlt-Italic.pfb><c:/texlive/2025/texmf-dist/fonts/type1/google/carlito/Crlt-Regular.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (56 pages, 9837671 bytes).
+Output written on main.pdf (61 pages, 9963268 bytes).
 PDF statistics:
- 2324 PDF objects out of 2487 (max. 8388607)
- 1699 compressed objects within 17 object streams
- 192 named destinations out of 1000 (max. 500000)
- 472 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2374 PDF objects out of 2487 (max. 8388607)
+ 1741 compressed objects within 18 object streams
+ 208 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

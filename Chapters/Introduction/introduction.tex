@@ -30,7 +30,7 @@ medications, as drug-resistance is a frequent complication \cite{ep-eadie}.
 Seizures consist of the disruption of the normal balance between 
 excitatory and inhibitory neurotransmission,
 resulting in abnormal, excessive and synchronized neuronal activity.
-Epileptic seizures are a highly heterogeneous phenomena.
+Epileptic seizures are a highly heterogeneous phenomenon.
 They can arise from a variety of underlying conditions, and in approximately
 $50\%$ of cases, the cause remains unknown \cite{WHO2016Epilepsy}.
 Significant variability exists in the type, severity and anatomical origin of a
@@ -46,7 +46,7 @@ Generalized seizures involve rapid and near-simultaneous abnormal electrical
 activity across both cerebral hemispheres, without a stable onset zone. 
 Focal seizures initially present electrical symptoms in a specific region of
 the brain, called Seizure Onset Zone (SOZ).
-Once initiated, the seizure may spread to adjacent areas, involving a vaster 
+Once initiated, the seizure may spread to connected areas, involving a vaster 
 area of the brain. \cite{ep-class}
 
 At seizure onset, neurons exhibit a transition from normal asynchronous activity
@@ -83,7 +83,7 @@ or non-invasive magnetoencephalography (MEG),
 is to be able to provide in-depth recordings of electric signals in otherwise
 unreachable brain areas. 
 However, sEEG is an invasive procedure that requires surgery during the
-electrode implatation, therfore it may only be used on patients that do not
+electrode implantation, therefore it may only be used on patients that do not
 respond to medical treatment and who are potential candidates to receive brain
 surgery in order to control their symptoms.
 
@@ -117,7 +117,7 @@ seizures within the same patient,
 therfore the analysis of a single seizure may lead to an underestimation of the
 actual SOZ \cite{ep-hetero2}.
 
-Additionally, the lack of a standardized acquisition protocol makes
+Additionally, the impossibility of a standardized acquisition protocol makes
 comprehensive studies particularly challenging \cite{ep-rev}.
 Even within the same acquisition center, the positioning of ECoG or sEEG
 sensors is different for each patient, as it is usually conditioned by
@@ -135,13 +135,12 @@ low number of patients (the average sample size between studies is 23 patients
 It has been observed that studies with lower sample size generally report higher
 accuracy and sensitivity, while studies with larger sample sizes tend to have 
 lower performance. 
-This trend suggests that high-performance results may be easier to achieve in
-studies with limited data but may not generalize well because of data
+This trend suggests that high-performance results are be easier to achieve in
+studies with limited data, but may not generalize well because of data
 heterogeneity \cite{ep-rev2}. 
 
-To evaluate classification performance and assist supervised methods, the list
-of resected or thermocoagulated regions is often used as ground truth for the
-SOZ localization.
+To evaluate classification and assist supervised methods, the list of resected or
+thermocoagulated regions is often used as ground truth for the SOZ localization.
 A further complication consists in the reliability of ground truths, as 
 long-term postoperative follow-ups are often absent or report insufficient data.
 If similar seizures still persist after surgery, it may indicate that the SOZ
@@ -168,14 +167,14 @@ classify each brain region as SOZ or healthy tissue.
 
 The proposed method combines network theory, deep learning, anomaly detection
 and classification approaches to localize the SOZ.
-Meaningful features are extracted from sEEG time-series capturing signal,
+Meaningful features are extracted from the sEEG time-series capturing signal,
 spectral and network patterns to characterize each channel.
 This approach combines both single-channel dynamics and the mutual
 relationships between different channels.
 Resting-state activity of multiple patients is used to train the model to learn
 an encoded representation of the expected behavior of a healthy brain.
-Epileptogenic activity is detected as a deviation from resting-state patterns,
-and the SOZ detection is implemented by the dynamic evolution of the anomaly
+Epileptogenic activity is detected as a deviation from resting-stat patterns,
+and the SOZ detection is implemented by the temporal evolution of the anomaly
 level associated with each brain region.
 
 Instead of directly modeling seizure activity, which is highly heterogeneous
@@ -188,7 +187,7 @@ of the joint distribution of features.
 SOZ localization can be formulated as the identification of statistical
 anomalies in the encoded distribution of resting-state features: pathological
 dynamics are identified as outliers in the expected resting-state distribution.
-This approach is purposly unsupervised, to provide robustness against possible
+This approach is purposely unsupervised, to provide robustness against possible
 ground truth inaccuracies.
 
 A key objective in this work is the development of a patient-independent model.
@@ -197,14 +196,14 @@ classification on multiple patients, as many existing methods are tailored to
 single patients and require manual tuning or individualized calibration
 \cite{ep-rev2}.
 While effective in controlled settings, these strategies limit scalability and
-automation.
+automation, hence the need for patient-independent approaches.
 
 The proposed method uses an automatic pipeline to capture common 
 statistical properties of sEEG signals despite the individual differences
 between multiple patients.
 Hyperparameter optimization is performed to select a unique set of parameters
 for all patients, and cross-validation was used to estimate generalization
-capabilites on unseen patients.
+capabilities on unseen patients.
 The model is then evaluated on an independent set of test patients, reporting
 established classification metrics.
 
@@ -214,4 +213,4 @@ Similarly, test patients were completely unseen during both training and
 validation, and no data from these patients was used at any stage of model
 development.
 Such separation ensures that the reported performance reflects, without
-overestimating, the true generalization capabilites of the model.
+overestimating, the true generalization capabilities of the model.

@@ -4,40 +4,37 @@
 \contentsline {section}{List of Tables}{v}{figure.caption.1}%
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Epilepsy}{1}{subsection.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1}Epileptic seizures}{1}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}Seizure Onset Zone (SOZ)}{1}{subsubsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.2}SOZ localization}{2}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Clinical relevance}{2}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Stereo-electroencephalography}{2}{subsubsection.1.2.2}%
-\contentsline {subsubsection}{\numberline {1.2.3}Problems and limitations}{2}{subsubsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.3}Thesis objective}{2}{subsection.1.3}%
-\contentsline {section}{\numberline {2}Methods and Materials}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Dataset Description}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Pre-processing}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}The Brain Network}{4}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Proposed Pipeline}{5}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Feature Extraction}{6}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Network features}{7}{subsubsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.2}Signal features}{8}{subsubsection.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.5.3}Spectral features}{9}{subsubsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.6}Variational Autoencoder (VAE)}{10}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Gaussian Mixture Models (GMM)}{13}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Negative log-likelihood}{14}{subsection.2.8}%
-\contentsline {subsection}{\numberline {2.9}Classification}{15}{subsection.2.9}%
-\contentsline {subsection}{\numberline {2.10}Hyperparameter Tuning}{17}{subsection.2.10}%
-\contentsline {subsubsection}{\numberline {2.10.1}VAE and GMM}{19}{subsubsection.2.10.1}%
-\contentsline {subsubsection}{\numberline {2.10.2}Classifier}{20}{subsubsection.2.10.2}%
-\contentsline {subsection}{\numberline {2.11}Evaluation}{21}{subsection.2.11}%
-\contentsline {section}{\numberline {3}Results and Discussion}{23}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Local features importance}{23}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}A classification example}{24}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Optimization Results}{28}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}VAE and GMM}{28}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Classifier}{33}{subsubsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.4}Evaluation Metrics}{36}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Discussion}{41}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Future developments}{43}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Conclusions}{45}{section.4}%
-\contentsline {section}{Appendix}{46}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Automated Epileptogenicity Index}{46}{subsection.4.1}%
-\contentsline {section}{References}{47}{equation.39}%
+\contentsline {subsection}{\numberline {1.2}Seizure Onset Zone (SOZ)}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Stereo-electroencephalography}{2}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Challenges and limitations}{2}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Thesis objective}{3}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Materials and Methods}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Dataset Description}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Pre-processing}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The Brain Network}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Proposed Pipeline}{8}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Feature Extraction}{9}{subsubsection.2.4.1}%
+\contentsline {paragraph}{Network features}{10}{Item.3}%
+\contentsline {paragraph}{Signal features}{11}{equation.5}%
+\contentsline {paragraph}{Spectral features}{12}{equation.13}%
+\contentsline {subsubsection}{\numberline {2.4.2}Variational Autoencoder (VAE)}{14}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Gaussian Mixture Models (GMM)}{17}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}Negative log-likelihood}{18}{subsubsection.2.4.4}%
+\contentsline {subsubsection}{\numberline {2.4.5}Classification}{18}{subsubsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.5}Hyperparameter Tuning}{21}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}VAE and GMM}{23}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Classifier}{23}{subsubsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.6}Evaluation}{25}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Results and Discussion}{27}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Local features importance}{27}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}A classification example}{28}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Optimization Results}{32}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}VAE and GMM}{32}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Classifier}{37}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Evaluation Metrics}{40}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Discussion}{45}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Future developments}{47}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Conclusions}{49}{section.4}%
+\contentsline {section}{Appendix}{50}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Automated Epileptogenicity Index}{50}{subsection.4.1}%
+\contentsline {section}{References}{52}{equation.46}%
