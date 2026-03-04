@@ -12,10 +12,12 @@
     methods particularly challenging.
 
     This study proposes an automated pipeline for the localization of the SOZ
-    in multiple patients using a unique set of parameters.
-    Meaningful features are extracted from sEEG measures:
-    signal features characterize the time domain, spectral features capture
-    information from the frequency domain, network features model the functional
+    across multiple patients using a unified parameter set.
+    A total of 23 patients was included in the dataset, including resting-state
+    and seizure sEEG recordings.
+    22 features are extracted from data:
+    signal features characterizing the time domain, spectral features capturing
+    information from the frequency domain and network features modelling the functional
     relationships between brain regions.
 
     A Variational Autoencoder (VAE) produces a latent representation of the
@@ -24,9 +26,10 @@
     A classifier decides which brain regions compose the SOZ based on the
     negative log-likelihood of seizure features, which is used as an indicator
     for anomaly detection.
-    Hyperparameter optimization was performed, and the model performance
-    was estimated using both Leave-One-Out Cross Validation (LOOCV) and
-    evaluation of a test set of unseen patients.
+    Hyperparameter optimization is performed including a preliminary validation
+    phase using Leave-One-Out Cross-Validation (LOOCV).
+    The final model is then trained on the full training set and evaluated
+    on an independent test set of unseen patients.
 
     The proposed model achieved promising results during cross-validation,
     however a significant performance drop was observed on unseen test patients,
