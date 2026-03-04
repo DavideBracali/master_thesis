@@ -15,10 +15,17 @@ where $ER[n]$ is the energy ratio, defined as:
     ER[n]=\frac{E_\gamma[n]+E_\beta[n]}{E_\theta[n]+E_\alpha[n]}
 \end{equation}
 where $E_{\theta,\alpha,\beta,\gamma}[n]$ represents the powerband
-(Section \ref{meth:features:spectral}) at time index $n$.
+(Section \ref{meth:features:spectral}) at time index $n$,
 while $N_{d_i}$ corresponds to the "change-point detection time", the time index
 corresponding to the first significant increment of the energy ratio, and
 $N_0=\min_{i}N_{d_i}$.
+
+To compute $N_{d_i}$ we define $U_{N,i}$ and $u_{N,i}$ as:
+\begin{equation}
+    U_{N,i} = \sum_{n=1}^{N} \left( ER_i[n] - \frac{1}{n} \sum_{k=1}^{n} ER[k] - \nu \right)  
+    u_{N,i} = \min_{n=1,\dots,N} U_{n,i}
+\end{equation}
+and define $N_{d_i}$ as the first time index $N$ so that $(U_{N,i}-u_{N,i})>\lambda$.
 
 The computation of $N_{d_i}$ depends on two parameters $\nu$ and $\lambda$:
 parameter $\nu$ corresponds to the magnitude of changes that
@@ -27,10 +34,10 @@ alarm rate.
 The original paper proposes that both $\nu$ and $\lambda$ are patient-specific
 parameters to be decided by an epileptologist for each patient.
 This poses a problem for a comparison with the method proposed in this study,
-as having an unique set of parameters for all patients is a necessity.
+as having a unique set of parameters for all patients is a necessity.
 
 To address this problem we decide to compute an automated version of the
-algorithm, where $\nu$ and $\lambda$ are chosen fine-tuning on the training set,
+algorithm, where $\nu$ and $\lambda$ are chosen by fine-tuning on the training set,
 maximizing the median score defined in Section \ref{meth:opt:classifier}.
 Fine-tuning was performed on a two dimensional grid, and its result is reported
 in Table \ref{tab:bartolomei}.

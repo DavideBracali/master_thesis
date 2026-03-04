@@ -13,27 +13,33 @@
 
     This study proposes an automated pipeline for the localization of the SOZ
     across multiple patients using a unified parameter set.
-    A total of 23 patients was included in the dataset, including resting-state
+    23 patients were included in the dataset, including resting-state
     and seizure sEEG recordings.
     22 features are extracted from data:
     signal features characterizing the time domain, spectral features capturing
-    information from the frequency domain and network features modelling the functional
-    relationships between brain regions.
+    information from the frequency domain and network features modelling the
+    synchronous relationships between brain regions.
 
     A Variational Autoencoder (VAE) produces a latent representation of the
-    resting-state features, while a Gaussian Mixture Model (GMM) fits the
-    encoded distribution and scores the likelihood of seizure features.
+    resting-state features, subsequently a Gaussian Mixture Model (GMM)
+    fits the encoded distribution and scores the likelihood of seizure features.
     A classifier decides which brain regions compose the SOZ based on the
     negative log-likelihood of seizure features, which is used as an indicator
     for anomaly detection.
-    Hyperparameter optimization is performed including a preliminary validation
-    phase using Leave-One-Out Cross-Validation (LOOCV).
-    The final model is then trained on the full training set and evaluated
-    on an independent test set of unseen patients.
+    Hyperparameter optimization is performed in order to tune the 10
+    hyperparameters that define the algorithm.
+    Optimization includes a preliminary validation phase using Leave-One-Out
+    Cross-Validation (LOOCV), then the final model is trained on the full
+    training set and evaluated on an independent test set of unseen patients.
 
     The proposed model achieved promising results during cross-validation,
     however a significant performance drop was observed on unseen test patients,
     reflecting the intrinsic heterogeneity of sEEG recordings across subjects.
+    A comparison with an automated version of the Epileptogenicity Index (EI),
+    a well-established and widely used quantitative measure for SOZ localization,
+    demonstrates that the proposed method achieves improved performance,
+    highlighting limitations in the traditional EI approach.
+
     Results highlight that inter-patient variability remains the primary
     challenge in SOZ localization, however potential strategies are proposed
     to direct future work towards patient-adaptive approaches.
